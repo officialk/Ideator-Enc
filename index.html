@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- META Tags -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Ideator</title>
+    <meta name="author" content="Karthik Koppaka" />
+    <meta name="description" content="description here" />
+    <meta name="keywords" content="keywords,here" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="manifest" href="manifest.json" />
+    <!-- CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <link rel="stylesheet" href="css/app.css" type="text/css" />
+
+    <!--    Firebase JS-->
+    <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-firestore.js"></script>
+    <!--UI JS-->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/app.js"></script>
+</head>
+
+<body>
+    <header class="hide">
+        <ul class="tabs row container">
+            <li class="tab col s4 m4 l4 center"><a href="#chat"><i class="material-icons">chat</i>
+                    <!--<span id="messageCount" class="badge new">1</span>--></a></li>
+            <li class="tab col s4 m4 l4 center"><a href="#public"><i class="material-icons">group</i>
+                    <!--<span id="publicCount" class="badge">3</span>--></a></li>
+            <li class="tab col s4 m4 l4 center"><a href="#private"><i class="material-icons">face</i>
+                    <!--<span id="privateCount" class="badge">3</span>--></a></li>
+        </ul>
+    </header>
+    <main class="container hide">
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large blue">
+                <i class="large material-icons">face</i>
+            </a>
+            <ul>
+                <li><a class="btn-floating red tooltipped" data-position="left" data-tooltip="Logout" onclick="logout()"><i class="material-icons">exit_to_app</i></a></li>
+                <li><a class="btn-floating green tooltipped modal-trigger" href="#addIdea" data-position="left" data-tooltip="Add Idea"><i class="material-icons">add</i></a></li>
+            </ul>
+        </div>
+        <br>
+        <div class="card" id="chat">
+            <br>
+            <div class="row container" id="messageInput">
+                <div class="col s10 m10 l10 input-field">
+                    <textarea type="text" class="materialize-textarea" id="messageTextInput"></textarea>
+                    <label for="messageTextInput">Enter Message</label>
+                </div>
+                <div class="col s2 m2 l2 input-field">
+                    <div class="btn-floating" onclick="sendMessage()"><i class="material-icons">send</i></div>
+                </div>
+            </div>
+            <div class="scrollable container" id="messageDisplay">
+
+            </div>
+        </div>
+        <div class="row" id="public">
+        </div>
+        <div class="row" id="private">
+
+        </div>
+        <div class="modal modal-fixed-footer" id="addIdea">
+            <div class="modal-content row">
+                <h5 class="center">Add Idea</h5>
+                <div class="input-field col s12 m6 l6">
+                    <input type="text" id="ideaTitle">
+                    <label for="ideaTitle">Idea Title</label>
+                </div>
+                <div class="input-field col s12 m6 l6">
+                    <select id="ideaType">
+                        <option value="private" selected disabled>Select Idea Type</option>
+                        <option value="private">private</option>
+                        <option value="public">public</option>
+                    </select>
+                </div>
+                <div class="input-field col s12 m12 l12">
+                    <textarea id="ideaDescription" class="materialize-textarea"></textarea>
+                    <label for="ideaDescription">Idea Description</label>
+                </div>
+            </div>
+            <div class="modal-footer center">
+                <div class="btn" onclick="addIdea()">Add <i class="material-icons">add</i></div>
+                <br>
+            </div>
+        </div>
+    </main>
+    <footer class="hide">
+    </footer>
+    <extras>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="center">
+            <div class="btn" onclick="login()">LOGIN TO GOOGLE</div>
+        </div>
+    </extras>
+</body>
+
+</html>
