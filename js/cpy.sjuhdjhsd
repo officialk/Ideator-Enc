@@ -287,3 +287,11 @@ const viewIdeaList = id => {
         })
 
 }
+
+const addUser=(email,name,pin)=>{
+    db.collection("users").add({
+        name:name,
+        email:email,
+        pin:sjcl.encrypt(""+pin, pin)
+    })
+}
