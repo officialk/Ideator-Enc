@@ -94,7 +94,7 @@ const loadMessages = () => {
     document.getElementById("messageDisplay").innerHTML = "";
     db.collection("messages")
         .onSnapshot(doc => {
-            document.getElementById("messageDisplay").innerHTML = "";
+            document.getElementById("messageDisplay").innerHTML = "<b><center>**END OF MESSAGES**</center></b>";
             doc.forEach(mssg => {
                 var mssg = mssg.data();
                 let html = `<div class="row message">
@@ -130,16 +130,18 @@ const sendMessage = () => {
 
 /*PROJECT RELATED FUNCTIONS*/
 const loadProjectList = () => {
-    document.getElementById("public").innerHTML = "";
-    document.getElementById("private").innerHTML = "";
+    document.getElementById("public").innerHTML = "<h3><center>No Public Projects Available hover over bottom right button and + button to add a project</center></h3>";
+    document.getElementById("private").innerHTML = "<h3><center>No Private Projects Available hover over bottom right button and + button to add a project</center></h3>";
     db
         .collection("projects")
         .get()
         .then(ideaList => {
+            let privhtml = "",
+                pubhtml = "";
             ideaList.forEach(doc => {
                 let idea = doc.data();
                 if (idea.type == "private" && idea.creatorId == data.uid) {
-                    let html = `<div class="card idea col s12 m6 l4">
+                    privhtml += `<div class="card idea col s12 m6 l4">
                                     <div class="card-title">${sjcl.decrypt(data.pin+data.name+data.uid+idea.date,idea.title)}</div>
                                     <div class="card-content">
                                         ${sjcl.decrypt(data.pin+data.name+data.uid+idea.date,idea.description)}
@@ -148,14 +150,13 @@ const loadProjectList = () => {
                                         ${idea.date}
                                     </div>
                                     <div class="card-action">
+                                        <a class="btn-floating tooltipped" data-position="top" data-tooltip="View Idea List" onclick="curProject='${doc.id}';viewIdeaList('${doc.id}')"><i class="material-icons">remove_red_eye</i></a>
                                         <a class="btn-floating tooltipped" data-position="top" data-tooltip="Add Idea" onclick="curProject='${doc.id}';curProjectType='private';$('#addIdeaModal').modal('open');"><i class="material-icons">add</i></a>
                                         <a class="btn-floating tooltipped" data-position="top" data-tooltip="Delete Project" onclick="deleteProject('${doc.id}')"><i class="material-icons">delete</i></a>
-                                        <a class="btn-floating tooltipped" data-position="bottom" data-tooltip="View Idea List" onclick="curProject='${doc.id}';viewIdeaList('${doc.id}')"><i class="material-icons">remove_red_eye</i></a>
                                     </div>
                                 </div>`;
-                    document.getElementById("private").insertAdjacentHTML("beforeend", html);
                 } else {
-                    let html = `<div class="card idea col s12 m6 l4">
+                    pubhtml += `<div class="card idea col s12 m6 l4">
                                     <div class="card-title">${sjcl.decrypt(idea.creatorId+idea.creatorName+idea.date,idea.title)}</div>
                                     <div class="card-content">
                                         ${sjcl.decrypt(idea.creatorId+idea.creatorName+idea.date,idea.description)}
@@ -165,14 +166,20 @@ const loadProjectList = () => {
                                         <!--Idea Count::${idea.count}-->
                                     </div>
                                     <div class="card-action">
+                                        <a class="btn-floating tooltipped" data-position="top" data-tooltip="View Idea List" onclick="curProject='${doc.id}';viewIdeaList('${doc.id}')"><i class="material-icons">remove_red_eye</i></a>
                                         <a class="btn-floating tooltipped" data-position="top" data-tooltip="Add Idea" onclick="curProject='${doc.id}';curProjectType='public';$('#addIdeaModal').modal('open');"><i class="material-icons">add</i></a>`;
                     if (idea.creatorId == data.uid) {
-                        html += `<a class="btn-floating tooltipped" data-position="top" data-tooltip="Delete Idea" onclick="deleteProject('${doc.id}')"><i class="material-icons">delete</i></a>`;
+                        pubhtml = pubhtml.concat(`\n<a class="btn-floating tooltipped" data-position="top" data-tooltip="Delete Idea" onclick="deleteProject('${doc.id}')"><i class="material-icons">delete</i></a>`);
                     }
-                    html += `<a class="btn-floating tooltipped" data-position="bottom" data-tooltip="View Idea List" onclick="curProject='${doc.id}';viewIdeaList('${doc.id}')"><i class="material-icons">remove_red_eye</i></a>`;
-                    document.getElementById("public").insertAdjacentHTML("beforeend", html);
+                    pubhtml += `</div></div>`;
                 }
             });
+            if (privhtml != "") {
+                document.getElementById("private").innerHTML = privhtml;
+            }
+            if (pubhtml != "") {
+                document.getElementById("public").innerHTML = pubhtml;
+            }
             initMaterial();
         })
 }
@@ -273,8 +280,10 @@ const viewIdeaList = id => {
                 }
                 html += `</div></li>`;
             })
-            document.getElementById("ideaListDisplay").innerHTML = html;
-            $('.collapsible').collapsible();
+            if (html != "") {
+                document.getElementById("ideaListDisplay").innerHTML = html;
+                $('.collapsible').collapsible();
+            }
         })
 
 }
