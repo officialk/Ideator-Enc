@@ -9,6 +9,12 @@ const firebaseConfig = {
     appId: "1:337836532873:web:38436b11705df954df5258"
 };
 var db;
+const encryptionFunctions = [
+
+];
+const decryptionFunctions = [
+
+];
 
 $(document).ready(function () {
     firebase.initializeApp(firebaseConfig);
@@ -24,12 +30,24 @@ const login = () => {
     provider.addScope('email');
     firebase.auth().signInWithPopup(provider).then(function (result) {
         db.collection("users").doc(result.user.uid).get().then((querySnapshot) => {
-            data.name = querySnapshot.data().name;
-            data.email = querySnapshot.data().email;
-            data.pin = querySnapshot.data().pin;
-            data.uid = result.user.uid;
-            localStorage.setItem("data", JSON.stringify(data));
-            loadDisplay();
+            let pin = prompt("Enter PIN");
+            try {
+
+                if (sjcl.decrypt(pin, querySnapshot.data().pin) == pin) {
+                    data.name = querySnapshot.data().name;
+                    data.email = querySnapshot.data().email;
+                    data.uid = result.user.uid;
+                    data.pin = pin;
+                    localStorage.setItem("data", JSON.stringify(data));
+                    loadDisplay();
+                } else {
+                    alert("Pin Wrong Please Try Again");
+                    window.location.reload();
+                }
+            } catch (e) {
+                alert("Pin Wrong Please Try Again");
+                window.location.reload();
+            }
         });
     }).catch(function (error) {
         console.log(error);
@@ -46,7 +64,7 @@ const loadDisplay = () => {
     loadMessages();
 }
 
-const initMaterial=()=>{
+const initMaterial = () => {
     $('.tabs').tabs();
     $('.fixed-action-btn').floatingActionButton();
     $('.tooltipped').tooltip();
@@ -55,6 +73,8 @@ const initMaterial=()=>{
 }
 
 const loadIdeas = () => {
+    document.getElementById("public").innerHTML= "";
+    document.getElementById("private").innerHTML= "";
     db
         .collection("ideas")
         .get()
@@ -63,36 +83,36 @@ const loadIdeas = () => {
                 let idea = doc.data();
                 if (idea.type == "private" && idea.creatorId == data.uid) {
                     let html = `<div class="card idea col s12 m6 l4">
-                                    <div class="card-title">${idea.title}</div>
+                                    <div class="card-title">${sjcl.decrypt(data.pin+data.name+data.uid+idea.date,idea.title)}</div>
                                     <div class="card-content">
-                                        ${idea.description}
+                                        ${sjcl.decrypt(data.pin+data.name+data.uid+idea.date,idea.description)}
                                         <!--Idea Count::${idea.count}-->
                                         <br>
                                         ${idea.date}
                                     </div>
                                     <div class="card-action">
-                                        <a class="btn-floating tooltipped" data-position="top" data-tooltip="Add Idea"><i class="material-icons">add</i></a>
-                                        <a class="btn-floating tooltipped" data-position="top" data-tooltip="Delete Idea"><i class="material-icons">delete</i></a>
+                                        <a class="btn-floating tooltipped" data-position="top" data-tooltip="Add Idea"><i class="material-icons">lock</i></a>
+                                        <a class="btn-floating tooltipped" data-position="top" data-tooltip="Delete Idea" onclick="deleteIdea('${doc.id}')"><i class="material-icons">delete</i></a>
                                         <a class="btn-floating disabled tooltipped" data-position="bottom" data-tooltip="Begin Work"><i class="material-icons">airplay</i></a>
                                     </div>
                                 </div>`;
                     document.getElementById("private").insertAdjacentHTML("beforeend", html);
-                }
-                else{
+                } else {
                     let html = `<div class="card idea col s12 m6 l4">
-                                    <div class="card-title">${idea.title}</div>
+                                    <div class="card-title">${sjcl.decrypt(idea.creatorId+idea.creatorName+idea.date,idea.title)}</div>
                                     <div class="card-content">
-                                        ${idea.description}
+                                        ${sjcl.decrypt(idea.creatorId+idea.creatorName+idea.date,idea.description)}
                                         <br>
                                         ${idea.creatorName}::${idea.date}
                                         <br>
                                         <!--Idea Count::${idea.count}-->
                                     </div>
                                     <div class="card-action">
-                                        <a class="btn-floating tooltipped" data-position="top" data-tooltip="Add Idea"><i class="material-icons">add</i></a>
-                                        <a class="btn-floating disabled tooltipped" data-position="top" data-tooltip="Begin Work"><i class="material-icons">airplay</i></a>
-                                    </div>
-                                </div>`;
+                                        <a class="btn-floating tooltipped" data-position="top" data-tooltip="Add Idea"><i class="material-icons">add</i></a>`;
+                    if (idea.creatorId == data.uid) {
+                        html += `<a class="btn-floating tooltipped" data-position="top" data-tooltip="Delete Idea" onclick="deleteIdea('${doc.id}')"><i class="material-icons">delete</i></a>`;
+                    }
+                    html += `<a class="btn-floating disabled tooltipped" data-position="top" data-tooltip="Begin Work"><i class="material-icons">airplay</i></a></div></div>`;
                     document.getElementById("public").insertAdjacentHTML("beforeend", html);
                 }
             });
@@ -100,14 +120,26 @@ const loadIdeas = () => {
     initMaterial();
 }
 
+const deleteIdea = (uid) => {
+    console.log(uid);
+}
+
 const addIdea = () => {
+    let desc = document.getElementById("ideaDescription").value;
+    let title = document.getElementById("ideaTitle").value;
+    let type = document.getElementById("ideaType").value;
+    let date = getDate();
+    let key = data.uid+data.name+date;
+    if (type == "private") {
+        key = data.pin+data.name+data.uid+date;
+    }
     db.collection("ideas").add({
         creatorId: data.uid,
-        creatorName:data.name,
-        date: getDate(),
-        description: document.getElementById("ideaDescription").value,
-        title: document.getElementById("ideaTitle").value,
-        type: document.getElementById("ideaType").value
+        creatorName: data.name,
+        date: date,
+        description: sjcl.encrypt(key,desc),
+        title: sjcl.encrypt(key,title),
+        type: type
     })
     $("#addIdea").modal("close");
     loadIdeas();
@@ -117,6 +149,7 @@ const loadMessages = () => {
     document.getElementById("messageDisplay").innerHTML = "";
     db.collection("messages")
         .onSnapshot(doc => {
+            document.getElementById("messageDisplay").innerHTML = "";
             doc.forEach(mssg => {
                 var mssg = mssg.data();
                 let html = `<div class="row message">
@@ -128,7 +161,7 @@ const loadMessages = () => {
                             <a class="btn-floating btn-flat tooltipped" data-position="bottom" data-tooltip="Add as a project"><i class="material-icons">add</i></a>
                             <a class="btn-floating btn-flat tooltipped" data-position="bottom" data-tooltip="reply"> <i class="material-icons">reply</i></a>
                         </span>--></p>
-                            ${mssg.content}
+                            ${sjcl.decrypt(mssg.date+data.name,mssg.content)}
                         </div>
                     </div>
                     <div class="col s2 m4 l4">
@@ -142,10 +175,11 @@ const loadMessages = () => {
 
 const sendMessage = () => {
     let mssg = document.getElementById("messageTextInput").value;
+    let date = getDate();
     db.collection("messages").add({
         sender: data.name,
-        date: getDate(),
-        content: mssg,
+        date: date,
+        content: sjcl.encrypt(date+data.name,mssg)
     })
 }
 

@@ -1,2 +1,11 @@
-::root {
+::root {}
+
+.scrollable {
+    max-height: 500px !important;
+    overflow-x: hidden !important;
+    overflow-y: scroll !important;
+}
+
+body {
+    overflow: hidden !important;
 }
