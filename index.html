@@ -45,7 +45,7 @@
             </a>
             <ul>
                 <li><a class="btn-floating red tooltipped" data-position="left" data-tooltip="Logout" onclick="logout()"><i class="material-icons">exit_to_app</i></a></li>
-                <li><a class="btn-floating green tooltipped modal-trigger" href="#addIdea" data-position="left" data-tooltip="Add Idea"><i class="material-icons">add</i></a></li>
+                <li><a class="btn-floating green tooltipped modal-trigger" href="#addProjectModal" data-position="left" data-tooltip="Add Project"><i class="material-icons">add</i></a></li>
             </ul>
         </div>
         <br>
@@ -70,7 +70,31 @@
         <div class="row" id="private">
 
         </div>
-        <div class="modal modal-fixed-footer" id="addIdea">
+        <div class="modal" id="addProjectModal">
+            <div class="modal-content row">
+                <h5 class="center">Add Project</h5>
+                <div class="input-field col s12 m6 l6">
+                    <input type="text" id="projectTitle">
+                    <label for="projectTitle">Project Title</label>
+                </div>
+                <div class="input-field col s12 m6 l6">
+                    <select id="projectType">
+                        <option value="private" selected disabled>Select Project Type</option>
+                        <option value="private">private</option>
+                        <option value="public">public</option>
+                    </select>
+                </div>
+                <div class="input-field col s12 m12 l12">
+                    <textarea id="projectDescription" class="materialize-textarea"></textarea>
+                    <label for="projectDescription">Project Description</label>
+                </div>
+            </div>
+            <div class="modal-footer center">
+                <div class="btn" onclick="addProject()">Add <i class="material-icons">add</i></div>
+                <br>
+            </div>
+        </div>
+        <div class="modal" id="addIdeaModal">
             <div class="modal-content row">
                 <h5 class="center">Add Idea</h5>
                 <div class="input-field col s12 m6 l6">
@@ -78,20 +102,20 @@
                     <label for="ideaTitle">Idea Title</label>
                 </div>
                 <div class="input-field col s12 m6 l6">
-                    <select id="ideaType">
-                        <option value="private" selected disabled>Select Idea Type</option>
-                        <option value="private">private</option>
-                        <option value="public">public</option>
-                    </select>
-                </div>
-                <div class="input-field col s12 m12 l12">
                     <textarea id="ideaDescription" class="materialize-textarea"></textarea>
                     <label for="ideaDescription">Idea Description</label>
                 </div>
+                <center>
+                    <div class="btn-floating" onclick="addIdea()"><i class="material-icons">add</i></div>
+                </center>
             </div>
-            <div class="modal-footer center">
-                <div class="btn" onclick="addIdea()">Add <i class="material-icons">add</i></div>
-                <br>
+        </div>
+        <div class="modal" id="ideaListModal">
+            <div class="modal-content">
+                <center><h2>IDEA LIST</h2></center>
+                <ul class="collapsible" id="ideaListDisplay">
+                    <h4>NO IDEAS YET ADD ONE USING THE + BUTTON</h4>
+                </ul>
             </div>
         </div>
     </main>
