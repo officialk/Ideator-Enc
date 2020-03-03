@@ -16,8 +16,17 @@ $(document).ready(function () {
     if (data.uid != undefined) {
         loadDisplay();
     }
+    initSw();
 });
 
+/*SW and PWA related Functions*/
+const initSw = () => {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js', {
+            scope: "/"
+        });
+    }
+}
 /*UI AND OTHER STUFF RELATED FUNCTIONS*/
 const login = () => {
     var provider = new firebase.auth.GoogleAuthProvider();
@@ -56,9 +65,9 @@ const signup = () => {
     firebase.auth().signInWithPopup(provider).then(function (result) {
         let pin = prompt("ENTER Password/PIN");
         db.collection("users").doc(result.user.uid).set({
-            name:result.user.displayName,
-            email:result.user.email,
-            pin:sjcl.encrypt(pin, pin)
+            name: result.user.displayName,
+            email: result.user.email,
+            pin: sjcl.encrypt(pin, pin)
         });
         data.name = result.user.displayName;
         data.email = result.user.email;
