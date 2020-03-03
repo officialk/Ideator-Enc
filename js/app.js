@@ -124,6 +124,54 @@ const logout = () => {
 const keyShift = (oldKey, newKey, text) => {
     return sjcl.encrypt(newKey, sjcl.decrypt(oldKey, text));
 }
+/*USER AND SETTING RELATED FUNCTIONS*/
+const updatePassword = () => {
+    let newPass = document.getElementById("newPasswordInput").value;
+    let newName = document.getElementById("newNameInput").value;
+    if (newName.length == 0) {
+        newName = data.name;
+    }
+    if (newPass.length > 5) {
+        db
+            .collection("projects")
+            .where("creatorId", "==", data.uid)
+            .get()
+            .then(docs => {
+                let size = docs.size;
+                docs.forEach(doc => {
+                    docCopy = doc.data();
+                    let req = db.collection("projects").doc(doc.id);
+                    db.runTransaction(transaction => {
+                        return transaction.get(req).then(ans => {
+                            let oldKey = data.uid + data.name + ans.data().date;
+                            let newKey = data.uid + newName + ans.data().date;
+                            if (docCopy.type == "private") {
+                                oldKey = data.pin + data.name + data.uid + ans.data().date;
+                                newKey = newPass + newName + data.uid + ans.data().date;
+                            }
+                            transaction.update(req, {
+                                creatorName: newName,
+                                title: keyShift(oldKey, newKey, ans.data().title),
+                                description: keyShift(oldKey, newKey, ans.data().description)
+                            })
+                        })
+                    })
+                })
+            })
+        db.collection("users").doc(data.uid).set({
+            name: newName,
+            email: data.email,
+            pin: sjcl.encrypt(newPass, newPass)
+        })
+        data.pin = newPass;
+        data.name = newName;
+        localStorage.setItem("data", JSON.stringify(data));
+        $("#settings").modal("close");
+
+    } else {
+        alert("Password should be atleast 5 chars long(enter current password if you dont want to change it)");
+    }
+}
 
 /*MESSAGES RELATED FUNCTIONS*/
 const loadMessages = () => {
@@ -275,7 +323,7 @@ const addProject = () => {
     let type = document.getElementById("projectType").value || "private";
     let date = getDate();
     let key = data.uid + data.name + date;
-    if (title.length < 5) {
+    if (title.length > 5) {
         if (desc.length > 15) {
             if (type == "private") {
                 key = data.pin + data.name + data.uid + date;
@@ -305,7 +353,7 @@ const addIdea = () => {
     let description = document.getElementById("ideaDescription").value;
     let date = getDate();
     let key = data.uid + data.name + date;
-    if (title.length < 5) {
+    if (title.length > 5) {
         if (desc.length > 15) {
             if (curProjectType == "private") {
                 key = data.uid + data.name + data.pin + date;

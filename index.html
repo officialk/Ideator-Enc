@@ -40,11 +40,12 @@
     </header>
     <main class="container hide">
         <div class="fixed-action-btn">
-            <a class="btn-floating btn-large blue">
+            <a class="btn-floating btn-large">
                 <i class="large material-icons">face</i>
             </a>
             <ul>
                 <li><a class="btn-floating red tooltipped" data-position="left" data-tooltip="Logout" onclick="logout()"><i class="material-icons">exit_to_app</i></a></li>
+                <li><a class="btn-floating blue tooltipped modal-trigger" href="#settingsModal" data-position="left" data-tooltip="Settings"><i class="material-icons">settings</i></a></li>
                 <li><a class="btn-floating green tooltipped modal-trigger" href="#addProjectModal" data-position="left" data-tooltip="Add Project"><i class="material-icons">add</i></a></li>
             </ul>
         </div>
@@ -112,10 +113,37 @@
         </div>
         <div class="modal" id="ideaListModal">
             <div class="modal-content">
-                <center><h2>IDEA LIST</h2></center>
+                <center>
+                    <h2>IDEA LIST</h2>
+                </center>
                 <ul class="collapsible" id="ideaListDisplay">
                     <h4>NO IDEAS YET ADD ONE USING THE + BUTTON</h4>
                 </ul>
+            </div>
+        </div>
+        <div class="modal" id="settingsModal">
+            <div class="modal-content">
+                <h5>
+                    <center>Settings</center>
+                </h5>
+                <div class="row container">
+                    <div class="input-field col s12 m6 l6">
+                        <input type="password" id="newPasswordInput">
+                        <label for="newPasswordInput">Enter New Password</label>
+                    </div>
+                    <div class="input-field col s12 m6 l6">
+                        <input type="text" id="newNameInput">
+                        <label for="newNameInput">Enter New Name</label>
+                    </div>
+                </div>
+                <div class="row container">
+                    <div class="input-field col s12 m12 l12 center">
+                        <div class="btn-floating" onclick="updatePassword()"><i class="material-icons">done_all</i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
             </div>
         </div>
     </main>
