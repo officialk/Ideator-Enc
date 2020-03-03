@@ -121,6 +121,10 @@ const logout = () => {
         });
 };
 
+const keyShift = (oldKey, newKey, text) => {
+    return sjcl.encrypt(newKey, sjcl.decrypt(oldKey, text));
+}
+
 /*MESSAGES RELATED FUNCTIONS*/
 const loadMessages = () => {
     document.getElementById("messageDisplay").innerHTML = "";
@@ -187,6 +191,7 @@ const loadProjectList = () => {
                                         <a class="btn-floating tooltipped" data-position="top" data-tooltip="View Idea List" onclick="curProject='${doc.id}';viewIdeaList('${doc.id}')"><i class="material-icons">remove_red_eye</i></a>
                                         <a class="btn-floating tooltipped" data-position="top" data-tooltip="Add Idea" onclick="curProject='${doc.id}';curProjectType='private';$('#addIdeaModal').modal('open');"><i class="material-icons">add</i></a>
                                         <a class="btn-floating tooltipped" data-position="top" data-tooltip="Delete Project" onclick="deleteProject('${doc.id}')"><i class="material-icons">delete</i></a>
+                                        <a class="btn-floating tooltipped" data-position="top" data-tooltip="Convert To Public Project" onclick="convProject('${doc.id}','public')"><i class="material-icons">refresh</i></a>
                                     </div>
                                 </div>`;
                 } else {
@@ -203,7 +208,9 @@ const loadProjectList = () => {
                                         <a class="btn-floating tooltipped" data-position="top" data-tooltip="View Idea List" onclick="curProject='${doc.id}';viewIdeaList('${doc.id}')"><i class="material-icons">remove_red_eye</i></a>
                                         <a class="btn-floating tooltipped" data-position="top" data-tooltip="Add Idea" onclick="curProject='${doc.id}';curProjectType='public';$('#addIdeaModal').modal('open');"><i class="material-icons">add</i></a>`;
                     if (idea.creatorId == data.uid) {
-                        pubhtml = pubhtml.concat(`<a class="btn-floating tooltipped" data-position="top" data-tooltip="Delete Idea" onclick="deleteProject('${doc.id}')"><i class="material-icons">delete</i></a>`);
+                        pubhtml += `
+                                    <a class="btn-floating tooltipped" data-position="top" data-tooltip="Delete Idea" onclick="deleteProject('${doc.id}')"><i class="material-icons">delete</i></a>
+                                    <a class="btn-floating tooltipped" data-position="top" data-tooltip="revert To Private Project" onclick="convProject('${doc.id}','private')"><i class="material-icons">refresh</i></a>`;
                     }
                     pubhtml += `</div></div>`;
                 }
@@ -218,8 +225,37 @@ const loadProjectList = () => {
         })
 }
 
+const convProject = (id, type) => {
+    let req = db.collection("projects").doc(id);
+    db.runTransaction(transaction => {
+        return transaction.get(req).then(ans => {
+            let oldKey = data.pin + data.name + data.uid + ans.data().date;
+            let newKey = data.uid + data.name + ans.data().date;
+            if (type == "private") {
+                let temp = oldKey;
+                oldKey = newKey;
+                newKey = temp;
+            }
+            transaction.update(req, {
+                type: type,
+                title: keyShift(oldKey, newKey, ans.data().title),
+                description: keyShift(oldKey, newKey, ans.data().description)
+            })
+        })
+    }).then(x => {
+        alert("updated Project type");
+        loadProjectList();
+    })
+}
+
 const deleteProject = id => {
     if (confirm("DO YOU REALY WANT TO DELETE THE PROJECT AS IT IS A IRREVERSIBLE PROCESS")) {
+        //        db
+        //            .collection("projects")
+        //            .doc(id)
+        //            .collection("ideas")
+        //            .delete()
+        //            .then(e => {
         db
             .collection("projects")
             .doc(id)
@@ -228,6 +264,8 @@ const deleteProject = id => {
                 alert("Project Deleted");
                 loadProjectList();
             })
+        //            })
+        //    }
     }
 }
 
