@@ -27,6 +27,7 @@ const initSw = () => {
         });
     }
 }
+
 /*UI AND OTHER STUFF RELATED FUNCTIONS*/
 const login = () => {
     var provider = new firebase.auth.GoogleAuthProvider();
@@ -152,11 +153,13 @@ const loadMessages = () => {
 const sendMessage = () => {
     let mssg = document.getElementById("messageTextInput").value;
     let date = getDate();
-    db.collection("messages").add({
-        sender: data.name,
-        date: date,
-        content: sjcl.encrypt(date + data.name, mssg)
-    })
+    if (mssg.length > 0) {
+        db.collection("messages").add({
+            sender: data.name,
+            date: date,
+            content: sjcl.encrypt(date + data.name, mssg)
+        });
+    }
 }
 
 /*PROJECT RELATED FUNCTIONS*/
@@ -231,22 +234,30 @@ const deleteProject = id => {
 const addProject = () => {
     let desc = document.getElementById("projectDescription").value;
     let title = document.getElementById("projectTitle").value;
-    let type = document.getElementById("projectType").value;
+    let type = document.getElementById("projectType").value || "private";
     let date = getDate();
     let key = data.uid + data.name + date;
-    if (type == "private") {
-        key = data.pin + data.name + data.uid + date;
+    if (title.length < 5) {
+        if (desc.length > 15) {
+            if (type == "private") {
+                key = data.pin + data.name + data.uid + date;
+            }
+            db.collection("projects").add({
+                creatorId: data.uid,
+                creatorName: data.name,
+                date: date,
+                description: sjcl.encrypt(key, desc),
+                title: sjcl.encrypt(key, title),
+                type: type
+            })
+            $("#addProject").modal("close");
+            loadProjectList();
+        } else {
+            alert("Description Too Short!(atleast 15 chars)");
+        }
+    } else {
+        alert("Title Too Short!(atleast 5 chars)");
     }
-    db.collection("projects").add({
-        creatorId: data.uid,
-        creatorName: data.name,
-        date: date,
-        description: sjcl.encrypt(key, desc),
-        title: sjcl.encrypt(key, title),
-        type: type
-    })
-    $("#addProject").modal("close");
-    loadProjectList();
 }
 
 /*IDEA RELATED FUNCTIONS*/
@@ -256,18 +267,26 @@ const addIdea = () => {
     let description = document.getElementById("ideaDescription").value;
     let date = getDate();
     let key = data.uid + data.name + date;
-    if (curProjectType == "private") {
-        key = data.uid + data.name + data.pin + date;
+    if (title.length < 5) {
+        if (desc.length > 15) {
+            if (curProjectType == "private") {
+                key = data.uid + data.name + data.pin + date;
+            }
+            db.collection(`projects/${curProject}/ideas`).add({
+                title: sjcl.encrypt(key, title),
+                description: sjcl.encrypt(key, description),
+                creatorId: data.uid,
+                creatorName: data.name,
+                date: date,
+                type: curProjectType
+            });
+            $("#addIdeaModal").modal("close");
+        } else {
+            alert("Description Too Short!(atleast 15 chars)");
+        }
+    } else {
+        alert("Title Too Short!(atleast 5 chars)");
     }
-    db.collection(`projects/${curProject}/ideas`).add({
-        title: sjcl.encrypt(key, title),
-        description: sjcl.encrypt(key, description),
-        creatorId: data.uid,
-        creatorName: data.name,
-        date: date,
-        type: curProjectType
-    });
-    $("#addIdeaModal").modal("close");
 }
 
 const deleteIdea = id => {
@@ -317,12 +336,4 @@ const viewIdeaList = id => {
             }
         })
 
-}
-
-const addUser = (email, name, pin) => {
-    db.collection("users").add({
-        name: name,
-        email: email,
-        pin: sjcl.encrypt("" + pin, pin)
-    })
 }
