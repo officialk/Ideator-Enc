@@ -13,10 +13,11 @@ var curProject, curProjectType;
 $(document).ready(function () {
     firebase.initializeApp(firebaseConfig);
     db = firebase.firestore();
-    if (data.uid != undefined) {
+    initMaterial();
+    if (data.id != undefined) {
         loadDisplay();
+        initSw();
     }
-    initSw();
 });
 
 /*SW and PWA related Functions*/
@@ -29,56 +30,24 @@ const initSw = () => {
 }
 
 /*UI AND OTHER STUFF RELATED FUNCTIONS*/
-const login = () => {
+const join = () => {
     var provider = new firebase.auth.GoogleAuthProvider();
-    provider.addScope('profile');
-    provider.addScope('email');
-    firebase.auth().signInWithPopup(provider).then(function (result) {
-        db.collection("users").doc(result.user.uid).get().then((querySnapshot) => {
-            let pin = prompt("Enter PIN");
-            try {
+    firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(result => {
+            let user = result.user;
 
-                if (sjcl.decrypt(pin, querySnapshot.data().pin) == pin) {
-                    data.name = querySnapshot.data().name;
-                    data.email = querySnapshot.data().email;
-                    data.uid = result.user.uid;
-                    data.pin = pin;
-                    localStorage.setItem("data", JSON.stringify(data));
-                    loadDisplay();
-                } else {
-                    alert("Pin Wrong Please Try Again");
-                    window.location.reload();
-                }
-            } catch (e) {
-                alert("Pin Wrong Please Try Again");
-                window.location.reload();
-            }
+            data.email = user.email;
+            data.name = user.displayName;
+            data.id = user.uid;
+            data.pic = user.photoURL;
+            localStorage.setItem("data", JSON.stringify(data));
+            location.reload();
+        })
+        .catch(function (error) {
+            console.log("ERROR::", error);
         });
-    }).catch(function (error) {
-        console.log(error);
-    });
-}
-
-const signup = () => {
-    var provider = new firebase.auth.GoogleAuthProvider();
-    provider.addScope('profile');
-    provider.addScope('email');
-    firebase.auth().signInWithPopup(provider).then(function (result) {
-        let pin = prompt("ENTER Password/PIN");
-        db.collection("users").doc(result.user.uid).set({
-            name: result.user.displayName,
-            email: result.user.email,
-            pin: sjcl.encrypt(pin, pin)
-        });
-        data.name = result.user.displayName;
-        data.email = result.user.email;
-        data.uid = result.user.uid;
-        data.pin = pin;
-        localStorage.setItem("data", JSON.stringify(data));
-        loadDisplay();
-    }).catch(function (error) {
-        console.log(error);
-    });
 }
 
 const logout = () => {
@@ -105,6 +74,7 @@ const loadDisplay = () => {
 }
 
 const initMaterial = () => {
+    //    M.autoInit();
     $('.tabs').tabs();
     $('.fixed-action-btn').floatingActionButton();
     $('.tooltipped').tooltip();
