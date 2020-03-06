@@ -81,6 +81,19 @@ const signup = () => {
     });
 }
 
+const logout = () => {
+    firebase
+        .auth()
+        .signOut()
+        .then(function () {
+            localStorage.setItem("data", "{}");
+            location.reload();
+        })
+        .catch(function (error) {
+            // An error happened.
+        });
+};
+
 const loadDisplay = () => {
     initMaterial();
     document.getElementsByTagName("header")[0].classList.remove("hide");
@@ -108,24 +121,12 @@ const getDate = () => {
     return date + " " + time;
 };
 
-const logout = () => {
-    firebase
-        .auth()
-        .signOut()
-        .then(function () {
-            localStorage.setItem("data", "{}");
-            location.reload();
-        })
-        .catch(function (error) {
-            // An error happened.
-        });
-};
-
 const keyShift = (oldKey, newKey, text) => {
     return sjcl.encrypt(newKey, sjcl.decrypt(oldKey, text));
 }
+
 /*USER AND SETTING RELATED FUNCTIONS*/
-const updatePassword = () => {
+/*const updatePassword = () => {
     let newPass = document.getElementById("newPasswordInput").value;
     let newName = document.getElementById("newNameInput").value;
     if (newName.length == 0) {
@@ -171,7 +172,7 @@ const updatePassword = () => {
     } else {
         alert("Password should be atleast 5 chars long(enter current password if you dont want to change it)");
     }
-}
+}*/
 
 /*MESSAGES RELATED FUNCTIONS*/
 const loadMessages = () => {
