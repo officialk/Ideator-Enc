@@ -1,0 +1,56 @@
+<div class="row container center" id="workspaceList">
+    <br>
+    <!--WORKSPACES LIST-->
+    <div class="col s12 m12 l12 flow-text center-align">
+        Workspace List
+    </div>
+    <br>
+    <br>
+    <div class="col s12 m4 l4 center">
+        <a class="modal-trigger card-panel block valign-wrapper" href="#addWorkspaceModal">
+            <i class="material-icons col s12 m12 l12 center">
+                add
+            </i>
+        </a>
+    </div>
+</div>
+<!--ADD WORKSPACE MODAL-->
+<div class="modal" id="addWorkspaceModal">
+    <div class="modal-content row">
+        <div class="col s12 m12 l12 flow-text center">
+            Add Workspace
+        </div>
+        <div class="input-field col s12 m6 l6">
+            <input type="text" id="addWorkspaceNameInput">
+            <label for="addWorkspaceNameInput">Workspace Name</label>
+        </div>
+        <div class="input-field col s12 m6 l6">
+            <input type="number" id="addWorkspaceLevelInput" min="1" max="10">
+            <label for="addWorkspaceLevelInput">Encryption Level(1-10)</label>
+        </div>
+        <div class="input-field col s12 m6 l6">
+            <input type="password" id="addWorkspacePassInput">
+            <label for="addWorkspacePassInput">Encryption Key</label>
+        </div>
+        <div class="input-field col s12 m6 l6">
+            <input type="password" id="addWorkspacePassConfInput">
+            <label for="addWorkspacePassConfInput">Confirm Encryption Key</label>
+        </div>
+        <div class="col s12 m12 l12 center" id="addWorkspaceTeamList">
+            <div>
+                <div class="input-field col s12 m6 l6">
+                    <input type="text" id="addWorkspaceEmail##Input" name="addWorkspaceEmailInput">
+                    <label for="addWorkspaceEmail##Input">Member ## Email</label>
+                </div>
+            </div>
+        </div>
+        <div class="center col s12 m12 l12">
+            <div class="btn-floating theme" onclick="createDynamicElement('addWorkspaceTeamList')"><i class="material-icons">add</i></div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="center col s12 m12 l12">
+            <div class="btn theme" onclick="addWorkspace()">Submit</div>
+        </div>
+    </div>
+</div>

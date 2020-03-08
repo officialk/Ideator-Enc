@@ -1,0 +1,23 @@
+
+<!--WORKSPACE LOGIN MODAL-->
+<div class="modal" id="workspaceLoginModal">
+    <div class="modal-content row">
+        <div class="col s12 m12 l12 flow-text center">
+            Workspace Login
+        </div>
+        <div class="input-field col s12 m6 l6">
+            <input type="password" id="workspaceLoginPassInput">
+            <label for="workspaceLoginPassInput">Encryption Key</label>
+        </div>
+        <div class="input-field col s12 m6 l6">
+            <input type="number" id="workspaceLoginLevelInput" min="1" max="10">
+            <label for="workspaceLoginLevelInput">Encryption Level(1-10)</label>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="center col s12 m12 l12">
+            <div class="btn theme" onclick="loadPage('home')">Cancel</div>
+            <div class="btn theme" onclick="loginToWorkspace()">Submit</div>
+        </div>
+    </div>
+</div>

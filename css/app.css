@@ -9,3 +9,12 @@
 body {
     overflow: hidden !important;
 }
+
+.block {
+    height: 200px !important;
+    width: 200px !important;
+    border-radius: 20px !important;
+}
+.link{
+    cursor: pointer
+}
