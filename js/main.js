@@ -1,9 +1,26 @@
+const data = JSON.parse(localStorage.getItem("data")) || {};
 var db;
-var currentWorkspace;
-$.getScript("./js/crypto.js");
-db = firebase.firestore();
+var page = JSON.parse(session("page")) || {};
 
 /*MISC FUNCTIONS*/
+const checkLogin = () => {
+    return data.id != undefined
+}
+
+const logout = () => {
+    firebase
+        .auth()
+        .signOut()
+        .then(function () {
+            local("data", "{}");
+            session("page", null);
+            location.reload();
+        })
+        .catch(function (error) {
+            // An error happened.
+        });
+}
+
 const getDate = () => {
     var today = new Date();
     var date =
@@ -33,7 +50,11 @@ const keyShift = (oldKey, newKey, text) => {
     return sjcl.encrypt(newKey, sjcl.decrypt(oldKey, text));
 }
 
-/*SW and PWA FUNCTIONS*/
+const loadPage = (page) => {
+    let [to, id] = page.split("?");
+    window.location.href = to + ".html?v=" + id;
+}
+/*INIT FUNCTIONS*/
 const initSw = () => {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/sw.js', {
@@ -42,3 +63,39 @@ const initSw = () => {
     }
 }
 
+const loadUserDetails = () => {
+    $("#userName").html(data.name);
+    $("#userEmail").html(data.email);
+    document.querySelector("#userPic").setAttribute("src", data.pic);
+}
+
+const initMaterial = () => {
+    M.AutoInit();
+    $('.sidenav').sidenav();
+    $('.tabs').tabs();
+    $('.fixed-action-btn').floatingActionButton();
+    $('.tooltipped').tooltip();
+    $('.modal').modal();
+    $('select').formSelect();
+}
+
+const initFirebase = () => {
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
+
+}
+
+const updateSession = () => {
+    session("page", JSON.stringify(page));
+}
+
+$(document).ready(() => {
+    if (checkLogin) {
+        loadUserDetails();
+        initMaterial();
+        initFirebase();
+        initSw();
+    } else {
+        location.href = "/";
+    }
+})

@@ -3,7 +3,7 @@ const addWorkspace = () => {
     let [name, level, pass, passconf] = getValuesByIds(["addWorkspaceNameInput", "addWorkspaceLevelInput", "addWorkspacePassInput", "addWorkspacePassConfInput"]);
     let team = getValuesByNames(["addWorkspaceEmailInput"])
         .filter(el => {
-            return validator("email", el);
+            return validator("email", el) && data.email != el;
         });
     if (name.length > 3 && name.length < 25) {
         if (level > 0 && level < 11) {
@@ -37,7 +37,8 @@ const addWorkspace = () => {
     }
 }
 
-const loadHomeData = () => {
+const loadData = () => {
+    createDynamicElement('addWorkspaceTeamList');
     db
         .collection("workspace")
         .get()
@@ -45,7 +46,7 @@ const loadHomeData = () => {
             let html = ``;
             list.forEach(ws => {
                 html += `<div class="col s12 m4 l4">
-                            <div class="card theme block link" onclick="loadPage('workspace#${ws.id}')">
+                            <div class="card block link rounded" onclick="loadPage('workspace?${ws.id}')">
                                 <div class="card-title truncate flow-text">${ws.data().name}</div>
                                 <div class="card-content">
                                     <div class="left-align truncate">
@@ -53,9 +54,6 @@ const loadHomeData = () => {
                                     <br>
                                     Date:${ws.data().date}
                                     </div>
-                                </div>
-                                <div class="card-action">
-                                    <div class="btn-floating theme"><i class="material-icons">remove_red_eye</i></div>
                                 </div>
                             </div>
                         </div>`;
