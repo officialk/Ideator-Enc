@@ -9,3 +9,18 @@
 body {
     overflow: hidden !important;
 }
+
+.block {
+    height: 200px !important;
+    width: 200px !important;
+    border-radius: 20px !important;
+}
+
+.link {
+    cursor: pointer
+}
+
+.theme {
+    background: #5da8a5 !important;
+    color: aliceblue !important;
+}

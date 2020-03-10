@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- META Tags -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Ideator</title>
+    <meta name="author" content="Karthik Koppaka" />
+    <meta name="description" content="description here" />
+    <meta name="keywords" content="keywords,here" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="manifest" href="/manifest.json" />
+    <!-- CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <link rel="stylesheet" href="/css/app.css" type="text/css" />
+
+    <!--FIREBASE JS-->
+    <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-firestore.js"></script>
+    <!--UI JS-->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/js/firebase.js"></script>
+    <script src="/js/crypto.js"></script>
+    <script src="/js/helper.js"></script>
+    <script src="/js/home.js"></script>
+    <script src="/js/main.js"></script>
+</head>
+
+<body onload="loadData()">
+    <header id="appNavbar">
+        <nav class="navbar-fixed theme">
+            <a href="#" class="brand-logo">Ideator</a>
+            <a href="#" data-target="mainNav" class="left sidenav-trigger"><i class="material-icons">menu</i></a>
+        </nav>
+        <ul id="mainNav" class="sidenav">
+            <li>
+                <div class="user-view">
+                    <a href="#user"><img class="circle" id="userPic" src=""></a>
+                    <a href="#name"><span class="black-text name" id="userName">John Doe</span></a>
+                    <a href="#email"><span class="black-text email" id="userEmail">jdandturk@gmail.com</span></a>
+                </div>
+            </li>
+            <li><a href="home.html"><i class="material-icons">home</i>Home</a></li>
+            <li><a href="#settingsModal"><i class="material-icons">settings</i>Settings</a></li>
+            <li><a href="#" onclick="logout()"><i class="material-icons">exit_to_app</i>Logout</a></li>
+            <li>
+                <div class="divider"></div>
+            </li>
+            <li><a class="subheader">Others</a></li>
+            <li><a class="waves-effect" href="#!">Feedback</a></li>
+            <li><a class="waves-effect" href="#!">Github</a></li>
+        </ul>
+    </header>
+    <main class="container">
+
+        <div class="row container center" id="workspaceList">
+            <br>
+            <!--WORKSPACES LIST-->
+            <div class="col s12 m12 l12 flow-text center-align">
+                Workspace List
+            </div>
+            <br>
+            <br>
+            <div class="col s12 m4 l4 center">
+                <a class="modal-trigger card-panel block valign-wrapper" href="#addWorkspaceModal">
+                    <i class="material-icons col s12 m12 l12 center">
+                        add
+                    </i>
+                </a>
+            </div>
+        </div>
+        <!--ADD WORKSPACE MODAL-->
+        <div class="modal" id="addWorkspaceModal">
+            <div class="modal-content row">
+                <div class="col s12 m12 l12 flow-text center">
+                    Add Workspace
+                </div>
+                <div class="input-field col s12 m6 l6">
+                    <input type="text" id="addWorkspaceNameInput">
+                    <label for="addWorkspaceNameInput">Workspace Name</label>
+                </div>
+                <div class="input-field col s12 m6 l6">
+                    <input type="number" id="addWorkspaceLevelInput" min="1" max="10">
+                    <label for="addWorkspaceLevelInput">Encryption Level(1-10)</label>
+                </div>
+                <div class="input-field col s12 m6 l6">
+                    <input type="password" id="addWorkspacePassInput">
+                    <label for="addWorkspacePassInput">Encryption Key</label>
+                </div>
+                <div class="input-field col s12 m6 l6">
+                    <input type="password" id="addWorkspacePassConfInput">
+                    <label for="addWorkspacePassConfInput">Confirm Encryption Key</label>
+                </div>
+                <div class="col s12 m12 l12 center" id="addWorkspaceTeamList">
+                    <div>
+                        <div class="input-field col s12 m6 l6">
+                            <input type="text" id="addWorkspaceEmail##Input" name="addWorkspaceEmailInput">
+                            <label for="addWorkspaceEmail##Input">Member ## Email</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="center col s12 m12 l12">
+                    <div class="btn-floating theme" onclick="createDynamicElement('addWorkspaceTeamList')"><i class="material-icons">add</i></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="center col s12 m12 l12">
+                    <div class="btn theme" onclick="addWorkspace()">Submit</div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+    </footer>
+    <extras>
+    </extras>
+</body>
+
+</html>
