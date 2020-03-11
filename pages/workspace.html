@@ -9,7 +9,7 @@
     <meta name="author" content="Karthik Koppaka" />
     <meta name="description" content="description here" />
     <meta name="keywords" content="keywords,here" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="manifest" href="/manifest.json" />
     <!-- CSS -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -26,14 +26,14 @@
     <script src="/js/firebase.js"></script>
     <script src="/js/crypto.js"></script>
     <script src="/js/helper.js"></script>
-    <script src="/js/workspace.js"></script>
     <script src="/js/main.js"></script>
+    <script src="/js/workspace.js"></script>
 </head>
 
 <body onload="isLoggedIn()">
     <header id="appNavbar">
         <nav class="navbar-fixed theme">
-            <a href="#" class="brand-logo">Ideator</a>
+            <a href="#" class="brand-logo center">Ideator</a>
             <a href="#" data-target="mainNav" class="left sidenav-trigger"><i class="material-icons">menu</i></a>
         </nav>
         <ul id="mainNav" class="sidenav">
@@ -44,7 +44,7 @@
                     <a href="#email"><span class="black-text email" id="userEmail">jdandturk@gmail.com</span></a>
                 </div>
             </li>
-            <li><a href="home.html"><i class="material-icons">home</i>Home</a></li>
+            <li><a onclick="loadPage('home')"><i class="material-icons">home</i>Home</a></li>
             <li><a href="#settingsModal"><i class="material-icons">settings</i>Settings</a></li>
             <li><a href="#" onclick="logout()"><i class="material-icons">exit_to_app</i>Logout</a></li>
             <li>
@@ -61,7 +61,7 @@
             <li class="tab col s4 m4 l4 center">
                 <a href="#chat" class="active">
                     <i class="material-icons">chat</i>
-<!--                    <span id="messageCount" class="badge new theme">0</span>-->
+                    <!--                    <span id="messageCount" class="badge new theme">0</span>-->
                 </a>
             </li>
             <li class="tab col s4 m4 l4 center">
@@ -104,7 +104,6 @@
                     </i>
                 </a>
             </div>
-
         </div>
         <div class="center flow-text" id="settings">
             <br>
@@ -132,7 +131,7 @@
             </div>
             <div class="modal-footer">
                 <div class="center col s12 m12 l12">
-                    <a class="btn theme" href='home.html'>Cancel</a>
+                    <a class="btn theme" onclick="loadPage('home?')">Cancel</a>
                     <div class="btn theme" onclick="loginToWorkspace()">Submit</div>
                 </div>
             </div>

@@ -9,7 +9,7 @@
     <meta name="author" content="Karthik Koppaka" />
     <meta name="description" content="description here" />
     <meta name="keywords" content="keywords,here" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="manifest" href="/manifest.json" />
     <!-- CSS -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -33,7 +33,7 @@
 <body onload="isLoggedIn()">
     <header id="appNavbar">
         <nav class="navbar-fixed theme">
-            <a href="#" class="brand-logo">Ideator</a>
+            <a href="#" class="brand-logo center">Ideator</a>
             <a href="#" data-target="mainNav" class="left sidenav-trigger"><i class="material-icons">menu</i></a>
         </nav>
         <ul id="mainNav" class="sidenav">
@@ -44,7 +44,7 @@
                     <a href="#email"><span class="black-text email" id="userEmail">jdandturk@gmail.com</span></a>
                 </div>
             </li>
-            <li><a href="home.html"><i class="material-icons">home</i>Home</a></li>
+            <li><a onclick="loadPage('home')"><i class="material-icons">home</i>Home</a></li>
             <li><a href="#settingsModal"><i class="material-icons">settings</i>Settings</a></li>
             <li><a href="#" onclick="logout()"><i class="material-icons">exit_to_app</i>Logout</a></li>
             <li>
@@ -59,15 +59,14 @@
         <br>
         <ul class="tabs row container">
             <li class="tab col s4 m4 l4 center">
-                <a href="#chat">
-                    <i class="material-icons">chat</i>
-                    <span id="messageCount" class="badge new theme">1</span>
+                <a href="#ideas">
+                    <i class="material-icons">lightbulb_outline</i>
+                    <!--                    <span id="ideaCount" class="badge theme">1</span>-->
                 </a>
             </li>
             <li class="tab col s4 m4 l4 center">
-                <a href="#projects">
-                    <i class="material-icons">dashboard</i>
-                    <span id="projectCount" class="badge theme">3</span>
+                <a href="#files">
+                    <i class="material-icons">folder_open</i>
                 </a>
             </li>
             <li class="tab col s4 m4 l4 center">
@@ -76,29 +75,58 @@
                 </a>
             </li>
         </ul>
+        <div class="row container center" id="ideas">
+            <div class="col s12 m12 l12 flow-text center-align">
+                Idea List
+            </div>
+            <br>
+            <br>
+            <div>
+                <a class="col s12 m12 l12 modal-trigger card-panel block-long valign-wrapper center-align" href="#addIdeaModal">
+                    <i class="material-icons col s12 m12 l12 center">
+                        add
+                    </i>
+                </a>
+            </div>
+        </div>
+        <div class="row container center" id="files">
+            <div class="col s12 m12 l12 flow-text center-align">
+                Files
+            </div>
+            <br>
+            <br>
+            <div class="col s12 m4 l4 center">
+                <a class="modal-trigger card-panel block valign-wrapper" href="#addFileModal">
+                    <i class="material-icons col s12 m12 l12 center">
+                        add
+                    </i>
+                </a>
+            </div>
+        </div>
+        <div id="settings" class="flow-text center">
+            <br>
+            <br>
+            UNDER CONTRUCTION
+        </div>
     </main>
     <footer>
     </footer>
     <extras>
-        <!--WORKSPACE LOGIN MODAL-->
-        <div class="modal" id="workspaceLoginModal">
+        <div class="modal" id="addIdeaModal">
             <div class="modal-content row">
-                <div class="col s12 m12 l12 flow-text center">
-                    Workspace Login
-                </div>
+                <h5 class="center">Add Idea</h5>
                 <div class="input-field col s12 m6 l6">
-                    <input type="password" id="workspaceLoginPassInput">
-                    <label for="workspaceLoginPassInput">Encryption Key</label>
+                    <input type="text" id="ideaTitle">
+                    <label for="ideaTitle">Idea Title</label>
                 </div>
-                <div class="input-field col s12 m6 l6">
-                    <input type="number" id="workspaceLoginLevelInput" min="1" max="10">
-                    <label for="workspaceLoginLevelInput">Encryption Level(1-10)</label>
+                <div class="input-field col s12 m12 l12">
+                    <textarea id="ideaDescription" class="materialize-textarea"></textarea>
+                    <label for="ideaDescription">Idea Description</label>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <div class="center col s12 m12 l12">
-                    <a class="btn theme" href='home.html'>Cancel</a>
-                    <div class="btn theme" onclick="loginToWorkspace()">Submit</div>
+                <div class="col s12 m12 l12 input-field">
+                    <center>
+                        <div class="btn-floating" onclick="addIdea()"><i class="material-icons">add</i></div>
+                    </center>
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-const workId = window.location.href.split("?v=")[1];
+const workId = location.href.split("?v=")[1].split("#")[0];
 
 const loginToWorkspace = () => {
     let pass = document.getElementById("workspaceLoginPassInput").value;
@@ -11,8 +11,8 @@ const loginToWorkspace = () => {
             try {
                 let conf = decrypt(wk.data().pass, pass, level);
                 if (conf == pass) {
-                    page.id = workId;
                     page.page = "workspace";
+                    page.id = workId;
                     page.pass = pass;
                     page.level = level;
                     updateSession();
@@ -132,7 +132,7 @@ const addProject = () => {
 }
 
 const isLoggedIn = () => {
-    if (page.page == "workspace" && page.id == workId) {
+    if (workId != "" && page.page == "workspace" && page.id == workId && page.pass != undefined && page.level != undefined) {
         loadWorkspaceData();
     } else {
         $("#workspaceLoginModal").modal({

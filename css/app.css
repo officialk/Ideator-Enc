@@ -24,3 +24,8 @@ body {
     background: #5da8a5 !important;
     color: aliceblue !important;
 }
+
+.block-long {
+    height: 50px !important;
+    border-radius: 20px !important;
+}

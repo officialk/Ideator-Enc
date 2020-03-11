@@ -1,10 +1,10 @@
-const data = JSON.parse(localStorage.getItem("data")) || {};
+const data = JSON.parse(local("data")) || {};
 var db;
 var page = JSON.parse(session("page")) || {};
 
 /*MISC FUNCTIONS*/
 const checkLogin = () => {
-    return data.id != undefined
+    return data != {} && data.id != undefined && data.name != undefined && data.email != undefined && data.pic != undefined
 }
 
 const logout = () => {
@@ -13,8 +13,8 @@ const logout = () => {
         .signOut()
         .then(function () {
             local("data", "{}");
-            session("page", null);
-            location.reload();
+            sessionStorage.clear();
+            location.href = "/";
         })
         .catch(function (error) {
             // An error happened.
@@ -71,7 +71,7 @@ const loadUserDetails = () => {
 
 const initMaterial = () => {
     M.AutoInit();
-    $('.sidenav').sidenav();
+    $('.mainNav').sidenav();
     $('.tabs').tabs();
     $('.fixed-action-btn').floatingActionButton();
     $('.tooltipped').tooltip();
@@ -90,12 +90,16 @@ const updateSession = () => {
 }
 
 $(document).ready(() => {
-    if (checkLogin) {
-        loadUserDetails();
+    if (checkLogin()) {
         initMaterial();
+        loadUserDetails();
         initFirebase();
         initSw();
     } else {
         location.href = "/";
     }
 })
+
+window.onoffline = () => {
+    alert("App is offline");
+}
