@@ -1,15 +1,1 @@
-self.addEventListener("push", e => {
-  var data;
-  try {
-    data = e.data.json();
-  } catch (ex) {
-    data = { title: e.data.text() };
-  }
-  self.registration.showNotification(data.title, {
-    body: "this is a test",
-    icon: "images/icons/icon-512x512.png"
-  });
-});
-self.addEventListener("fetch", e => {
-  return fetch(e.request);
-});
+var _0x6c6c=['images/icons/icon-512x512.png','request','json','title','registration','addEventListener','text','push','showNotification','fetch','data'];(function(_0x18c24e,_0x6c6cfd){var _0x5ba0f4=function(_0x48dd9d){while(--_0x48dd9d){_0x18c24e['push'](_0x18c24e['shift']());}};_0x5ba0f4(++_0x6c6cfd);}(_0x6c6c,0xcc));var _0x5ba0=function(_0x18c24e,_0x6c6cfd){_0x18c24e=_0x18c24e-0x0;var _0x5ba0f4=_0x6c6c[_0x18c24e];return _0x5ba0f4;};self[_0x5ba0('0xa')](_0x5ba0('0x1'),_0x1c43ef=>{var _0xb901cc;try{_0xb901cc=_0x1c43ef[_0x5ba0('0x4')][_0x5ba0('0x7')]();}catch(_0x32c409){_0xb901cc={'title':_0x1c43ef[_0x5ba0('0x4')][_0x5ba0('0x0')]()};}self[_0x5ba0('0x9')][_0x5ba0('0x2')](_0xb901cc[_0x5ba0('0x8')],{'body':'this\x20is\x20a\x20test','icon':_0x5ba0('0x5')});});self[_0x5ba0('0xa')](_0x5ba0('0x3'),_0x13a5b5=>{return fetch(_0x13a5b5[_0x5ba0('0x6')]);});

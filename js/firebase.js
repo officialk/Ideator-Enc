@@ -1,10 +1,1 @@
-/*FIREBASE STUFF*/
-const firebaseConfig = {
-    apiKey: "AIzaSyDLKOTc-PKbspDjOFlpkiMDYHuN_77DJpo",
-    authDomain: "ideator-c9f1d.firebaseapp.com",
-    databaseURL: "https://ideator-c9f1d.firebaseio.com",
-    projectId: "ideator-c9f1d",
-    storageBucket: "ideator-c9f1d.appspot.com",
-    messagingSenderId: "337836532873",
-    appId: "1:337836532873:web:38436b11705df954df5258"
-};
+var _0x5141=['ideator-live','G-HVQJ271469','ideator-live.firebaseapp.com','ideator-live.appspot.com','https://ideator-live.firebaseio.com','520430350326','1:520430350326:web:76dede2e74e14f565e21d7','AIzaSyCunSys_ABIxjF7KiLsEeBZ35XwNMjB7gQ'];(function(_0x462b16,_0x514198){var _0x57ffb7=function(_0x40c0f9){while(--_0x40c0f9){_0x462b16['push'](_0x462b16['shift']());}};_0x57ffb7(++_0x514198);}(_0x5141,0x18b));var _0x57ff=function(_0x462b16,_0x514198){_0x462b16=_0x462b16-0x0;var _0x57ffb7=_0x5141[_0x462b16];return _0x57ffb7;};var firebaseConfig={'apiKey':_0x57ff('0x4'),'authDomain':_0x57ff('0x7'),'databaseURL':_0x57ff('0x1'),'projectId':_0x57ff('0x5'),'storageBucket':_0x57ff('0x0'),'messagingSenderId':_0x57ff('0x2'),'appId':_0x57ff('0x3'),'measurementId':_0x57ff('0x6')};
