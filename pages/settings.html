@@ -3,12 +3,12 @@
 
 <head>
     <!-- META Tags -->
-     <meta charset="UTF-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Ideator(beta)</title>
+    <title>Ideator</title>
     <meta name="author" content="Karthik Koppaka" />
-    <meta name="description" content="This is a simple platform where you can securely share your personal and community ideas which click suddenly in your bright minds."/>
-    <meta name="keywords" content="idea,sharing,firebase,encryption,encrypted,team,community,materialize" />
+    <meta name="description" content="description here" />
+    <meta name="keywords" content="keywords,here" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="manifest" href="/manifest.json" />
     <!-- CSS -->
@@ -26,7 +26,7 @@
     <script src="/js/firebase.js"></script>
     <script src="/js/crypto.js"></script>
     <script src="/js/helper.js"></script>
-    <script src="/js/project.js"></script>
+    <script src="/js/settings.js"></script>
     <script src="/js/main.js"></script>
 </head>
 
@@ -58,41 +58,7 @@
         </ul>
     </header>
     <main class="container">
-        <br>
-        <ul class="tabs row container">
-            <li class="col s3 m3 l3 center">
-                <a onclick="back()" class="btn-floating"><i class="material-icons">arrow_back</i></a>
-            </li>
-            <li class="tab col s5 m5 l5 center">
-                <a href="#ideas">
-                    <i class="material-icons">lightbulb_outline</i>
-                    <span id="ideaCount" class="badge theme">0</span>
-                </a>
-            </li>
-            <li class="tab col s4 m4 l4 center">
-                <a href="#settings">
-                    <i class="material-icons">settings</i>
-                </a>
-            </li>
-        </ul>
-        <div class="row container center" id="ideas">
-            <div class="col s12 m12 l12 flow-text center-align">
-                Idea List
-            </div>
-            <br>
-            <br>
-            <div>
-                <a class="col s12 m12 l12 modal-trigger card-panel block-long valign-wrapper center-align" href="#addIdeaModal">
-                    <i class="material-icons col s12 m12 l12 center">
-                        add
-                    </i>
-                </a>
-            </div>
-            <ul class="col s12 m12 l12 collapsible popout" id="IdeasList">
-
-            </ul>
-        </div>
-        <div id="settings" class="flow-text center">
+        <div class="center flow-text" id="settings">
             <br>
             <br>
             UNDER CONTRUCTION
@@ -100,26 +66,6 @@
     </main>
     <footer>
     </footer>
-    <extras>
-        <div class="modal" id="addIdeaModal">
-            <div class="modal-content row">
-                <h5 class="center">Add Idea</h5>
-                <div class="input-field col s12 m6 l6">
-                    <input type="text" id="ideaTitle">
-                    <label for="ideaTitle">Idea Title</label>
-                </div>
-                <div class="input-field col s12 m12 l12">
-                    <textarea id="ideaDescription" class="materialize-textarea"></textarea>
-                    <label for="ideaDescription">Idea Description</label>
-                </div>
-                <div class="col s12 m12 l12 input-field">
-                    <center>
-                        <div class="btn-floating" onclick="addIdea()"><i class="material-icons">add</i></div>
-                    </center>
-                </div>
-            </div>
-        </div>
-    </extras>
 </body>
 
 </html>

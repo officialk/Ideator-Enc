@@ -1,6 +1,6 @@
 window.onload = () => {
     firebase.initializeApp(firebaseConfig);
-    let data = JSON.parse(local("data"));
+    let data = JSON.parse(local("data")) || {};
     if (data.id != undefined) {
         window.location.href = "pages/home.html";
     }
@@ -15,6 +15,7 @@ const join = () => {
         .signInWithPopup(provider)
         .then(result => {
             let user = result.user;
+            var data = {};
             data.email = user.email;
             data.name = user.displayName;
             data.id = user.uid;

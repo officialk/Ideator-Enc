@@ -1,10 +1,11 @@
 /*WORKSPACE FUNCTIONS*/
 const addWorkspace = () => {
     let [name, level, pass, passconf] = getValuesByIds(["addWorkspaceNameInput", "addWorkspaceLevelInput", "addWorkspacePassInput", "addWorkspacePassConfInput"]);
-    let team = getValuesByNames(["addWorkspaceEmailInput"])
-        .filter(el => {
-            return validator("email", el) && data.email != el;
-        });
+    let team = [data.email]
+        .concat(getValuesByNames(["addWorkspaceEmailInput"])[0]
+            .filter(el => {
+                return validator("email", el) && data.email != el;
+            }));
     if (name.length > 3 && name.length < 25) {
         if (level > 0 && level < 11) {
             if (pass.length > 5) {
@@ -14,15 +15,30 @@ const addWorkspace = () => {
                         creatorName: data.name,
                         name: name,
                         pass: encrypt(pass, pass, level),
-                        team: team[0].concat(data.email),
+                        team: team,
                         date: getDate()
                     }
-                    console.log(wdata);
                     db
                         .collection("workspace")
-                        .add(wdata);
+                        .add(wdata)
+                        .then(e => {
+                            db
+                                .collection("workspace")
+                                .doc(e.id)
+                                .collection("projects")
+                                .add({})
+                            db
+                                .collection("workspace")
+                                .doc(e.id)
+                                .collection("messages")
+                                .add({})
+                            document.getElementById(`workspace${e.id}`).classList.remove("grey");
+                        })
+                        .catch(e => {
+                            console.log(e);
+                        });
                     $("#addWorkspaceModal").modal("close");
-                    loadHomeData();
+                    loadData();
                 } else {
                     alert("Passwords dont match");
                 }
@@ -38,6 +54,7 @@ const addWorkspace = () => {
 }
 
 const loadData = () => {
+    sessionStorage.clear();
     createDynamicElement('addWorkspaceTeamList');
     db
         .collection("workspace")
@@ -45,21 +62,23 @@ const loadData = () => {
         .then(list => {
             let html = ``;
             list.forEach(ws => {
-                html += `<div class="col s12 m4 l4">
-                            <div class="card block link rounded" onclick="loadPage('workspace?${ws.id}')">
-                                <div class="card-title truncate flow-text">${ws.data().name}</div>
+                let work = ws.data();
+                if (work.creatorId != undefined && work.team.indexOf(data.email) != -1) {
+                    html += `<div class="col s12 m6 l4">
+                            <div class="card block link rounded ${ws.metadata.hasPendingWrites?"grey":""}" onclick="loadPage('workspace?${ws.id}')" id="workspace${ws.id}">
+                                <div class="card-title truncate flow-text">${work.name}</div>
                                 <div class="card-content">
                                     <div class="left-align truncate">
-                                    Creator:${(ws.data().ownerId==data.id)?"You":ws.data().ownerName}
+                                    Creator:${(work.creatorId==data.id)?"You":work.creatorName}
                                     <br>
-                                    Date:${ws.data().date}
+                                    Date:${work.date}
                                     </div>
                                 </div>
                             </div>
                         </div>`;
+                }
             })
             document
-                .getElementById("workspaceList")
-                .insertAdjacentHTML("beforeend", html);
+                .getElementById("workspaceList").innerHTML = html;
         })
 }

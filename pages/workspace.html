@@ -5,11 +5,11 @@
     <!-- META Tags -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Ideator</title>
+    <title>Ideator(beta)</title>
     <meta name="author" content="Karthik Koppaka" />
-    <meta name="description" content="description here" />
-    <meta name="keywords" content="keywords,here" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <meta name="description" content="This is a simple platform where you can securely share your personal and community ideas which click suddenly in your bright minds." />
+    <meta name="keywords" content="idea,sharing,firebase,encryption,encrypted,team,community,materialize" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="manifest" href="/manifest.json" />
     <!-- CSS -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -30,13 +30,13 @@
     <script src="/js/main.js"></script>
 </head>
 
-<body onload="isLoggedIn()">
+<body>
     <header id="appNavbar">
         <nav class="navbar-fixed theme">
-            <a href="#" class="brand-logo">Ideator</a>
+            <a href="#" class="brand-logo center">Ideator(beta)</a>
             <a href="#" data-target="mainNav" class="left sidenav-trigger"><i class="material-icons">menu</i></a>
         </nav>
-        <ul id="mainNav" class="sidenav">
+        <ul id="mainNav" class="sidenav sidenav-fixed">
             <li>
                 <div class="user-view">
                     <a href="#user"><img class="circle" id="userPic" src=""></a>
@@ -44,24 +44,29 @@
                     <a href="#email"><span class="black-text email" id="userEmail">jdandturk@gmail.com</span></a>
                 </div>
             </li>
-            <li><a href="home.html"><i class="material-icons">home</i>Home</a></li>
-            <li><a href="#settingsModal"><i class="material-icons">settings</i>Settings</a></li>
+            <li><a onclick="loadPage('home')"><i class="material-icons">home</i>Home</a></li>
+            <li><a onclick="loadPage('settings')"><i class="material-icons">settings</i>Settings</a></li>
             <li><a href="#" onclick="logout()"><i class="material-icons">exit_to_app</i>Logout</a></li>
             <li>
                 <div class="divider"></div>
             </li>
+            <!--
             <li><a class="subheader">Others</a></li>
             <li><a class="waves-effect" href="#!">Feedback</a></li>
             <li><a class="waves-effect" href="#!">Github</a></li>
+-->
         </ul>
     </header>
     <main class="container">
         <br>
         <ul class="tabs row container">
+            <li class="col s2 m2 l2 center">
+                <a href="home.html" class="btn-floating"><i class="material-icons">arrow_back</i></a>
+            </li>
             <li class="tab col s4 m4 l4 center">
-                <a href="#chat" class="active">
+                <a href="#chat">
                     <i class="material-icons">chat</i>
-<!--                    <span id="messageCount" class="badge new theme">0</span>-->
+                    <!--                    <span id="messageCount" class="badge new theme">0</span>-->
                 </a>
             </li>
             <li class="tab col s4 m4 l4 center">
@@ -70,7 +75,7 @@
                     <span id="projectCount" class="badge theme">0</span>
                 </a>
             </li>
-            <li class="tab col s4 m4 l4 center">
+            <li class="tab col s2 m2 l2 center">
                 <a href="#settings">
                     <i class="material-icons">settings</i>
                 </a>
@@ -97,14 +102,14 @@
             </div>
             <br>
             <br>
-            <div class="col s12 m4 l4 center">
+            <div class="col s12 m6 l4 center">
                 <a class="modal-trigger card-panel block valign-wrapper" href="#addProjectModal">
                     <i class="material-icons col s12 m12 l12 center">
                         add
                     </i>
                 </a>
             </div>
-
+            <div id="projectsList"></div>
         </div>
         <div class="center flow-text" id="settings">
             <br>
@@ -132,7 +137,7 @@
             </div>
             <div class="modal-footer">
                 <div class="center col s12 m12 l12">
-                    <a class="btn theme" href='home.html'>Cancel</a>
+                    <a class="btn theme" onclick="loadPage('home?')">Cancel</a>
                     <div class="btn theme" onclick="loginToWorkspace()">Submit</div>
                 </div>
             </div>
@@ -150,8 +155,9 @@
                 </div>
             </div>
             <div class="modal-footer center">
-                <div class="btn" onclick="addProject()">Add <i class="material-icons">add</i></div>
-                <br>
+                <div class="center">
+                    <div class="btn-floating" onclick="addProject()"><i class="material-icons">add</i></div>
+                </div>
             </div>
         </div>
     </extras>
