@@ -1,5 +1,9 @@
 const workId = location.href.split("?v=")[1].split("#")[0];
 
+var projects;
+
+var messages;
+
 const loginToWorkspace = () => {
     let pass = document.getElementById("workspaceLoginPassInput").value;
     let level = document.getElementById("workspaceLoginLevelInput").value;
@@ -15,29 +19,32 @@ const loginToWorkspace = () => {
                     page.id = workId;
                     page.pass = pass;
                     page.level = level;
+                    $("#workspaceLoginModal").modal("close");
                     updateSession();
                     loadWorkspaceData();
-                    $("#workspaceLoginModal").modal("close");
                 } else {
                     throw new Error("Invalid Credentials");
                 }
             } catch (e) {
+                console.log(e);
                 alert("Invalid Credentials");
             }
+        })
+        .catch(e => {
+            console.log(e);
         })
 }
 
 const loadWorkspaceData = () => {
+    projects = db.collection(`workspace/${workId}/projects`)
+    messages = db.collection(`workspace/${workId}/messages`)
     loadMessages();
     loadProjects();
     initMaterial();
 }
 
 const loadMessages = () => {
-    db
-        .collection("workspace")
-        .doc(workId)
-        .collection("messages")
+    messages
         .orderBy("date", "asc")
         .onSnapshot(messages => {
             document.getElementById("messageDisplay").innerHTML = "";
@@ -71,10 +78,7 @@ const sendMessage = () => {
     let mssg = document.getElementById("messageTextInput").value;
     let date = getDate();
     if (mssg.length > 0) {
-        db
-            .collection("workspace")
-            .doc(workId)
-            .collection("messages")
+        messages
             .add({
                 sender: data.name,
                 date: date,
@@ -92,10 +96,7 @@ const sendMessage = () => {
 }
 
 const loadProjects = () => {
-    db
-        .collection("workspace")
-        .doc(workId)
-        .collection("projects")
+    projects
         .get()
         .then(projects => {
             document.getElementById("projectsList").innerHTML = "";
@@ -130,10 +131,7 @@ const addProject = () => {
     let date = getDate();
     if (title.length > 5) {
         if (desc.length > 15) {
-            db
-                .collection("workspace")
-                .doc(workId)
-                .collection('projects')
+            projects
                 .add({
                     creatorId: data.id,
                     creatorName: data.name,
@@ -171,4 +169,8 @@ const isLoggedIn = () => {
         });
         $("#workspaceLoginModal").modal("open");
     }
+}
+
+const loadData = () => {
+    isLoggedIn();
 }

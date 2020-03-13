@@ -10,7 +10,6 @@ const addWorkspace = () => {
         if (level > 0 && level < 11) {
             if (pass.length > 5) {
                 if (pass == passconf) {
-                    console.log(team);
                     let wdata = {
                         creatorId: data.id,
                         creatorName: data.name,
@@ -33,6 +32,7 @@ const addWorkspace = () => {
                                 .doc(e.id)
                                 .collection("messages")
                                 .add({})
+                            document.getElementById(`workspace${e.id}`).classList.remove("grey");
                         })
                         .catch(e => {
                             console.log(e);
@@ -54,6 +54,7 @@ const addWorkspace = () => {
 }
 
 const loadData = () => {
+    sessionStorage.clear();
     createDynamicElement('addWorkspaceTeamList');
     db
         .collection("workspace")
@@ -64,7 +65,7 @@ const loadData = () => {
                 let work = ws.data();
                 if (work.creatorId != undefined && work.team.indexOf(data.email) != -1) {
                     html += `<div class="col s12 m6 l4">
-                            <div class="card block link rounded" onclick="loadPage('workspace?${ws.id}')">
+                            <div class="card block link rounded ${ws.metadata.hasPendingWrites?"grey":""}" onclick="loadPage('workspace?${ws.id}')" id="workspace${ws.id}">
                                 <div class="card-title truncate flow-text">${work.name}</div>
                                 <div class="card-content">
                                     <div class="left-align truncate">
@@ -78,7 +79,6 @@ const loadData = () => {
                 }
             })
             document
-                .getElementById("workspaceList")
-                .insertAdjacentHTML("beforeend", html);
+                .getElementById("workspaceList").innerHTML = html;
         })
 }

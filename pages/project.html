@@ -30,7 +30,7 @@
     <script src="/js/main.js"></script>
 </head>
 
-<body onload="isLoggedIn()">
+<body>
     <header id="appNavbar">
         <nav class="navbar-fixed theme">
             <a href="#" class="brand-logo center">Ideator</a>
@@ -58,18 +58,16 @@
     <main class="container">
         <br>
         <ul class="tabs row container">
-            <li class="tab col s4 m4 l4 center">
+            <li class="col s1 m1 l1 center">
+                <a onclick="back()" class="btn-floating"><i class="material-icons">arrow_back</i></a>
+            </li>
+            <li class="tab col s5 m5 l5 center">
                 <a href="#ideas">
                     <i class="material-icons">lightbulb_outline</i>
-                    <!--                    <span id="ideaCount" class="badge theme">1</span>-->
+                    <span id="ideaCount" class="badge theme">0</span>
                 </a>
             </li>
-            <li class="tab col s4 m4 l4 center">
-                <a href="#files">
-                    <i class="material-icons">folder_open</i>
-                </a>
-            </li>
-            <li class="tab col s4 m4 l4 center">
+            <li class="tab col s6 m6 l6 center">
                 <a href="#settings">
                     <i class="material-icons">settings</i>
                 </a>
@@ -88,21 +86,9 @@
                     </i>
                 </a>
             </div>
-            <div class="col s12 m12 l12" id="IdeasList"></div>
-        </div>
-        <div class="row container center" id="files">
-            <div class="col s12 m12 l12 flow-text center-align">
-                Files
-            </div>
-            <br>
-            <br>
-            <div class="col s12 m4 l4 center">
-                <a class="modal-trigger card-panel block valign-wrapper" href="#addFileModal">
-                    <i class="material-icons col s12 m12 l12 center">
-                        add
-                    </i>
-                </a>
-            </div>
+            <ul class="col s12 m12 l12 collapsible popout" id="IdeasList">
+
+            </ul>
         </div>
         <div id="settings" class="flow-text center">
             <br>

@@ -26,11 +26,11 @@
     <script src="/js/firebase.js"></script>
     <script src="/js/crypto.js"></script>
     <script src="/js/helper.js"></script>
-    <script src="/js/main.js"></script>
     <script src="/js/workspace.js"></script>
+    <script src="/js/main.js"></script>
 </head>
 
-<body onload="isLoggedIn()">
+<body>
     <header id="appNavbar">
         <nav class="navbar-fixed theme">
             <a href="#" class="brand-logo center">Ideator</a>
@@ -58,6 +58,9 @@
     <main class="container">
         <br>
         <ul class="tabs row container">
+            <li class="col s2 m2 l2 center">
+                <a href="home.html" class="btn-floating"><i class="material-icons">arrow_back</i></a>
+            </li>
             <li class="tab col s4 m4 l4 center">
                 <a href="#chat">
                     <i class="material-icons">chat</i>
@@ -70,7 +73,7 @@
                     <span id="projectCount" class="badge theme">0</span>
                 </a>
             </li>
-            <li class="tab col s4 m4 l4 center">
+            <li class="tab col s2 m2 l2 center">
                 <a href="#settings">
                     <i class="material-icons">settings</i>
                 </a>
@@ -104,7 +107,7 @@
                     </i>
                 </a>
             </div>
-            <div id="projectsList" ></div>
+            <div id="projectsList"></div>
         </div>
         <div class="center flow-text" id="settings">
             <br>
@@ -150,8 +153,9 @@
                 </div>
             </div>
             <div class="modal-footer center">
-                <div class="btn" onclick="addProject()">Add <i class="material-icons">add</i></div>
-                <br>
+                <div class="center">
+                    <div class="btn-floating" onclick="addProject()"><i class="material-icons">add</i></div>
+                </div>
             </div>
         </div>
     </extras>

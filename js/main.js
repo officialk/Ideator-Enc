@@ -1,5 +1,7 @@
 const data = JSON.parse(local("data")) || {};
+
 var db;
+
 var page = JSON.parse(session("page")) || {};
 
 /*MISC FUNCTIONS*/
@@ -76,13 +78,13 @@ const initMaterial = () => {
     $('.tooltipped').tooltip();
     $('.modal').modal();
     $('select').formSelect();
+    $('.collapsible').collapsible();
 
 }
 
 const initFirebase = () => {
     firebase.initializeApp(firebaseConfig);
     db = firebase.firestore();
-
 }
 
 const updateSession = () => {
@@ -91,15 +93,12 @@ const updateSession = () => {
 
 $(document).ready(() => {
     if (checkLogin()) {
-        initMaterial();
-        loadUserDetails();
         initFirebase();
+        loadUserDetails();
+        initMaterial();
+        loadData();
         initSw();
     } else {
         location.href = "/";
     }
 })
-
-window.onoffline = () => {
-    alert("App is offline");
-}
