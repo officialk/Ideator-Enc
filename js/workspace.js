@@ -35,16 +35,19 @@ const loadWorkspaceData = () => {
 
 const loadMessages = () => {
     db
+        .collection("workspace")
+        .doc(workId)
         .collection("messages")
-        .where("workspaceId", "==", workId)
-        .get()
-        .then(messages => {
-            let html = "";
+        .orderBy("date", "asc")
+        .onSnapshot(messages => {
+            document.getElementById("messageDisplay").innerHTML = "";
+            //            let html = '';
             messages.forEach(doc => {
                 let mssg = doc.data();
-                html += `<div class="row message">
+                if (mssg.content != undefined) {
+                    let html = `<div class="row message">
                             <div class="${(mssg.sender==data.name)?"col s2 m4 l4":"hide"}"></div>
-                            <div class="card col s10 m8 l8 ${(mssg.sender==data.name)?"green":"grey"}" id="message${doc.id}">
+                            <div class="card col s10 m8 l8 ${(mssg.sender==data.name)?((doc.metadata.hasPendingWrites)?"blue":"green"):"grey"}" id="message${doc.id}">
                                 <div class="white-text card-content">
                                 <p><b>${(mssg.sender==data.name)?"You":mssg.sender}</b>( ${mssg.date} )
                                 <!-- <span class="right">
@@ -57,8 +60,10 @@ const loadMessages = () => {
                             <div class="col s2 m4 l4">
                             </div>
                         </div>`;
+                    document.getElementById("messageDisplay").insertAdjacentHTML("afterbegin", html);
+                }
+                //                document.getElementById("messageDisplay").innerHTML = html;
             })
-            document.getElementById("messageDisplay").innerHTML = html;
         })
 }
 
@@ -66,26 +71,40 @@ const sendMessage = () => {
     let mssg = document.getElementById("messageTextInput").value;
     let date = getDate();
     if (mssg.length > 0) {
-        db.collection("messages").add({
-            workspaceId: workId,
-            sender: data.name,
-            date: date,
-            content: encrypt(mssg, page.pass + workId + date, page.level)
-        });
+        db
+            .collection("workspace")
+            .doc(workId)
+            .collection("messages")
+            .add({
+                sender: data.name,
+                date: date,
+                content: encrypt(mssg, page.pass + workId + date, page.level)
+            })
+            .then(e => {
+                document.getElementById(`message${e.id}`).classList.remove("blue");
+                document.getElementById(`message${e.id}`).classList.add("green");
+            })
+            .catch(e => {
+                console.log(e)
+            })
     }
     document.getElementById("messageTextInput").value = "";
 }
 
 const loadProjects = () => {
     db
+        .collection("workspace")
+        .doc(workId)
         .collection("projects")
-        .where("workspaceId", "==", workId)
         .get()
         .then(projects => {
+            document.getElementById("projectsList").innerHTML = "";
+            let html = "";
             projects.forEach(doc => {
                 let project = doc.data();
-                let html = `<div class="col s12 m4 l4">
-                                <div class="card block link rounded" onclick="loadPage('project?${doc.id}')">
+                if (project.creatorId != undefined) {
+                    html += `<div class="col s12 m6 l4">
+                                <div class="card block link rounded ${doc.metadata.hasPendingWrites?"grey":""}" onclick="loadPage('project?${doc.id}')" id='project${doc.id}'>
                                     <div class="card-title truncate flow-text">${decrypt(project.title,workId + project.creatorId + project.creatorName + page.key,page.level)}</div>
                                     <div class="card-content">
                                         <div class="left-align truncate">
@@ -98,10 +117,10 @@ const loadProjects = () => {
                                     </div>
                                 </div>
                             </div>`;
-                document.getElementById("projects").insertAdjacentHTML("beforeend", html);
-                /*${(project.creatorId==data.id)?`<a class="btn-floating tooltipped" data-position="top" data-tooltip="Delete Project" onclick="deleteProject('${doc.id}')"><i class="material-icons">delete</i></a>`:""}*/
+                }
             })
-            document.getElementById("projectCount").innerHTML = projects.size;
+            document.getElementById("projectsList").innerHTML = html;
+            document.getElementById("projectCount").innerHTML = (projects.size - 1) || 0;
         })
 }
 
@@ -112,14 +131,23 @@ const addProject = () => {
     if (title.length > 5) {
         if (desc.length > 15) {
             db
+                .collection("workspace")
+                .doc(workId)
                 .collection('projects')
                 .add({
-                    workspaceId: workId,
                     creatorId: data.id,
                     creatorName: data.name,
                     date: date,
                     description: encrypt(desc, workId + data.id + data.name + page.key, page.level),
                     title: encrypt(title, workId + data.id + data.name + page.key, page.level)
+                }).then(e => {
+                    db
+                        .collection(`workspace/${workId}/projects/${e.id}/ideas`)
+                        .add({})
+                    document.getElementById(`project${e.id}`).classList.remove("grey");
+                })
+                .catch(e => {
+                    console.log(e);
                 })
             $("#addProjectModal").modal("close");
             loadProjects();

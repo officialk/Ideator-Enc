@@ -36,7 +36,7 @@
             <a href="#" class="brand-logo center">Ideator</a>
             <a href="#" data-target="mainNav" class="left sidenav-trigger"><i class="material-icons">menu</i></a>
         </nav>
-        <ul id="mainNav" class="sidenav">
+        <ul id="mainNav" class="sidenav sidenav-fixed">
             <li>
                 <div class="user-view">
                     <a href="#user"><img class="circle" id="userPic" src=""></a>
@@ -59,7 +59,7 @@
         <br>
         <ul class="tabs row container">
             <li class="tab col s4 m4 l4 center">
-                <a href="#chat" class="active">
+                <a href="#chat">
                     <i class="material-icons">chat</i>
                     <!--                    <span id="messageCount" class="badge new theme">0</span>-->
                 </a>
@@ -97,13 +97,14 @@
             </div>
             <br>
             <br>
-            <div class="col s12 m4 l4 center">
+            <div class="col s12 m6 l4 center">
                 <a class="modal-trigger card-panel block valign-wrapper" href="#addProjectModal">
                     <i class="material-icons col s12 m12 l12 center">
                         add
                     </i>
                 </a>
             </div>
+            <div id="projectsList" ></div>
         </div>
         <div class="center flow-text" id="settings">
             <br>

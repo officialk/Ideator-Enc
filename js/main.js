@@ -70,13 +70,13 @@ const loadUserDetails = () => {
 }
 
 const initMaterial = () => {
-    M.AutoInit();
-    $('.mainNav').sidenav();
+    $('.sidenav').sidenav();
     $('.tabs').tabs();
     $('.fixed-action-btn').floatingActionButton();
     $('.tooltipped').tooltip();
     $('.modal').modal();
     $('select').formSelect();
+
 }
 
 const initFirebase = () => {
