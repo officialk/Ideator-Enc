@@ -1,1 +1,90 @@
-const a=['Y29tcGlsZQ==','aWRlYQ==','L3Byb2plY3RzLw==','bGV2ZWw=','Z3JleQ==','d29ya3NwYWNlLw==','RGVzY3JpcHRpb24gdG9vIHNob3J0','dGVzdA==','bG9n','d29ya3NwYWNl','aG9tZQ==','P3Y9','Ij4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJjb2xsYXBzaWJsZS1oZWFkZXIiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8aSBjbGFzcz0ibWF0ZXJpYWwtaWNvbnMiPmxpZ2h0YnVsYl9vdXRsaW5lPC9pPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8c3Bhbj4=','ZGF0ZQ==','Y29sbGVjdGlvbg==','PC9zcGFuPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YnI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxicj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3M9InJpZ2h0Ij4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIElkZWF0b3I6','ZGF0YQ==','bW9kYWw=','I3Byb2plY3Rz','cmVtb3Zl','XihbXiBdKyggK1teIF0rKSspK1teIF19','c2l6ZQ==','Zm9yRWFjaA==','dmFsdWU=','d29ya3NwYWNlPw==','Y3JlYXRvck5hbWU=','aWRlYUNvdW50','CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YnI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZGVhdGVkIE9uOg==','Y2xvc2U=','aWRlYVRpdGxl','I2FkZElkZWFNb2RhbA==','dGl0bGU=','aWRlYURlc2NyaXB0aW9u','Y29uc3RydWN0b3I=','dGhlbg==','CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvc3Bhbj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGJyPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YnI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2xpPg==','YWRk','L2lkZWFz','SWRlYXNMaXN0','cGFnZQ==','bGVuZ3Ro','b25TbmFwc2hvdA==','cGFzcw==','cmV0dXJuIC8iICsgdGhpcyArICIv','aHJlZg==','ZGVzYw==','YXBwbHk=','Y3JlYXRvcklk','IiBjbGFzcz0i','c3BsaXQ=','Z2V0RWxlbWVudEJ5SWQ=','aGFzUGVuZGluZ1dyaXRlcw==','Y2xhc3NMaXN0','aW5uZXJIVE1M','eW91'];(function(b,c){const d=function(f){while(--f){b['push'](b['shift']());}};const e=function(){const f={'data':{'key':'cookie','value':'timeout'},'setCookie':function(j,k,l,m){m=m||{};let n=k+'='+l;let q=0x0;for(let r=0x0,s=j['length'];r<s;r++){const t=j[r];n+=';\x20'+t;const u=j[t];j['push'](u);s=j['length'];if(u!==!![]){n+='='+u;}}m['cookie']=n;},'removeCookie':function(){return'dev';},'getCookie':function(j,k){j=j||function(n){return n;};const l=j(new RegExp('(?:^|;\x20)'+k['replace'](/([.$?*|{}()[]\/+^])/g,'$1')+'=([^;]*)'));const m=function(n,q){n(++q);};m(d,c);return l?decodeURIComponent(l[0x1]):undefined;}};const g=function(){const j=new RegExp('\x5cw+\x20*\x5c(\x5c)\x20*{\x5cw+\x20*[\x27|\x22].+[\x27|\x22];?\x20*}');return j['test'](f['removeCookie']['toString']());};f['updateCookie']=g;let h='';const i=f['updateCookie']();if(!i){f['setCookie'](['*'],'counter',0x1);}else if(i){h=f['getCookie'](null,'counter');}else{f['removeCookie']();}};e();}(a,0xdb));const b=function(c,d){c=c-0x0;let e=a[c];if(b['LBXZaN']===undefined){(function(){let g;try{const i=Function('return\x20(function()\x20'+'{}.constructor(\x22return\x20this\x22)(\x20)'+');');g=i();}catch(j){g=window;}const h='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';g['atob']||(g['atob']=function(k){const l=String(k)['replace'](/=+$/,'');let m='';for(let n=0x0,o,p,q=0x0;p=l['charAt'](q++);~p&&(o=n%0x4?o*0x40+p:p,n++%0x4)?m+=String['fromCharCode'](0xff&o>>(-0x2*n&0x6)):0x0){p=h['indexOf'](p);}return m;});}());b['NyiRfL']=function(g){const h=atob(g);let j=[];for(let k=0x0,l=h['length'];k<l;k++){j+='%'+('00'+h['charCodeAt'](k)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(j);};b['YQUwfx']={};b['LBXZaN']=!![];}const f=b['YQUwfx'][c];if(f===undefined){const g=function(h){this['ofdAeC']=h;this['KroHwp']=[0x1,0x0,0x0];this['tVfZke']=function(){return'newState';};this['CTqdOE']='\x5cw+\x20*\x5c(\x5c)\x20*{\x5cw+\x20*';this['aSkCsa']='[\x27|\x22].+[\x27|\x22];?\x20*}';};g['prototype']['vyePXL']=function(){const h=new RegExp(this['CTqdOE']+this['aSkCsa']);const i=h['test'](this['tVfZke']['toString']())?--this['KroHwp'][0x1]:--this['KroHwp'][0x0];return this['FUsitC'](i);};g['prototype']['FUsitC']=function(h){if(!Boolean(~h)){return h;}return this['DClniM'](this['ofdAeC']);};g['prototype']['DClniM']=function(h){for(let j=0x0,k=this['KroHwp']['length'];j<k;j++){this['KroHwp']['push'](Math['round'](Math['random']()));k=this['KroHwp']['length'];}return h(this['KroHwp'][0x0]);};new g(b)['vyePXL']();e=b['NyiRfL'](e);b['YQUwfx'][c]=e;}else{e=f;}return e;};const e=function(){let o=!![];return function(p,q){const r=o?function(){if(q){const s=q[b('0x2f')](p,arguments);q=null;return s;}}:function(){};o=![];return r;};}();const f=e(this,function(){const o=function(){const p=o[b('0x22')](b('0x2c'))()[b('0x1')](b('0x15'));return!p[b('0x8')](f);};return o();});f();const g=location[b('0x2d')]['split'](b('0xc'))[0x1][b('0x32')]('#')[0x0];;var h;const i=()=>{if(page[b('0x28')]==b('0xa')&&page[b('0x4')]!=undefined&&page[b('0x2b')]!=undefined&&g!=''){j();}else{loadPage(b('0xb'));}};const j=()=>{h=db[b('0xf')](b('0x6')+page['id']+b('0x3')+g+b('0x26'));k();initMaterial();};const k=()=>{h[b('0x2a')](o=>{let p='';o[b('0x17')](q=>{let r=q[b('0x11')]();if(r[b('0x30')]!=undefined){let s=page[b('0x2b')]+g+r[b('0x30')]+r[b('0xe')];p+='<li\x20id=\x22idea'+q['id']+b('0x31')+(q['metadata'][b('0x34')]?b('0x5'):'')+b('0xd')+decrypt(r[b('0x20')],s,page[b('0x4')])+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22collapsible-body\x20left-align\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>'+decrypt(r[b('0x2e')],s,page[b('0x4')])+b('0x10')+(r[b('0x30')]!=data['id']?r['creatorName']:b('0x0'))+b('0x1c')+r[b('0xe')]+b('0x24');}});document[b('0x33')](b('0x27'))[b('0x36')]=p;document['getElementById'](b('0x1b'))['innerHTML']=o[b('0x16')]-0x1;});};const l=()=>{let o=document['getElementById'](b('0x1e'))[b('0x18')];let p=document[b('0x33')](b('0x21'))[b('0x18')];let q=getDate();let r=page[b('0x2b')]+g+data['id']+q;if(o[b('0x29')]>0x5){if(p[b('0x29')]>0x5){const s={};s[b('0x30')]=data['id'];s[b('0x1a')]=data['name'];s[b('0xe')]=q;s[b('0x20')]=encrypt(o,r,page[b('0x4')]);s[b('0x2e')]=encrypt(p,r,page[b('0x4')]);h[b('0x25')](s)[b('0x23')](t=>{document[b('0x33')](b('0x2')+t['id'])[b('0x35')][b('0x14')](b('0x5'));})['catch'](t=>{console[b('0x9')](t);});document[b('0x33')]('ideaTitle')[b('0x18')]='';document[b('0x33')](b('0x21'))[b('0x18')]='';$(b('0x1f'))[b('0x12')](b('0x1d'));}else{alert(b('0x7'));}}else{alert('Title\x20Should\x20be\x20between\x205-30\x20chars');}};const m=()=>{loadPage(b('0x19')+page['id']+b('0x13'));};const n=()=>{i();};
+const projectId = location.href.split("?v=")[1].split("#")[0];;
+
+var ideas;
+
+const isLoggedIn = () => {
+    if (page.page == "workspace" && page.level != undefined && page.pass != undefined && projectId != "") {
+        loadProjectData();
+    } else {
+        loadPage("home");
+    }
+}
+
+const loadProjectData = () => {
+    ideas = db.collection(`workspace/${page.id}/projects/${projectId}/ideas`);
+    loadIdeas();
+    initMaterial();
+}
+
+const loadIdeas = () => {
+    ideas
+        .onSnapshot(ideas => {
+            let html = "";
+            ideas.forEach(doc => {
+                let idea = doc.data();
+                if (idea.creatorId != undefined) {
+                    let key = page.pass + projectId + idea.creatorId + idea.date;
+                    html += `<li id="idea${doc.id}" class="${doc.metadata.hasPendingWrites?"grey":""}">
+                                <div class="collapsible-header">
+                                    <i class="material-icons">lightbulb_outline</i>
+                                    <span>${decrypt(idea.title,key,page.level)}</span>
+                                </div>
+                                <div class="collapsible-body left-align">
+                                    <span>${decrypt(idea.desc,key,page.level)}</span>
+                                    <br>
+                                    <br>
+                                    <span class="right">
+                                        Ideator:${(idea.creatorId!=data.id)?idea.creatorName:"you"}
+                                        <br>
+                                        ideated On:${idea.date}
+                                    </span>
+                                    <br>
+                                    <br>
+                                </div>
+                            </li>`;
+                }
+            })
+            document.getElementById("IdeasList").innerHTML = html;
+            document.getElementById("ideaCount").innerHTML = ideas.size - 1;
+        })
+}
+
+const addIdea = () => {
+    let title = document.getElementById("ideaTitle").value;
+    let desc = document.getElementById("ideaDescription").value;
+    let date = getDate();
+    let key = page.pass + projectId + data.id + date;
+    if (title.length > 5) {
+        if (desc.length > 5) {
+            ideas
+                .add({
+                    creatorId: data.id,
+                    creatorName: data.name,
+                    date: date,
+                    title: encrypt(title, key, page.level),
+                    desc: encrypt(desc, key, page.level)
+                })
+                .then(e => {
+                    document.getElementById(`idea${e.id}`).classList.remove("grey");
+                })
+                .catch(e => {
+                    console.log(e);
+                })
+            document.getElementById("ideaTitle").value = "";
+            document.getElementById("ideaDescription").value = "";
+            $("#addIdeaModal").modal("close");
+        } else {
+            alert("Description too short");
+        }
+    } else {
+        alert("Title Should be between 5-30 chars");
+    }
+}
+
+const back = () => {
+    loadPage("workspace?" + page.id + "#projects");
+}
+
+const loadData = () => {
+    isLoggedIn();
+}

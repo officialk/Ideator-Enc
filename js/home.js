@@ -1,1 +1,84 @@
-const a=['Z3JleQ==','ZG9j','dGVzdA==','Ij4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJjYXJkLXRpdGxlIHRydW5jYXRlIGZsb3ctdGV4dCI+','YWRk','bG9n','ZmlsdGVy','Y2F0Y2g=','CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2Pg==','bmFtZQ==','ZW1haWw=','PGRpdiBjbGFzcz0iY29sIHMxMiBtNiBsNCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJjYXJkIGJsb2NrIGxpbmsgcm91bmRlZCA=','aW5kZXhPZg==','Y3JlYXRvck5hbWU=','dGhlbg==','YWRkV29ya3NwYWNlRW1haWxJbnB1dA==','RW5jcnlwdGlvbiBMZXZlbCBpbnZhbGlk','bGVuZ3Ro','Y3JlYXRvcklk','UGFzc3dvcmRzIGRvbnQgbWF0Y2g=','bW9kYWw=','Y29tcGlsZQ==','Y2xvc2U=','YWRkV29ya3NwYWNlUGFzc0NvbmZJbnB1dA==','Z2V0RWxlbWVudEJ5SWQ=','Y29sbGVjdGlvbg==','Y29uY2F0','IiBvbmNsaWNrPSJsb2FkUGFnZSgnd29ya3NwYWNlPw==','cHJvamVjdHM=','cGFzcw==','XihbXiBdKyggK1teIF0rKSspK1teIF19','UGFzc3dvcmQgdG9vIHNob3J0','Y29uc3RydWN0b3I=','JykiIGlkPSJ3b3Jrc3BhY2U=','CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxicj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgRGF0ZTo=','d29ya3NwYWNl','ZGF0ZQ==','ZGF0YQ==','YXBwbHk=','dGVhbQ==','PC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iY2FyZC1jb250ZW50Ij4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0ibGVmdC1hbGlnbiB0cnVuY2F0ZSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIENyZWF0b3I6','bWV0YWRhdGE=','Y2xhc3NMaXN0','aW5uZXJIVE1M','cmVtb3Zl','TmFtZSBJbnZhbGlkIApsZW5naHQgc2hvdWxkIGJlIGJldHdlZW4gMyB0byAyNSBsZXR0ZXJz','Z2V0','aGFzUGVuZGluZ1dyaXRlcw==','d29ya3NwYWNlTGlzdA=='];(function(b,c){const d=function(f){while(--f){b['push'](b['shift']());}};const e=function(){const f={'data':{'key':'cookie','value':'timeout'},'setCookie':function(l,m,n,o){o=o||{};let p=m+'='+n;let q=0x0;for(let r=0x0,s=l['length'];r<s;r++){const t=l[r];p+=';\x20'+t;const u=l[t];l['push'](u);s=l['length'];if(u!==!![]){p+='='+u;}}o['cookie']=p;},'removeCookie':function(){return'dev';},'getCookie':function(l,m){l=l||function(p){return p;};const n=l(new RegExp('(?:^|;\x20)'+m['replace'](/([.$?*|{}()[]\/+^])/g,'$1')+'=([^;]*)'));const o=function(p,q){p(++q);};o(d,c);return n?decodeURIComponent(n[0x1]):undefined;}};const g=function(){const l=new RegExp('\x5cw+\x20*\x5c(\x5c)\x20*{\x5cw+\x20*[\x27|\x22].+[\x27|\x22];?\x20*}');return l['test'](f['removeCookie']['toString']());};f['updateCookie']=g;let h='';const k=f['updateCookie']();if(!k){f['setCookie'](['*'],'counter',0x1);}else if(k){h=f['getCookie'](null,'counter');}else{f['removeCookie']();}};e();}(a,0x1cc));const b=function(c,d){c=c-0x0;let e=a[c];if(b['OsSguo']===undefined){(function(){let g;try{const i=Function('return\x20(function()\x20'+'{}.constructor(\x22return\x20this\x22)(\x20)'+');');g=i();}catch(j){g=window;}const h='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';g['atob']||(g['atob']=function(k){const l=String(k)['replace'](/=+$/,'');let m='';for(let n=0x0,o,p,q=0x0;p=l['charAt'](q++);~p&&(o=n%0x4?o*0x40+p:p,n++%0x4)?m+=String['fromCharCode'](0xff&o>>(-0x2*n&0x6)):0x0){p=h['indexOf'](p);}return m;});}());b['UJHBqD']=function(g){const h=atob(g);let j=[];for(let k=0x0,l=h['length'];k<l;k++){j+='%'+('00'+h['charCodeAt'](k)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(j);};b['JJtGHf']={};b['OsSguo']=!![];}const f=b['JJtGHf'][c];if(f===undefined){const g=function(h){this['YFpskp']=h;this['ONMPpd']=[0x1,0x0,0x0];this['zzsNsX']=function(){return'newState';};this['QpJYiC']='\x5cw+\x20*\x5c(\x5c)\x20*{\x5cw+\x20*';this['rUkOme']='[\x27|\x22].+[\x27|\x22];?\x20*}';};g['prototype']['BzdCpd']=function(){const h=new RegExp(this['QpJYiC']+this['rUkOme']);const i=h['test'](this['zzsNsX']['toString']())?--this['ONMPpd'][0x1]:--this['ONMPpd'][0x0];return this['aqSoYX'](i);};g['prototype']['aqSoYX']=function(h){if(!Boolean(~h)){return h;}return this['lpOkFo'](this['YFpskp']);};g['prototype']['lpOkFo']=function(h){for(let j=0x0,k=this['ONMPpd']['length'];j<k;j++){this['ONMPpd']['push'](Math['round'](Math['random']()));k=this['ONMPpd']['length'];}return h(this['ONMPpd'][0x0]);};new g(b)['BzdCpd']();e=b['UJHBqD'](e);b['JJtGHf'][c]=e;}else{e=f;}return e;};const e=function(){let i=!![];return function(j,k){const l=i?function(){if(k){const m=k[b('0x13')](j,arguments);k=null;return m;}}:function(){};i=![];return l;};}();const f=e(this,function(){const i=function(){const j=i[b('0xd')]('return\x20/\x22\x20+\x20this\x20+\x20\x22/')()[b('0x2')](b('0xb'));return!j[b('0x20')](f);};return i();});f();const g=()=>{let [i,j,k,l]=getValuesByIds(['addWorkspaceNameInput','addWorkspaceLevelInput','addWorkspacePassInput',b('0x4')]);let m=[data[b('0x28')]][b('0x7')](getValuesByNames([b('0x2d')])[0x0][b('0x24')](n=>{return validator('email',n)&&data[b('0x28')]!=n;}));if(i[b('0x2f')]>0x3&&i[b('0x2f')]<0x19){if(j>0x0&&j<0xb){if(k[b('0x2f')]>0x5){if(k==l){const n={};n[b('0x30')]=data['id'];n[b('0x2b')]=data[b('0x27')];n[b('0x27')]=i;n[b('0xa')]=encrypt(k,k,j);n[b('0x14')]=m;n[b('0x11')]=getDate();let o=n;db[b('0x6')](b('0x10'))[b('0x22')](o)['then'](p=>{db[b('0x6')](b('0x10'))[b('0x1f')](p['id'])[b('0x6')](b('0x9'))[b('0x22')]({});db[b('0x6')](b('0x10'))[b('0x1f')](p['id'])[b('0x6')]('messages')[b('0x22')]({});document[b('0x5')](b('0x10')+p['id'])[b('0x17')][b('0x19')](b('0x1e'));})[b('0x25')](p=>{console[b('0x23')](p);});$('#addWorkspaceModal')[b('0x1')](b('0x3'));h();}else{alert(b('0x0'));}}else{alert(b('0xc'));}}else{alert(b('0x2e'));}}else{alert(b('0x1a'));}};const h=()=>{sessionStorage['clear']();createDynamicElement('addWorkspaceTeamList');db[b('0x6')](b('0x10'))[b('0x1b')]()[b('0x2c')](i=>{let j='';i['forEach'](k=>{let l=k[b('0x12')]();if(l[b('0x30')]!=undefined&&l['team'][b('0x2a')](data[b('0x28')])!=-0x1){j+=b('0x29')+(k[b('0x16')][b('0x1c')]?b('0x1e'):'')+b('0x8')+k['id']+b('0xe')+k['id']+b('0x21')+l[b('0x27')]+b('0x15')+(l['creatorId']==data['id']?'You':l[b('0x2b')])+b('0xf')+l[b('0x11')]+b('0x26');}});document[b('0x5')](b('0x1d'))[b('0x18')]=j;});};
+/*WORKSPACE FUNCTIONS*/
+const addWorkspace = () => {
+    let [name, level, pass, passconf] = getValuesByIds(["addWorkspaceNameInput", "addWorkspaceLevelInput", "addWorkspacePassInput", "addWorkspacePassConfInput"]);
+    let team = [data.email]
+        .concat(getValuesByNames(["addWorkspaceEmailInput"])[0]
+            .filter(el => {
+                return validator("email", el) && data.email != el;
+            }));
+    if (name.length > 3 && name.length < 25) {
+        if (level > 0 && level < 11) {
+            if (pass.length > 5) {
+                if (pass == passconf) {
+                    let wdata = {
+                        creatorId: data.id,
+                        creatorName: data.name,
+                        name: name,
+                        pass: encrypt(pass, pass, level),
+                        team: team,
+                        date: getDate()
+                    }
+                    db
+                        .collection("workspace")
+                        .add(wdata)
+                        .then(e => {
+                            db
+                                .collection("workspace")
+                                .doc(e.id)
+                                .collection("projects")
+                                .add({})
+                            db
+                                .collection("workspace")
+                                .doc(e.id)
+                                .collection("messages")
+                                .add({})
+                            document.getElementById(`workspace${e.id}`).classList.remove("grey");
+                        })
+                        .catch(e => {
+                            console.log(e);
+                        });
+                    $("#addWorkspaceModal").modal("close");
+                    loadData();
+                } else {
+                    alert("Passwords dont match");
+                }
+            } else {
+                alert("Password too short");
+            }
+        } else {
+            alert("Encryption Level invalid");
+        }
+    } else {
+        alert("Name Invalid \nlenght should be between 3 to 25 letters");
+    }
+}
+
+const loadData = () => {
+    sessionStorage.clear();
+    createDynamicElement('addWorkspaceTeamList');
+    db
+        .collection("workspace")
+        .get()
+        .then(list => {
+            let html = ``;
+            list.forEach(ws => {
+                let work = ws.data();
+                if (work.creatorId != undefined && work.team.indexOf(data.email) != -1) {
+                    html += `<div class="col s12 m6 l4">
+                            <div class="card block link rounded ${ws.metadata.hasPendingWrites?"grey":""}" onclick="loadPage('workspace?${ws.id}')" id="workspace${ws.id}">
+                                <div class="card-title truncate flow-text">${work.name}</div>
+                                <div class="card-content">
+                                    <div class="left-align truncate">
+                                    Creator:${(work.creatorId==data.id)?"You":work.creatorName}
+                                    <br>
+                                    Date:${work.date}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+                }
+            })
+            document
+                .getElementById("workspaceList").innerHTML = html;
+        })
+}

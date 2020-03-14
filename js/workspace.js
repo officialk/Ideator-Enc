@@ -1,1 +1,176 @@
-const a=['c3BsaXQ=','bG9n','Z3JlZW4=','I3dvcmtzcGFjZUxvZ2luTW9kYWw=','dGhlbg==','Zm9yRWFjaA==','Z2V0RWxlbWVudEJ5SWQ=','Y29udGVudA==','a2V5','aGlkZQ==','bmFtZQ==','bW9kYWw=','WW91','b3BhY2l0eQ==','YXBwbHk=','ZGF0ZQ==','Y2xhc3NMaXN0','CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImNvbCBzMiBtNCBsNCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+','c2VuZGVy','Y29uc3RydWN0b3I=','PGRpdiBjbGFzcz0iY29sIHMxMiBtNiBsNCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iY2FyZCBibG9jayBsaW5rIHJvdW5kZWQg','c2l6ZQ==','Ij48L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImNhcmQgY29sIHMxMCBtOCBsOCA=','Y3JlYXRvck5hbWU=','VGl0bGUgVG9vIFNob3J0IShhdGxlYXN0IDUgY2hhcnMp','ZGVzY3JpcHRpb24=','JykiIGlkPSdwcm9qZWN0','cGFzcw==','aW5uZXJIVE1M','SW52YWxpZCBDcmVkZW50aWFscw==','bWV0YWRhdGE=','Y2F0Y2g=','cHJvamVjdENvdW50','cmV0dXJuIC8iICsgdGhpcyArICIv','CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGJyPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIA==','Ymx1ZQ==','bGV2ZWw=','dmFsdWU=','bWVzc2FnZURpc3BsYXk=','bWVzc2FnZQ==','ZGF0YQ==','b3JkZXJCeQ==','d29ya3NwYWNlTG9naW5QYXNzSW5wdXQ=','CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4=','Y2xvc2U=','bGVuZ3Ro','d29ya3NwYWNl','Ij4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJ3aGl0ZS10ZXh0IGNhcmQtY29udGVudCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHA+PGI+','b3V0RHVyYXRpb24=','aGFzUGVuZGluZ1dyaXRlcw==','cGFnZQ==','Z3JleQ==','PC9iPigg','cmVtb3Zl','dGl0bGU=','RGVzY3JpcHRpb24gVG9vIFNob3J0IShhdGxlYXN0IDE1IGNoYXJzKQ==','cHJvamVjdERlc2NyaXB0aW9u','d29ya3NwYWNlLw==','YWZ0ZXJiZWdpbg==','XihbXiBdKyggK1teIF0rKSspK1teIF19','PGRpdiBjbGFzcz0icm93IG1lc3NhZ2UiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0i','Y3JlYXRvcklk','Y29sbGVjdGlvbg==','aW5zZXJ0QWRqYWNlbnRIVE1M','bWVzc2FnZVRleHRJbnB1dA==','cHJvamVjdHNMaXN0','P3Y9','CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGJyPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIERhdGU6','L21lc3NhZ2Vz','YWRk','L3Byb2plY3Rz','Y29tcGlsZQ=='];(function(b,c){const d=function(f){while(--f){b['push'](b['shift']());}};const e=function(){const f={'data':{'key':'cookie','value':'timeout'},'setCookie':function(j,k,l,m){m=m||{};let n=k+'='+l;let o=0x0;for(let p=0x0,q=j['length'];p<q;p++){const t=j[p];n+=';\x20'+t;const u=j[t];j['push'](u);q=j['length'];if(u!==!![]){n+='='+u;}}m['cookie']=n;},'removeCookie':function(){return'dev';},'getCookie':function(j,k){j=j||function(n){return n;};const l=j(new RegExp('(?:^|;\x20)'+k['replace'](/([.$?*|{}()[]\/+^])/g,'$1')+'=([^;]*)'));const m=function(n,o){n(++o);};m(d,c);return l?decodeURIComponent(l[0x1]):undefined;}};const g=function(){const j=new RegExp('\x5cw+\x20*\x5c(\x5c)\x20*{\x5cw+\x20*[\x27|\x22].+[\x27|\x22];?\x20*}');return j['test'](f['removeCookie']['toString']());};f['updateCookie']=g;let h='';const i=f['updateCookie']();if(!i){f['setCookie'](['*'],'counter',0x1);}else if(i){h=f['getCookie'](null,'counter');}else{f['removeCookie']();}};e();}(a,0x12d));const b=function(c,d){c=c-0x0;let e=a[c];if(b['LkLIgq']===undefined){(function(){let g;try{const i=Function('return\x20(function()\x20'+'{}.constructor(\x22return\x20this\x22)(\x20)'+');');g=i();}catch(j){g=window;}const h='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';g['atob']||(g['atob']=function(k){const l=String(k)['replace'](/=+$/,'');let m='';for(let n=0x0,o,p,q=0x0;p=l['charAt'](q++);~p&&(o=n%0x4?o*0x40+p:p,n++%0x4)?m+=String['fromCharCode'](0xff&o>>(-0x2*n&0x6)):0x0){p=h['indexOf'](p);}return m;});}());b['lWXeiU']=function(g){const h=atob(g);let j=[];for(let k=0x0,l=h['length'];k<l;k++){j+='%'+('00'+h['charCodeAt'](k)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(j);};b['npOScw']={};b['LkLIgq']=!![];}const f=b['npOScw'][c];if(f===undefined){const g=function(h){this['meiIkK']=h;this['kLmWWd']=[0x1,0x0,0x0];this['erhTkI']=function(){return'newState';};this['jnzVYl']='\x5cw+\x20*\x5c(\x5c)\x20*{\x5cw+\x20*';this['IfveEQ']='[\x27|\x22].+[\x27|\x22];?\x20*}';};g['prototype']['lNZkkR']=function(){const h=new RegExp(this['jnzVYl']+this['IfveEQ']);const i=h['test'](this['erhTkI']['toString']())?--this['kLmWWd'][0x1]:--this['kLmWWd'][0x0];return this['LtLIey'](i);};g['prototype']['LtLIey']=function(h){if(!Boolean(~h)){return h;}return this['vXVgzq'](this['meiIkK']);};g['prototype']['vXVgzq']=function(h){for(let j=0x0,k=this['kLmWWd']['length'];j<k;j++){this['kLmWWd']['push'](Math['round'](Math['random']()));k=this['kLmWWd']['length'];}return h(this['kLmWWd'][0x0]);};new g(b)['lNZkkR']();e=b['lWXeiU'](e);b['npOScw'][c]=e;}else{e=f;}return e;};const e=function(){let r=!![];return function(s,t){const u=r?function(){if(t){const v=t[b('0x1')](s,arguments);t=null;return v;}}:function(){};r=![];return u;};}();const f=e(this,function(){const r=function(){const s=r[b('0x6')](b('0x14'))()[b('0x3a')](b('0x2e'));return!s['test'](f);};return r();});f();const g=location['href'][b('0x3b')](b('0x35'))[0x1][b('0x3b')]('#')[0x0];var h;var i;const j=()=>{let r=document[b('0x41')](b('0x1d'))['value'];let s=document[b('0x41')]('workspaceLoginLevelInput')['value'];db[b('0x31')](b('0x21'))['doc'](g)['get']()[b('0x3f')](t=>{try{let u=decrypt(t[b('0x1b')]()[b('0xe')],r,s);if(u==r){page[b('0x25')]=b('0x21');page['id']=g;page[b('0xe')]=r;page['level']=s;$(b('0x3e'))[b('0x46')](b('0x1f'));updateSession();k();}else{throw new Error(b('0x10'));}}catch(v){console[b('0x3c')](v);alert(b('0x10'));}})[b('0x12')](t=>{console[b('0x3c')](t);});};const k=()=>{h=db[b('0x31')](b('0x2c')+g+b('0x39'));i=db[b('0x31')]('workspace/'+g+b('0x37'));l();n();initMaterial();};const l=()=>{i[b('0x1c')](b('0x2'),'asc')['onSnapshot'](r=>{document['getElementById'](b('0x19'))[b('0xf')]='';r[b('0x40')](s=>{let t=s[b('0x1b')]();if(t[b('0x42')]!=undefined){let u=b('0x2f')+(t[b('0x5')]==data[b('0x45')]?'col\x20s2\x20m4\x20l4':b('0x44'))+b('0x9')+(t[b('0x5')]==data[b('0x45')]?s[b('0x11')][b('0x24')]?b('0x16'):b('0x3d'):b('0x26'))+'\x22\x20id=\x22message'+s['id']+b('0x22')+(t[b('0x5')]==data[b('0x45')]?b('0x47'):t[b('0x5')])+b('0x27')+t[b('0x2')]+'\x20)\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<!--\x20<span\x20class=\x22right\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<a\x20class=\x22btn-floating\x20btn-flat\x20tooltipped\x22\x20data-position=\x22bottom\x22\x20data-tooltip=\x22Add\x20as\x20a\x20project\x22><i\x20class=\x22material-icons\x22>add</i></a>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<a\x20class=\x22btn-floating\x20btn-flat\x20tooltipped\x22\x20data-position=\x22bottom\x22\x20data-tooltip=\x22reply\x22>\x20<i\x20class=\x22material-icons\x22>reply</i></a>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</span>--></p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+decrypt(t[b('0x42')],page['pass']+g+t['date'],page['level'])+b('0x4');document['getElementById'](b('0x19'))[b('0x32')](b('0x2d'),u);}});});};const m=()=>{let r=document['getElementById'](b('0x33'))[b('0x18')];let s=getDate();if(r[b('0x20')]>0x0){const t={};t[b('0x5')]=data[b('0x45')];t[b('0x2')]=s;t[b('0x42')]=encrypt(r,page['pass']+g+s,page[b('0x17')]);i[b('0x38')](t)[b('0x3f')](u=>{document[b('0x41')](b('0x1a')+u['id'])[b('0x3')][b('0x28')](b('0x16'));document[b('0x41')]('message'+u['id'])[b('0x3')][b('0x38')](b('0x3d'));})[b('0x12')](u=>{console[b('0x3c')](u);});}document[b('0x41')](b('0x33'))[b('0x18')]='';};const n=()=>{h['get']()[b('0x3f')](r=>{document[b('0x41')](b('0x34'))[b('0xf')]='';let s='';r[b('0x40')](t=>{let u=t[b('0x1b')]();if(u[b('0x30')]!=undefined){s+=b('0x7')+(t[b('0x11')][b('0x24')]?b('0x26'):'')+'\x22\x20onclick=\x22loadPage(\x27project?'+t['id']+b('0xd')+t['id']+'\x27>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22card-title\x20truncate\x20flow-text\x22>'+decrypt(u[b('0x29')],g+u[b('0x30')]+u[b('0xa')]+page[b('0x43')],page['level'])+'</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22card-content\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22left-align\x20truncate\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Creator:'+(u['creatorId']==data['id']?b('0x47'):u['creatorName'])+b('0x15')+decrypt(u[b('0xc')],g+u[b('0x30')]+u[b('0xa')]+page['key'],page['level'])+b('0x36')+u[b('0x2')]+b('0x1e');}});document[b('0x41')](b('0x34'))[b('0xf')]=s;document[b('0x41')](b('0x13'))['innerHTML']=r[b('0x8')]-0x1||0x0;});};const o=()=>{let r=document[b('0x41')](b('0x2b'))[b('0x18')];let s=document[b('0x41')]('projectTitle')[b('0x18')];let t=getDate();if(s['length']>0x5){if(r[b('0x20')]>0xf){const u={};u[b('0x30')]=data['id'];u[b('0xa')]=data[b('0x45')];u[b('0x2')]=t;u[b('0xc')]=encrypt(r,g+data['id']+data['name']+page['key'],page[b('0x17')]);u['title']=encrypt(s,g+data['id']+data[b('0x45')]+page[b('0x43')],page[b('0x17')]);h[b('0x38')](u)[b('0x3f')](v=>{db[b('0x31')](b('0x2c')+g+'/projects/'+v['id']+'/ideas')[b('0x38')]({});document['getElementById']('project'+v['id'])[b('0x3')][b('0x28')]('grey');})[b('0x12')](v=>{console[b('0x3c')](v);});$('#addProjectModal')[b('0x46')](b('0x1f'));n();}else{alert(b('0x2a'));}}else{alert(b('0xb'));}};const p=()=>{if(g!=''&&page['page']==b('0x21')&&page['id']==g&&page[b('0xe')]!=undefined&&page['level']!=undefined){k();}else{const r={};r['dismissible']=![];r[b('0x0')]=0x1;r['inDuration']=0x0;r[b('0x23')]=0xfa;$(b('0x3e'))[b('0x46')](r);$(b('0x3e'))[b('0x46')]('open');}};const q=()=>{p();};
+const workId = location.href.split("?v=")[1].split("#")[0];
+
+var projects;
+
+var messages;
+
+const loginToWorkspace = () => {
+    let pass = document.getElementById("workspaceLoginPassInput").value;
+    let level = document.getElementById("workspaceLoginLevelInput").value;
+    db
+        .collection("workspace")
+        .doc(workId)
+        .get()
+        .then(wk => {
+            try {
+                let conf = decrypt(wk.data().pass, pass, level);
+                if (conf == pass) {
+                    page.page = "workspace";
+                    page.id = workId;
+                    page.pass = pass;
+                    page.level = level;
+                    $("#workspaceLoginModal").modal("close");
+                    updateSession();
+                    loadWorkspaceData();
+                } else {
+                    throw new Error("Invalid Credentials");
+                }
+            } catch (e) {
+                console.log(e);
+                alert("Invalid Credentials");
+            }
+        })
+        .catch(e => {
+            console.log(e);
+        })
+}
+
+const loadWorkspaceData = () => {
+    projects = db.collection(`workspace/${workId}/projects`)
+    messages = db.collection(`workspace/${workId}/messages`)
+    loadMessages();
+    loadProjects();
+    initMaterial();
+}
+
+const loadMessages = () => {
+    messages
+        .orderBy("date", "asc")
+        .onSnapshot(messages => {
+            document.getElementById("messageDisplay").innerHTML = "";
+            //            let html = '';
+            messages.forEach(doc => {
+                let mssg = doc.data();
+                if (mssg.content != undefined) {
+                    let html = `<div class="row message">
+                            <div class="${(mssg.sender==data.name)?"col s2 m4 l4":"hide"}"></div>
+                            <div class="card col s10 m8 l8 ${(mssg.sender==data.name)?((doc.metadata.hasPendingWrites)?"blue":"green"):"grey"}" id="message${doc.id}">
+                                <div class="white-text card-content">
+                                <p><b>${(mssg.sender==data.name)?"You":mssg.sender}</b>( ${mssg.date} )
+                                <!-- <span class="right">
+                                    <a class="btn-floating btn-flat tooltipped" data-position="bottom" data-tooltip="Add as a project"><i class="material-icons">add</i></a>
+                                    <a class="btn-floating btn-flat tooltipped" data-position="bottom" data-tooltip="reply"> <i class="material-icons">reply</i></a>
+                                </span>--></p>
+                                    ${decrypt(mssg.content, page.pass + workId + mssg.date,page.level)}
+                                </div>
+                            </div>
+                            <div class="col s2 m4 l4">
+                            </div>
+                        </div>`;
+                    document.getElementById("messageDisplay").insertAdjacentHTML("afterbegin", html);
+                }
+                //                document.getElementById("messageDisplay").innerHTML = html;
+            })
+        })
+}
+
+const sendMessage = () => {
+    let mssg = document.getElementById("messageTextInput").value;
+    let date = getDate();
+    if (mssg.length > 0) {
+        messages
+            .add({
+                sender: data.name,
+                date: date,
+                content: encrypt(mssg, page.pass + workId + date, page.level)
+            })
+            .then(e => {
+                document.getElementById(`message${e.id}`).classList.remove("blue");
+                document.getElementById(`message${e.id}`).classList.add("green");
+            })
+            .catch(e => {
+                console.log(e)
+            })
+    }
+    document.getElementById("messageTextInput").value = "";
+}
+
+const loadProjects = () => {
+    projects
+        .get()
+        .then(projects => {
+            document.getElementById("projectsList").innerHTML = "";
+            let html = "";
+            projects.forEach(doc => {
+                let project = doc.data();
+                if (project.creatorId != undefined) {
+                    html += `<div class="col s12 m6 l4">
+                                <div class="card block link rounded ${doc.metadata.hasPendingWrites?"grey":""}" onclick="loadPage('project?${doc.id}')" id='project${doc.id}'>
+                                    <div class="card-title truncate flow-text">${decrypt(project.title,workId + project.creatorId + project.creatorName + page.key,page.level)}</div>
+                                    <div class="card-content">
+                                        <div class="left-align truncate">
+                                            Creator:${(project.creatorId==data.id)?"You":project.creatorName}
+                                            <br>
+                                            ${decrypt(project.description,workId + project.creatorId + project.creatorName + page.key,page.level)}
+                                            <br>
+                                            Date:${project.date}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+                }
+            })
+            document.getElementById("projectsList").innerHTML = html;
+            document.getElementById("projectCount").innerHTML = (projects.size - 1) || 0;
+        })
+}
+
+const addProject = () => {
+    let desc = document.getElementById("projectDescription").value;
+    let title = document.getElementById("projectTitle").value;
+    let date = getDate();
+    if (title.length > 5) {
+        if (desc.length > 15) {
+            projects
+                .add({
+                    creatorId: data.id,
+                    creatorName: data.name,
+                    date: date,
+                    description: encrypt(desc, workId + data.id + data.name + page.key, page.level),
+                    title: encrypt(title, workId + data.id + data.name + page.key, page.level)
+                }).then(e => {
+                    db
+                        .collection(`workspace/${workId}/projects/${e.id}/ideas`)
+                        .add({})
+                    document.getElementById(`project${e.id}`).classList.remove("grey");
+                })
+                .catch(e => {
+                    console.log(e);
+                })
+            $("#addProjectModal").modal("close");
+            loadProjects();
+        } else {
+            alert("Description Too Short!(atleast 15 chars)");
+        }
+    } else {
+        alert("Title Too Short!(atleast 5 chars)");
+    }
+}
+
+const isLoggedIn = () => {
+    if (workId != "" && page.page == "workspace" && page.id == workId && page.pass != undefined && page.level != undefined) {
+        loadWorkspaceData();
+    } else {
+        $("#workspaceLoginModal").modal({
+            dismissible: false,
+            opacity: 1,
+            inDuration: 0,
+            outDuration: 250
+        });
+        $("#workspaceLoginModal").modal("open");
+    }
+}
+
+const loadData = () => {
+    isLoggedIn();
+}

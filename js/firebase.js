@@ -1,1 +1,10 @@
-var _0x5141=['ideator-live','G-HVQJ271469','ideator-live.firebaseapp.com','ideator-live.appspot.com','https://ideator-live.firebaseio.com','520430350326','1:520430350326:web:76dede2e74e14f565e21d7','AIzaSyCunSys_ABIxjF7KiLsEeBZ35XwNMjB7gQ'];(function(_0x462b16,_0x514198){var _0x57ffb7=function(_0x40c0f9){while(--_0x40c0f9){_0x462b16['push'](_0x462b16['shift']());}};_0x57ffb7(++_0x514198);}(_0x5141,0x18b));var _0x57ff=function(_0x462b16,_0x514198){_0x462b16=_0x462b16-0x0;var _0x57ffb7=_0x5141[_0x462b16];return _0x57ffb7;};var firebaseConfig={'apiKey':_0x57ff('0x4'),'authDomain':_0x57ff('0x7'),'databaseURL':_0x57ff('0x1'),'projectId':_0x57ff('0x5'),'storageBucket':_0x57ff('0x0'),'messagingSenderId':_0x57ff('0x2'),'appId':_0x57ff('0x3'),'measurementId':_0x57ff('0x6')};
+var firebaseConfig = {
+    apiKey: "AIzaSyCunSys_ABIxjF7KiLsEeBZ35XwNMjB7gQ",
+    authDomain: "ideator-live.firebaseapp.com",
+    databaseURL: "https://ideator-live.firebaseio.com",
+    projectId: "ideator-live",
+    storageBucket: "ideator-live.appspot.com",
+    messagingSenderId: "520430350326",
+    appId: "1:520430350326:web:76dede2e74e14f565e21d7",
+    measurementId: "G-HVQJ271469"
+};
