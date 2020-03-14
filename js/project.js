@@ -59,6 +59,7 @@ const addIdea = () => {
     let key = page.pass + projectId + data.id + date;
     if (title.length > 5) {
         if (desc.length > 5) {
+            showLoading('addIdeaModal', 'Adding A New Idea To the Project')
             ideas
                 .add({
                     creatorId: data.id,
@@ -68,14 +69,15 @@ const addIdea = () => {
                     desc: encrypt(desc, key, page.level)
                 })
                 .then(e => {
+                    showLoading('addIdeaModal', 'Complete')
                     document.getElementById(`idea${e.id}`).classList.remove("grey");
+                    document.getElementById("ideaTitle").value = "";
+                    document.getElementById("ideaDescription").value = "";
+                    $("#addIdeaModal").modal("close");
                 })
                 .catch(e => {
                     console.log(e);
                 })
-            document.getElementById("ideaTitle").value = "";
-            document.getElementById("ideaDescription").value = "";
-            $("#addIdeaModal").modal("close");
         } else {
             alert("Description too short");
         }

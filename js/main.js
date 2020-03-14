@@ -93,6 +93,22 @@ const updateSession = () => {
     session("page", JSON.stringify(page));
 }
 
+const showLoading = (id, message) => {
+    document.getElementById(id).innerHTML = `
+        <div class='modal-content row container'>
+            <br>
+            <br>
+            <div class="progress col s12 m12 l12">
+                <div class="indeterminate"></div>
+            </div>
+            <br>
+            <div class="flow-text center col s12 m12 l12">
+                ${message}
+            </div>
+        </div>
+    `;
+}
+
 $(document).ready(() => {
     if (checkLogin()) {
         initFirebase();

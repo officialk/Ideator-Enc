@@ -133,6 +133,7 @@ const addProject = () => {
     let date = getDate();
     if (title.length > 5) {
         if (desc.length > 15) {
+            showLoading('addProjectModal', 'Adding A New Project For You');
             let key = workId + data.id + data.name + page.key;
             projects
                 .add({
@@ -142,15 +143,19 @@ const addProject = () => {
                     description: encrypt(desc, key, page.level),
                     title: encrypt(title, key, page.level)
                 }).then(e => {
+                    showLoading('addProjectModal', 'Setting Up Other Stuff');
                     db
                         .collection(`workspace/${workId}/projects/${e.id}/ideas`)
                         .add({})
-                    document.getElementById(`project${e.id}`).classList.remove("grey");
+                        .then(e => {
+                            document.getElementById(`project${e.id}`).classList.remove("grey");
+                            showLoading('addProjectModal', 'Complete');
+                            $("#addProjectModal").modal("close");
+                        })
                 })
                 .catch(e => {
                     console.log(e);
                 })
-            $("#addProjectModal").modal("close");
             loadProjects();
         } else {
             alert("Description Too Short!(atleast 15 chars)");
@@ -218,7 +223,50 @@ const changeSettings = () => {
     if (name.length > 3 && name.length < 25) {
         if (level > 0 && level < 11) {
             if (pass.length > 5) {
-
+                //                var main = db
+                //                    .collection("workspace")
+                //                    .doc(workId);
+                //                db.runTransaction(transaction => {
+                //                    return transaction
+                //                        .get(main)
+                //                        .then(doc => {
+                //                            transaction.update(main, {
+                //                                name: name,
+                //                                pass: encrypt(pass, pass, level),
+                //                                team: team
+                //                            });
+                //                        });
+                //                }).then(function () {
+                //                    if (level != page.level || page.pass != pass) {
+                //                        //                        sessionStorage.clear();
+                //                        //                        location.reload();
+                //                        projects
+                //                            .get()
+                //                            .then(projectList => {
+                //                                let batch = db.batch();
+                //                                projectList.forEach(doc => {
+                //                                    let prevkey = workId + data.id + data.name + page.key;
+                //                                    let newkey = workId + data.id + data.name + pass;
+                //                                    let project = doc.data();
+                //                                    let title = encrypt(decrypt(project.title, prevkey, page.level), newkey, level);
+                //                                    let desc = encrypt(decrypt(project.description, prevkey, page.level), newkey, level);
+                //                                    batch.update(doc, {
+                //                                        title: title,
+                //                                        description: desc
+                //                                    })
+                //                                })
+                //                            })
+                //                        messages
+                //                            .get()
+                //                            .then(elem => {
+                //
+                //                            })
+                //                    } else {
+                //                        $("#settings").modal("close");
+                //                    }
+                //                }).catch(function (error) {
+                //                    console.log("Transaction failed: ", error);
+                //                });
             } else {
                 alert("Password too short");
             }

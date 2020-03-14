@@ -10,6 +10,7 @@ const addWorkspace = () => {
         if (level > 0 && level < 11) {
             if (pass.length > 5) {
                 if (pass == passconf) {
+                    showLoading('addWorkspaceModal', 'Adding A New Workspace For You');
                     let wdata = {
                         creatorId: data.id,
                         creatorName: data.name,
@@ -22,23 +23,29 @@ const addWorkspace = () => {
                         .collection("workspace")
                         .add(wdata)
                         .then(e => {
+                            showLoading('addWorkspaceModal', 'Workspace Added');
                             db
                                 .collection("workspace")
                                 .doc(e.id)
                                 .collection("projects")
                                 .add({})
-                            db
-                                .collection("workspace")
-                                .doc(e.id)
-                                .collection("messages")
-                                .add({})
-                            document.getElementById(`workspace${e.id}`).classList.remove("grey");
+                                .then(x => {
+                                    showLoading('addWorkspaceModal', 'Setting Up Other Stuff');
+                                    db
+                                        .collection("workspace")
+                                        .doc(e.id)
+                                        .collection("messages")
+                                        .add({})
+                                        .then(x => {
+                                            showLoading('addWorkspaceModal', 'Complete');
+                                            $('addWorkspaceModal').modal('close');
+                                            loadData();
+                                        })
+                                })
                         })
                         .catch(e => {
                             console.log(e);
                         });
-                    $("#addWorkspaceModal").modal("close");
-                    loadData();
                 } else {
                     alert("Passwords dont match");
                 }
