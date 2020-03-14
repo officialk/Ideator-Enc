@@ -60,7 +60,7 @@ const loadPage = (page) => {
 const initSw = () => {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/sw.js', {
-            scope: "/"
+            scope: "/ideator"
         });
     }
 }
