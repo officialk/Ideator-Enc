@@ -10,6 +10,8 @@ const addWorkspace = () => {
         if (level > 0 && level < 11) {
             if (pass.length > 5) {
                 if (pass == passconf) {
+                    let modal = document.getElementById('addWorkspaceModal');
+                    let html = modal.innerHTML;
                     showLoading('addWorkspaceModal', 'Adding A New Workspace For You');
                     let wdata = {
                         creatorId: data.id,
@@ -38,7 +40,8 @@ const addWorkspace = () => {
                                         .add({})
                                         .then(x => {
                                             showLoading('addWorkspaceModal', 'Complete');
-                                            $('addWorkspaceModal').modal('close');
+                                            $('#addWorkspaceModal').modal('close');
+                                            modal.innerHTML = html;
                                             loadData();
                                         })
                                 })

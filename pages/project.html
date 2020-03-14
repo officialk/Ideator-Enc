@@ -109,7 +109,7 @@
     <footer>
     </footer>
     <extras>
-        <div class="modal" id="addIdeaModal">
+        <div class="modal bottom-sheet modal-fixed-footer" id="addIdeaModal">
             <div class="modal-content row">
                 <h5 class="center">Add Idea</h5>
                 <div class="input-field col s12 m6 l6">
@@ -120,10 +120,13 @@
                     <textarea id="ideaDescription" class="materialize-textarea"></textarea>
                     <label for="ideaDescription">Idea Description</label>
                 </div>
-                <div class="col s12 m12 l12 input-field">
-                    <center>
-                        <div class="btn-floating" onclick="addIdea()"><i class="material-icons">add</i></div>
-                    </center>
+            </div>
+            <div class="modal-footer row">
+                <div class="col s6 m6 l6 center">
+                    <div class="btn theme modal-close">Cancel</div>
+                </div>
+                <div class="col s6 m6 l6 center">
+                    <div class="btn theme" onclick="addIdea()">Submit</div>
                 </div>
             </div>
         </div>

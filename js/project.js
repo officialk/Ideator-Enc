@@ -59,6 +59,8 @@ const addIdea = () => {
     let key = page.pass + projectId + data.id + date;
     if (title.length > 5) {
         if (desc.length > 5) {
+            let modal = document.getElementById('addIdeaModal')
+            let html = modal.innerHTML;
             showLoading('addIdeaModal', 'Adding A New Idea To the Project')
             ideas
                 .add({
@@ -70,10 +72,8 @@ const addIdea = () => {
                 })
                 .then(e => {
                     showLoading('addIdeaModal', 'Complete')
-                    document.getElementById(`idea${e.id}`).classList.remove("grey");
-                    document.getElementById("ideaTitle").value = "";
-                    document.getElementById("ideaDescription").value = "";
                     $("#addIdeaModal").modal("close");
+                    modal.innerHTML = html;
                 })
                 .catch(e => {
                     console.log(e);
@@ -124,7 +124,7 @@ const changeSettings = () => {
     if (title.length > 5) {
         if (desc.length > 15) {
             if (title != mainTitle || desc != mainDesc) {
-                showLoading('settings',"Making Changes");
+                showLoading('settings', "Making Changes");
                 let key = page.id + data.id + data.name + page.key;
                 let proj = db
                     .collection('workspace')
@@ -143,7 +143,7 @@ const changeSettings = () => {
                         });
                 }).then(function () {
                     $("#settings").modal("close");
-                    showLoading('settings',"Complete");
+                    showLoading('settings', "Complete");
                 }).catch(function (error) {
                     console.log("Transaction failed: ", error);
                 });

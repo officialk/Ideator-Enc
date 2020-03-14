@@ -133,6 +133,8 @@ const addProject = () => {
     let date = getDate();
     if (title.length > 5) {
         if (desc.length > 15) {
+            let modal = document.getElementById('addProjectModal');
+            let html = modal.innerHTML;
             showLoading('addProjectModal', 'Adding A New Project For You');
             let key = workId + data.id + data.name + page.key;
             projects
@@ -148,9 +150,9 @@ const addProject = () => {
                         .collection(`workspace/${workId}/projects/${e.id}/ideas`)
                         .add({})
                         .then(e => {
-                            document.getElementById(`project${e.id}`).classList.remove("grey");
                             showLoading('addProjectModal', 'Complete');
                             $("#addProjectModal").modal("close");
+                            modal.innerHTML = html;
                         })
                 })
                 .catch(e => {

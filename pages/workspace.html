@@ -164,8 +164,6 @@
                 </div>
             </div>
             <div class="modal-footer row">
-                <div class="center col s12 m12 l12">
-                </div>
                 <div class="col s6 m6 l6 center">
                     <a class="btn theme" onclick="loadPage('home?')">Cancel</a>
                 </div>
@@ -174,21 +172,24 @@
                 </div>
             </div>
         </div>
-        <div class="modal" id="addProjectModal">
+        <div class="modal modal-fixed-footer bottom-sheet" id="addProjectModal">
             <div class="modal-content row">
                 <h5 class="center">Add Project</h5>
                 <div class="input-field col s12 m6 l6">
                     <input type="text" id="projectTitle">
                     <label for="projectTitle">Project Title</label>
                 </div>
-                <div class="input-field col s6 m6 l6">
+                <div class="input-field col s12 m12 l12">
                     <textarea id="projectDescription" class="materialize-textarea"></textarea>
                     <label for="projectDescription">Project Description</label>
                 </div>
             </div>
-            <div class="modal-footer center">
-                <div class="center">
-                    <div class="btn-floating" onclick="addProject()"><i class="material-icons">add</i></div>
+            <div class="modal-footer row">
+                <div class="col s6 m6 l6 center">
+                    <a class="btn theme modal-close">Cancel</a>
+                </div>
+                <div class="col s6 m6 l6 center">
+                    <a class="btn theme" onclick="addProject()">Submit</a>
                 </div>
             </div>
         </div>
