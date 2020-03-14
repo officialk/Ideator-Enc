@@ -16,7 +16,7 @@ const logout = () => {
         .then(function () {
             local("data", "{}");
             sessionStorage.clear();
-            location.href = "/";
+            location.href = "/ideator";
         })
         .catch(function (error) {
             // An error happened.
@@ -99,6 +99,6 @@ $(document).ready(() => {
         loadData();
         initSw();
     } else {
-        location.href = "/";
+        location.href = "/ideator";
     }
 })
