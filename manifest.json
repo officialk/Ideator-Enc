@@ -5,8 +5,8 @@
     "background_color": "#5da8a5",
     "display": "standalone",
     "orientation": "portrait",
-    "scope": "/ideator",
-    "start_url": "/ideator",
+    "scope": "/",
+    "start_url": "/",
     "icons": [
         {
             "src": "images/icons/icon-72x72.png",

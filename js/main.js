@@ -16,7 +16,7 @@ const logout = () => {
         .then(function () {
             local("data", "{}");
             sessionStorage.clear();
-            location.href = "/ideator";
+            location.href = "/";
         })
         .catch(function (error) {
             // An error happened.
@@ -60,7 +60,7 @@ const loadPage = (page) => {
 const initSw = () => {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/sw.js', {
-            scope: "/ideator"
+            scope: "/"
         });
     }
 }
@@ -99,6 +99,6 @@ $(document).ready(() => {
         loadData();
         initSw();
     } else {
-        location.href = "/ideator";
+        location.href = "/";
     }
 })
