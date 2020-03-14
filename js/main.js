@@ -76,7 +76,9 @@ const initMaterial = () => {
     $('.tabs').tabs();
     $('.fixed-action-btn').floatingActionButton();
     $('.tooltipped').tooltip();
-    $('.modal').modal();
+    $('.modal').modal({
+        dismissible: false
+    });
     $('select').formSelect();
     $('.collapsible').collapsible();
 

@@ -40,6 +40,8 @@ const loadWorkspaceData = () => {
     messages = db.collection(`workspace/${workId}/messages`)
     loadMessages();
     loadProjects();
+    displaySettings();
+    createDynamicElement('changeWorkspaceTeamList');
     initMaterial();
 }
 
@@ -131,13 +133,14 @@ const addProject = () => {
     let date = getDate();
     if (title.length > 5) {
         if (desc.length > 15) {
+            let key = workId + data.id + data.name + page.key;
             projects
                 .add({
                     creatorId: data.id,
                     creatorName: data.name,
                     date: date,
-                    description: encrypt(desc, workId + data.id + data.name + page.key, page.level),
-                    title: encrypt(title, workId + data.id + data.name + page.key, page.level)
+                    description: encrypt(desc, key, page.level),
+                    title: encrypt(title, key, page.level)
                 }).then(e => {
                     db
                         .collection(`workspace/${workId}/projects/${e.id}/ideas`)
@@ -173,4 +176,56 @@ const isLoggedIn = () => {
 
 const loadData = () => {
     isLoggedIn();
+}
+
+const displaySettings = () => {
+    db
+        .collection(`workspace`)
+        .doc(`${workId}`)
+        .get()
+        .then(ws => {
+            if (ws.data().creatorId == data.id) {
+                document
+                    .getElementsByTagName("main")[0]
+                    .innerHTML += `<div class="fixed-action-btn tooltop">
+                                      <a class="btn-floating btn-large theme modal-trigger" href="#settings">
+                                        <i class="large material-icons">settings</i>
+                                      </a>
+                                    </div>`;
+                document.getElementById('changeWorkspaceNameInput').value = ws.data().name;
+                document.getElementById('changeWorkspacePassInput').value = page.pass;
+                document.getElementById('changeWorkspaceLevelInput').value = page.level;
+                let c = 1;
+                ws.data().team.forEach((member) => {
+                    if (member != data.email) {
+                        createDynamicElement("changeWorkspaceTeamList");
+                        document.getElementById(`workspaceTeamList${c++}Input`).value = member;
+                    }
+                })
+                M.updateTextFields();
+                initMaterial();
+            }
+        })
+}
+
+const changeSettings = () => {
+    let [name, pass, level] = getValuesByIds(['changeWorkspaceNameInput', 'changeWorkspacePassInput', 'changeWorkspaceLevelInput']);
+    let team = [data.email]
+        .concat(getValuesByNames(["changeWorkspaceTeamListInput"])[0]
+            .filter(el => {
+                return validator("email", el) && data.email != el;
+            }));
+    if (name.length > 3 && name.length < 25) {
+        if (level > 0 && level < 11) {
+            if (pass.length > 5) {
+
+            } else {
+                alert("Password too short");
+            }
+        } else {
+            alert("Encryption Level invalid");
+        }
+    } else {
+        alert("Name Invalid \nlenght should be between 3 to 25 letters");
+    }
 }

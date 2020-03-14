@@ -1,5 +1,7 @@
 const projectId = location.href.split("?v=")[1].split("#")[0];;
 
+var mainTitle, mainDesc;
+
 var ideas;
 
 const isLoggedIn = () => {
@@ -13,6 +15,7 @@ const isLoggedIn = () => {
 const loadProjectData = () => {
     ideas = db.collection(`workspace/${page.id}/projects/${projectId}/ideas`);
     loadIdeas();
+    displaySettings();
     initMaterial();
 }
 
@@ -87,4 +90,66 @@ const back = () => {
 
 const loadData = () => {
     isLoggedIn();
+}
+
+const displaySettings = () => {
+    db.collection(`workspace/${page.id}/projects`)
+        .doc(projectId)
+        .get()
+        .then(p => {
+            if (p.data().creatorId == data.id) {
+                document
+                    .getElementsByTagName("main")[0]
+                    .innerHTML += `<div class="fixed-action-btn tooltop">
+                                      <a class="btn-floating btn-large theme modal-trigger" href="#settings">
+                                        <i class="large material-icons">settings</i>
+                                      </a>
+                                    </div>`;
+                let key = page.id + data.id + data.name + page.key
+                mainTitle = decrypt(p.data().title, key, page.level);
+                mainDesc = decrypt(p.data().description, key, page.level)
+                document.getElementById('changeProjectTitleInput').value = mainTitle;
+                document.getElementById('changeProjectDescInput').value = mainDesc;
+                initMaterial();
+                M.updateTextFields();
+            }
+        })
+}
+
+const changeSettings = () => {
+    let [title, desc] = getValuesByIds(['changeProjectTitleInput', 'changeProjectDescInput']);
+    console.log(title, desc);
+    if (title.length > 5) {
+        if (desc.length > 15) {
+            if (title != mainTitle || desc != mainDesc) {
+                let key = page.id + data.id + data.name + page.key;
+                let proj = db
+                    .collection('workspace')
+                    .doc(page.id)
+                    .collection('projects')
+                    .doc(projectId);
+
+                db.runTransaction(transaction => {
+                    return transaction
+                        .get(proj)
+                        .then(doc => {
+                            transaction.update(proj, {
+                                title: encrypt(title, key, page.level),
+                                description: encrypt(desc, key, page.level)
+                            });
+                        });
+                }).then(function () {
+                    $("#settings").modal("close");
+                }).catch(function (error) {
+                    console.log("Transaction failed: ", error);
+                });
+            } else {
+                $("#settings").modal("close");
+            }
+        } else {
+            alert("Description Too Short!(atleast 15 chars)");
+        }
+    } else {
+        alert("Title Too Short!(atleast 5 chars)");
+    }
 }

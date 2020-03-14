@@ -45,7 +45,6 @@
                 </div>
             </li>
             <li><a onclick="loadPage('home')"><i class="material-icons">home</i>Home</a></li>
-            <li><a onclick="loadPage('settings')"><i class="material-icons">settings</i>Settings</a></li>
             <li><a href="#" onclick="logout()"><i class="material-icons">exit_to_app</i>Logout</a></li>
             <li>
                 <div class="divider"></div>
@@ -59,28 +58,21 @@
     </header>
     <main class="container">
         <br>
-        <ul class="tabs row container">
-            <li class="col s3 m3 l3 center">
+        <ul class="row container">
+            <li class="input-field col s3 m3 l3 center">
                 <a onclick="back()" class="btn-floating"><i class="material-icons">arrow_back</i></a>
             </li>
-            <li class="tab col s5 m5 l5 center">
+            <li class="input-field col s9 m9 l9 center">
                 <a href="#ideas">
-                    <i class="material-icons">lightbulb_outline</i>
-                    <span id="ideaCount" class="badge theme">0</span>
-                </a>
-            </li>
-            <li class="tab col s4 m4 l4 center">
-                <a href="#settings">
-                    <i class="material-icons">settings</i>
+                    <!--                    <i class="material-icons">lightbulb_outline</i>-->
+                    <div class="col s12 m12 l12 flow-text center-align">
+                        Idea List
+                        <span id="ideaCount" class="badge theme">0</span>
+                    </div>
                 </a>
             </li>
         </ul>
         <div class="row container center" id="ideas">
-            <div class="col s12 m12 l12 flow-text center-align">
-                Idea List
-            </div>
-            <br>
-            <br>
             <div>
                 <a class="col s12 m12 l12 modal-trigger card-panel block-long valign-wrapper center-align" href="#addIdeaModal">
                     <i class="material-icons col s12 m12 l12 center">
@@ -92,10 +84,26 @@
 
             </ul>
         </div>
-        <div id="settings" class="flow-text center">
-            <br>
-            <br>
-            UNDER CONTRUCTION
+        <div class="modal bottom-sheet modal-fixed-footer" id="settings">
+            <div class="modal-content row">
+                <div class="flow-text">Project Settings</div>
+                <div class="input-field col s12 m6 l4">
+                    <input type="text" id="changeProjectTitleInput">
+                    <label for="changeProjectTitleInput">Project Title</label>
+                </div>
+                <div class="input-field col s12 m12 l12">
+                    <textarea id="changeProjectDescInput" class="materialize-textarea"></textarea>
+                    <label for="changeProjectDescInput">Project Description</label>
+                </div>
+            </div>
+            <div class="modal-footer row">
+                <div class="col s6 m6 l6 center">
+                    <div class="btn theme modal-close">Cancel</div>
+                </div>
+                <div class="col s6 m6 l6 center">
+                    <div class="btn theme" onclick="changeSettings()">Submit</div>
+                </div>
+            </div>
         </div>
     </main>
     <footer>

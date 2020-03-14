@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Ideator(beta)</title>
     <meta name="author" content="Karthik Koppaka" />
-    <meta name="description" content="This is a simple platform where you can securely share your personal and community ideas which click suddenly in your bright minds."/>
+    <meta name="description" content="This is a simple platform where you can securely share your personal and community ideas which click suddenly in your bright minds." />
     <meta name="keywords" content="idea,sharing,firebase,encryption,encrypted,team,community,materialize" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="manifest" href="/manifest.json" />
@@ -45,12 +45,11 @@
                 </div>
             </li>
             <li><a onclick="loadPage('home')"><i class="material-icons">home</i>Home</a></li>
-            <li><a onclick="loadPage('settings')"><i class="material-icons">settings</i>Settings</a></li>
             <li><a href="#" onclick="logout()"><i class="material-icons">exit_to_app</i>Logout</a></li>
             <li>
                 <div class="divider"></div>
             </li>
-<!--
+            <!--
             <li><a class="subheader">Others</a></li>
             <li><a class="waves-effect" href="#!">Feedback</a></li>
             <li><a class="waves-effect" href="#!">Github</a></li>
@@ -77,30 +76,30 @@
             <div id="workspaceList"></div>
         </div>
         <!--ADD WORKSPACE MODAL-->
-        <div class="modal" id="addWorkspaceModal">
+        <div class="modal bottom-sheet modal-fixed-footer" id="addWorkspaceModal">
             <div class="modal-content row">
                 <div class="col s12 m12 l12 flow-text center">
                     Add Workspace
                 </div>
-                <div class="input-field col s12 m6 l6">
+                <div class="input-field col s12 m6 l3">
                     <input type="text" id="addWorkspaceNameInput">
                     <label for="addWorkspaceNameInput">Workspace Name</label>
                 </div>
-                <div class="input-field col s12 m6 l6">
+                <div class="input-field col s12 m6 l3">
                     <input type="number" id="addWorkspaceLevelInput" min="1" max="10">
                     <label for="addWorkspaceLevelInput">Encryption Level(1-10)</label>
                 </div>
-                <div class="input-field col s12 m6 l6">
+                <div class="input-field col s12 m6 l3">
                     <input type="password" id="addWorkspacePassInput">
                     <label for="addWorkspacePassInput">Encryption Key</label>
                 </div>
-                <div class="input-field col s12 m6 l6">
+                <div class="input-field col s12 m6 l3">
                     <input type="password" id="addWorkspacePassConfInput">
                     <label for="addWorkspacePassConfInput">Confirm Encryption Key</label>
                 </div>
                 <div class="col s12 m12 l12 center" id="addWorkspaceTeamList">
                     <div>
-                        <div class="input-field col s12 m6 l6">
+                        <div class="input-field col s12 m6 l3">
                             <input type="text" id="addWorkspaceEmail##Input" name="addWorkspaceEmailInput">
                             <label for="addWorkspaceEmail##Input">Member ## Email</label>
                         </div>
@@ -110,9 +109,12 @@
                     <div class="btn-floating theme" onclick="createDynamicElement('addWorkspaceTeamList')"><i class="material-icons">add</i></div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <div class="center col s12 m12 l12">
+            <div class="modal-footer row">
+                <div class="center col s6 m6 l6 right">
                     <div class="btn theme" onclick="addWorkspace()">Submit</div>
+                </div>
+                <div class="center col s6 m6 l6">
+                    <div class="btn theme modal-close">Close</div>
                 </div>
             </div>
         </div>

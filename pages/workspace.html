@@ -45,7 +45,6 @@
                 </div>
             </li>
             <li><a onclick="loadPage('home')"><i class="material-icons">home</i>Home</a></li>
-            <li><a onclick="loadPage('settings')"><i class="material-icons">settings</i>Settings</a></li>
             <li><a href="#" onclick="logout()"><i class="material-icons">exit_to_app</i>Logout</a></li>
             <li>
                 <div class="divider"></div>
@@ -58,21 +57,15 @@
             <li class="col s2 m2 l2 center">
                 <a href="home.html" class="btn-floating"><i class="material-icons">arrow_back</i></a>
             </li>
-            <li class="tab col s4 m4 l4 center">
+            <li class="tab col s5 m5 l5 center">
                 <a href="#chat">
                     <i class="material-icons">chat</i>
-                    <!--                    <span id="messageCount" class="badge new theme">0</span>-->
                 </a>
             </li>
-            <li class="tab col s4 m4 l4 center">
+            <li class="tab col s5 m5 l5 center">
                 <a href="#projects">
                     <i class="material-icons">dashboard</i>
                     <span id="projectCount" class="badge theme">0</span>
-                </a>
-            </li>
-            <li class="tab col s2 m2 l2 center">
-                <a href="#settings">
-                    <i class="material-icons">settings</i>
                 </a>
             </li>
         </ul>
@@ -106,17 +99,57 @@
             </div>
             <div id="projectsList"></div>
         </div>
-        <div class="center flow-text" id="settings">
-            <br>
-            <br>
-            UNDER CONTRUCTION
+        <div class="center modal bottom-sheet modal-fixed-footer" id="settings">
+            <div class="modal-content">
+                <center>
+                    <h5>
+                        Workspace Settings
+                    </h5>
+                </center>
+                <div class="row container">
+                    <div class="input-field col s12 m6 l6">
+                        <input type="text" id="changeWorkspaceNameInput">
+                        <label for="changeWorkspaceNameInput">Change Workspace Name</label>
+                    </div>
+                    <div class="input-field col s12 m6 l6">
+                        <input type="password" id="changeWorkspacePassInput">
+                        <label for="changeWorkspacePassInput">Change Workspace Password</label>
+                    </div>
+                    <div class="input-field col s12 m6 l6">
+                        <input type="number" id="changeWorkspaceLevelInput">
+                        <label for="changeWorkspaceLevelInput">Change Workspace Level</label>
+                    </div>
+                    <b class="center col s12 m12 l12">
+                        Team List
+                    </b>
+                    <div class="col s12 m12 l12 center" id="changeWorkspaceTeamList">
+                        <div>
+                            <div class="input-field col s12 m6 l6">
+                                <input type="email" id="workspaceTeamList##Input" name="changeWorkspaceTeamListInput">
+                                <label for="workspaceTeamList##Input">Member ##</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center col s12 m12 l12">
+                        <div class="btn-floating theme" onclick="createDynamicElement('changeWorkspaceTeamList')"><i class="material-icons">add</i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer row">
+                <div class="col s6 m6 l6 center">
+                    <div class="btn theme modal-close">Cancel</div>
+                </div>
+                <div class="col s6 m6 l6 center">
+                    <div class="btn theme" onclick="changeSettings()">Submit</div>
+                </div>
+            </div>
         </div>
     </main>
     <footer>
     </footer>
     <extras>
         <!--WORKSPACE LOGIN MODAL-->
-        <div class="modal" id="workspaceLoginModal">
+        <div class="modal bottom-sheet" id="workspaceLoginModal">
             <div class="modal-content row">
                 <div class="col s12 m12 l12 flow-text center">
                     Workspace Login
@@ -130,9 +163,13 @@
                     <label for="workspaceLoginLevelInput">Encryption Level(1-10)</label>
                 </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer row">
                 <div class="center col s12 m12 l12">
+                </div>
+                <div class="col s6 m6 l6 center">
                     <a class="btn theme" onclick="loadPage('home?')">Cancel</a>
+                </div>
+                <div class="col s6 m6 l6 center">
                     <div class="btn theme" onclick="loginToWorkspace()">Submit</div>
                 </div>
             </div>
