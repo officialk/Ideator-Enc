@@ -1,13 +1,12 @@
 {
     "name": "Ideator",
     "short_name": "Ideator",
-    "theme_color": "#2196f3",
-    "background_color": "#2196f3",
-    "description": "This is a simple platform where you can securely share your personal and community ideas which click suddenly in your bright minds.",
+    "theme_color": "#5da8a5",
+    "background_color": "#5da8a5",
     "display": "standalone",
     "orientation": "portrait",
-    "Scope": "/",
-    "start_url": "/",
+    "scope": "/ideator",
+    "start_url": "/ideator",
     "icons": [
         {
             "src": "images/icons/icon-72x72.png",
