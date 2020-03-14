@@ -124,6 +124,7 @@ const changeSettings = () => {
     if (title.length > 5) {
         if (desc.length > 15) {
             if (title != mainTitle || desc != mainDesc) {
+                showLoading('settings',"Making Changes");
                 let key = page.id + data.id + data.name + page.key;
                 let proj = db
                     .collection('workspace')
@@ -142,6 +143,7 @@ const changeSettings = () => {
                         });
                 }).then(function () {
                     $("#settings").modal("close");
+                    showLoading('settings',"Complete");
                 }).catch(function (error) {
                     console.log("Transaction failed: ", error);
                 });
