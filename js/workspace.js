@@ -39,8 +39,7 @@ const loadWorkspaceData = () => {
     messages = db.collection(`workspace/${workId}/messages`)
     loadMessages();
     loadProjects();
-    displaySettings();
-    createDynamicElement('changeWorkspaceTeamList');
+    initUI();
     initMaterial();
 }
 
@@ -186,7 +185,7 @@ const loadData = () => {
     isLoggedIn();
 }
 
-const displaySettings = () => {
+const initUI = () => {
     db
         .collection(`workspace`)
         .doc(`${workId}`)
@@ -198,7 +197,7 @@ const displaySettings = () => {
             let c = 1;
             ws.data().team.forEach(member => {
                 document.getElementById("workspaceInfoTeam").innerHTML += `
-                    <b>${member==data.email?"You":member}</b>
+                    <li>${member==data.email?"You":member}</li>
                     <br>
                 `;
             })
@@ -212,14 +211,13 @@ const displaySettings = () => {
                                     </div>`;
                 document.getElementById('changeWorkspaceNameInput').value = ws.data().name;
                 ws.data().team.forEach(member => {
+                    createDynamicElement("changeWorkspaceTeamList");
                     if (member != data.email) {
-                        createDynamicElement("changeWorkspaceTeamList");
                         document.getElementById(`workspaceTeamList${c++}Input`).value = member;
                     }
                 })
-                M.updateTextFields();
-                initMaterial();
             }
+            initMaterial();
         })
 }
 

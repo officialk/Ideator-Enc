@@ -81,7 +81,7 @@ const initMaterial = () => {
     });
     $('select').formSelect();
     $('.collapsible').collapsible();
-
+    M.updateTextFields();
 }
 
 const initFirebase = () => {

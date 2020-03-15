@@ -49,11 +49,9 @@
             <li>
                 <div class="divider"></div>
             </li>
-            <!--
             <li><a class="subheader">Others</a></li>
-            <li><a class="waves-effect" href="#!">Feedback</a></li>
-            <li><a class="waves-effect" href="#!">Github</a></li>
--->
+            <li><a class="waves-effect" onclick="loadPage('feedback')">Feedback</a></li>
+            <li><a class="waves-effect" href="https://github.com/officialk/ideator" target="_blank">Github</a></li>
         </ul>
     </header>
     <main class="container">
@@ -86,30 +84,6 @@
             <ul class="col s12 m12 l12 collapsible popout" id="IdeasList">
 
             </ul>
-        </div>
-        <div class="modal bottom-sheet modal-fixed-footer" id="settings">
-            <div class="modal-content row">
-                <div class="flow-text">Project Settings</div>
-                <div class="input-field col s12 m6 l4">
-                    <input type="text" id="changeProjectTitleInput">
-                    <label for="changeProjectTitleInput">Project Title</label>
-                </div>
-                <div class="input-field col s12 m12 l12">
-                    <textarea id="changeProjectDescInput" class="materialize-textarea"></textarea>
-                    <label for="changeProjectDescInput">Project Description</label>
-                </div>
-            </div>
-            <div class="modal-footer row">
-                <div class="col s4 m4 l4 center">
-                    <div class="btn theme modal-close">Cancel</div>
-                </div>
-                <div class="col s4 m4 l4 center">
-                    <div class="btn red" onclick="deleteProject()">Delete</div>
-                </div>
-                <div class="col s4 m4 l4 center">
-                    <div class="btn theme" onclick="changeSettings()">Submit</div>
-                </div>
-            </div>
         </div>
         <div class="center container" id="info">
             <div class="flow-text" id="">Project Details</div>
@@ -162,6 +136,30 @@
     <footer>
     </footer>
     <extras>
+        <div class="modal bottom-sheet modal-fixed-footer" id="settings">
+            <div class="modal-content row">
+                <div class="flow-text">Project Settings</div>
+                <div class="input-field col s12 m6 l4">
+                    <input type="text" id="changeProjectTitleInput">
+                    <label for="changeProjectTitleInput">Project Title</label>
+                </div>
+                <div class="input-field col s12 m12 l12">
+                    <textarea id="changeProjectDescInput" class="materialize-textarea"></textarea>
+                    <label for="changeProjectDescInput">Project Description</label>
+                </div>
+            </div>
+            <div class="modal-footer row">
+                <div class="col s4 m4 l4 center">
+                    <div class="btn theme modal-close">Cancel</div>
+                </div>
+                <div class="col s4 m4 l4 center">
+                    <div class="btn red" onclick="deleteProject()">Delete</div>
+                </div>
+                <div class="col s4 m4 l4 center">
+                    <div class="btn theme" onclick="changeSettings()">Submit</div>
+                </div>
+            </div>
+        </div>
         <div class="modal bottom-sheet modal-fixed-footer" id="addIdeaModal">
             <div class="modal-content row">
                 <h5 class="center">Add Idea</h5>

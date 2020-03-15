@@ -49,6 +49,9 @@
             <li>
                 <div class="divider"></div>
             </li>
+            <li><a class="subheader">Others</a></li>
+            <li><a class="waves-effect" onclick="loadPage('feedback')">Feedback</a></li>
+            <li><a class="waves-effect" href="https://github.com/officialk/ideator" target="_blank">Github</a></li>
         </ul>
     </header>
     <main class="container">
@@ -106,46 +109,6 @@
             </div>
             <div id="projectsList"></div>
         </div>
-        <div class="center modal bottom-sheet modal-fixed-footer" id="settings">
-            <div class="modal-content">
-                <center>
-                    <h5>
-                        Workspace Settings
-                    </h5>
-                </center>
-                <div class="row container">
-                    <div class="input-field col s12 m6 l6">
-                        <input type="text" id="changeWorkspaceNameInput">
-                        <label for="changeWorkspaceNameInput">Change Workspace Name</label>
-                    </div>
-                    <b class="center col s12 m12 l12">
-                        Team List
-                    </b>
-                    <div class="col s12 m12 l12 center" id="changeWorkspaceTeamList">
-                        <div>
-                            <div class="input-field col s12 m6 l6">
-                                <input type="email" id="workspaceTeamList##Input" name="changeWorkspaceTeamListInput">
-                                <label for="workspaceTeamList##Input">Member ##</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="center col s12 m12 l12">
-                        <div class="btn-floating theme" onclick="createDynamicElement('changeWorkspaceTeamList')"><i class="material-icons">add</i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer row">
-                <div class="col s4 m4 l4 center">
-                    <div class="btn theme modal-close">Cancel</div>
-                </div>
-                <div class="col s4 m4 l4 center">
-                    <a class="btn red" onclick="deleteWorkspace()">Delete</a>
-                </div>
-                <div class="col s4 m4 l4 center">
-                    <div class="btn theme" onclick="changeSettings()">Submit</div>
-                </div>
-            </div>
-        </div>
         <div class="center container" id="info">
             <div class="flow-text" id="">Workspace Details</div>
             <br>
@@ -186,12 +149,15 @@
                             Workspace Team
                         </b>
                     </th>
-                    <td></td>
+                    <td>
+                    </td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td id="workspaceInfoTeam" class="left-align">
+                    <td>
+                        <ul id="workspaceInfoTeam" class="left-align browser-default">
 
+                        </ul>
                     </td>
                 </tr>
             </table>
@@ -200,7 +166,46 @@
     <footer>
     </footer>
     <extras>
-        <!--WORKSPACE LOGIN MODAL-->
+        <div class="center modal bottom-sheet modal-fixed-footer" id="settings">
+            <div class="modal-content">
+                <center>
+                    <h5>
+                        Workspace Settings
+                    </h5>
+                </center>
+                <div class="row container">
+                    <div class="input-field col s12 m6 l6">
+                        <input type="text" id="changeWorkspaceNameInput">
+                        <label for="changeWorkspaceNameInput">Change Workspace Name</label>
+                    </div>
+                    <b class="center col s12 m12 l12">
+                        Team List
+                    </b>
+                    <div class="col s12 m12 l12 center" id="changeWorkspaceTeamList">
+                        <div>
+                            <div class="input-field col s12 m6 l6">
+                                <input type="email" id="workspaceTeamList##Input" name="changeWorkspaceTeamListInput">
+                                <label for="workspaceTeamList##Input">Member ##</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center col s12 m12 l12">
+                        <div class="btn-floating theme" onclick="createDynamicElement('changeWorkspaceTeamList')"><i class="material-icons">add</i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer row">
+                <div class="col s4 m4 l4 center">
+                    <div class="btn theme modal-close">Cancel</div>
+                </div>
+                <div class="col s4 m4 l4 center">
+                    <a class="btn red" onclick="deleteWorkspace()">Delete</a>
+                </div>
+                <div class="col s4 m4 l4 center">
+                    <div class="btn theme" onclick="changeSettings()">Submit</div>
+                </div>
+            </div>
+        </div>
         <div class="modal bottom-sheet" id="workspaceLoginModal">
             <div class="modal-content row">
                 <div class="col s12 m12 l12 flow-text center">
