@@ -105,15 +105,16 @@ const loadProjects = () => {
             let html = "";
             projects.forEach(doc => {
                 let project = doc.data();
+                let key = workId + project.creatorId + project.creatorName + page.key;
                 if (project.creatorId != undefined) {
                     html += `<div class="col s12 m6 l4">
-                                <div class="card block link rounded ${doc.metadata.hasPendingWrites?"grey":""}" onclick="loadPage('project?${doc.id}')" id='project${doc.id}'>
-                                    <div class="card-title truncate flow-text">${decrypt(project.title,workId + project.creatorId + project.creatorName + page.key,page.level)}</div>
+                                <div class="card block link rounded onclick="loadPage('project?${doc.id}')" id='project${doc.id}'>
+                                    <div class="card-title truncate flow-text">${decrypt(project.title,key,page.level)}</div>
                                     <div class="card-content">
                                         <div class="left-align truncate">
                                             Creator:${(project.creatorId==data.id)?"You":project.creatorName}
                                             <br>
-                                            ${decrypt(project.description,workId + project.creatorId + project.creatorName + page.key,page.level)}
+                                            ${decrypt(project.description,key,page.level)}
                                             <br>
                                             Date:${project.date}
                                         </div>
@@ -200,8 +201,6 @@ const displaySettings = () => {
                                       </a>
                                     </div>`;
                 document.getElementById('changeWorkspaceNameInput').value = ws.data().name;
-                document.getElementById('changeWorkspacePassInput').value = page.pass;
-                document.getElementById('changeWorkspaceLevelInput').value = page.level;
                 let c = 1;
                 ws.data().team.forEach((member) => {
                     if (member != data.email) {
@@ -225,50 +224,25 @@ const changeSettings = () => {
     if (name.length > 3 && name.length < 25) {
         if (level > 0 && level < 11) {
             if (pass.length > 5) {
-                //                var main = db
-                //                    .collection("workspace")
-                //                    .doc(workId);
-                //                db.runTransaction(transaction => {
-                //                    return transaction
-                //                        .get(main)
-                //                        .then(doc => {
-                //                            transaction.update(main, {
-                //                                name: name,
-                //                                pass: encrypt(pass, pass, level),
-                //                                team: team
-                //                            });
-                //                        });
-                //                }).then(function () {
-                //                    if (level != page.level || page.pass != pass) {
-                //                        //                        sessionStorage.clear();
-                //                        //                        location.reload();
-                //                        projects
-                //                            .get()
-                //                            .then(projectList => {
-                //                                let batch = db.batch();
-                //                                projectList.forEach(doc => {
-                //                                    let prevkey = workId + data.id + data.name + page.key;
-                //                                    let newkey = workId + data.id + data.name + pass;
-                //                                    let project = doc.data();
-                //                                    let title = encrypt(decrypt(project.title, prevkey, page.level), newkey, level);
-                //                                    let desc = encrypt(decrypt(project.description, prevkey, page.level), newkey, level);
-                //                                    batch.update(doc, {
-                //                                        title: title,
-                //                                        description: desc
-                //                                    })
-                //                                })
-                //                            })
-                //                        messages
-                //                            .get()
-                //                            .then(elem => {
-                //
-                //                            })
-                //                    } else {
-                //                        $("#settings").modal("close");
-                //                    }
-                //                }).catch(function (error) {
-                //                    console.log("Transaction failed: ", error);
-                //                });
+                showLoading('settings', "Making Changes");
+                var main = db
+                    .collection("workspace")
+                    .doc(workId);
+                db.runTransaction(transaction => {
+                    return transaction
+                        .get(main)
+                        .then(doc => {
+                            transaction.update(main, {
+                                name: name,
+                                team: team
+                            });
+                        });
+                }).then(function () {
+                    $("#settings").modal("close");
+                    showLoading('settings', "Complete");
+                }).catch(function (error) {
+                    console.log("Transaction failed: ", error);
+                });
             } else {
                 alert("Password too short");
             }

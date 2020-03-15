@@ -27,7 +27,7 @@ const loadIdeas = () => {
                 let idea = doc.data();
                 if (idea.creatorId != undefined) {
                     let key = page.pass + projectId + idea.creatorId + idea.date;
-                    html += `<li id="idea${doc.id}" class="${doc.metadata.hasPendingWrites?"grey":""}">
+                    html += `<li id="idea${doc.id}">
                                 <div class="collapsible-header">
                                     <i class="material-icons">lightbulb_outline</i>
                                     <span>${decrypt(idea.title,key,page.level)}</span>
