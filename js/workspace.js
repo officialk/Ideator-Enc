@@ -108,16 +108,17 @@ const loadProjects = () => {
                 let key = workId + project.creatorId + project.creatorName + page.key;
                 if (project.creatorId != undefined) {
                     html += `<div class="col s12 m6 l4">
-                                <div class="card block link rounded onclick="loadPage('project?${doc.id}')" id='project${doc.id}'>
-                                    <div class="card-title truncate flow-text">${decrypt(project.title,key,page.level)}</div>
+                                <div class="card block link hoverable rounded" onclick="loadPage('project?${doc.id}')" id='project${doc.id}'>
+                                    <div class="card-title truncate flow-text"><b>${decrypt(project.title,key,page.level)}</b></div>
                                     <div class="card-content">
-                                        <div class="left-align truncate">
-                                            Creator:${(project.creatorId==data.id)?"You":project.creatorName}
-                                            <br>
+                                        <div class="left-align wrap">
                                             ${decrypt(project.description,key,page.level)}
-                                            <br>
-                                            Date:${project.date}
                                         </div>
+                                    </div>
+                                    <div class="card-footer left-align container">
+                                        Creator:${(project.creatorId==data.id)?"You":project.creatorName}
+                                        <br>
+                                        Date:${project.date}
                                     </div>
                                 </div>
                             </div>`;

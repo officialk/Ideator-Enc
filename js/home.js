@@ -74,11 +74,30 @@ const loadData = () => {
             list.forEach(ws => {
                 let work = ws.data();
                 if (work.creatorId != undefined && work.team.indexOf(data.email) != -1) {
+                    let teamHtml = '';
+                    work.team.forEach(member => {
+                        if (member != data.email) {
+                            teamHtml += `
+                                        <div class='btn-floating btn-small theme tooltipped' data-position="top" data-tooltip="${member}">
+                                            ${member[0].toUpperCase()}
+                                        </div>`
+                        }
+                    })
                     html += `<div class="col s12 m6 l4">
-                            <div class="card block link rounded ${ws.metadata.hasPendingWrites?"grey":""}" onclick="loadPage('workspace?${ws.id}')" id="workspace${ws.id}">
+                            <div class="card block link hoverable rounded" onclick="loadPage('workspace?${ws.id}')" id="workspace${ws.id}">
                                 <div class="card-title truncate flow-text">${work.name}</div>
-                                <div class="card-content">
-                                    <div class="left-align truncate">
+                                <div class="card-content truncate">
+                                    <div class=" wrap left-align container">
+                                        <center>Team</center>
+                                        <br>
+                                        <div class='btn-floating btn-small theme tooltipped' data-position="top" data-tooltip="You">
+                                            ${data.name[0].toUpperCase()}
+                                        </div>
+                                        ${teamHtml}
+                                    </div>
+                                </div>
+                                <div class="card-footer container">
+                                    <div class="truncate">
                                     Creator:${(work.creatorId==data.id)?"You":work.creatorName}
                                     <br>
                                     Date:${work.date}
@@ -89,6 +108,8 @@ const loadData = () => {
                 }
             })
             document
-                .getElementById("workspaceList").innerHTML = html;
+                .getElementById("workspaceList")
+                .innerHTML = html;
+            $('.tooltipped').tooltip();
         })
 }

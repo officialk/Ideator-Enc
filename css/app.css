@@ -7,7 +7,7 @@
 }
 
 body {
-/*    overflow: hidden !important;*/
+    /*    overflow: hidden !important;*/
 }
 
 .block {
@@ -43,4 +43,15 @@ footer {
     footer {
         padding-left: 0;
     }
+}
+
+.wrap {
+    word-wrap: normal !important;
+    height: 85px !important;
+    max-height: 85px !important;
+    overflow: hidden !important;
+}
+
+.card .card-content {
+    padding: 10px;
 }
