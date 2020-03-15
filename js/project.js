@@ -124,7 +124,6 @@ const displaySettings = () => {
 
 const changeSettings = () => {
     let [title, desc] = getValuesByIds(['changeProjectTitleInput', 'changeProjectDescInput']);
-    console.log(title, desc);
     if (title.length > 5) {
         if (desc.length > 15) {
             if (title != mainTitle || desc != mainDesc) {
@@ -159,5 +158,22 @@ const changeSettings = () => {
         }
     } else {
         alert("Title Too Short!(atleast 5 chars)");
+    }
+}
+
+const deleteProject = () => {
+    if (confirm("THIS WILL DELETE ALL DATA RELATED TO THE PROJECT AND IS IRREVERSIBLE")) {
+        showLoading("settings", "Deleting Project and All its Data")
+        db
+            .collection('workspace')
+            .doc(page.id)
+            .collection('projects')
+            .doc(projectId)
+            .delete()
+            .then(e => {
+                showLoading("settings", "Deletion Of Project Completed")
+                alert("Project Deleted");
+                loadPage('workspace?' + page.id + "#projects");
+            })
     }
 }

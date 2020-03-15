@@ -26,7 +26,6 @@ const loginToWorkspace = () => {
                     throw new Error("Invalid Credentials");
                 }
             } catch (e) {
-                console.log(e);
                 alert("Invalid Credentials");
             }
         })
@@ -197,13 +196,9 @@ const displaySettings = () => {
             document.getElementById("workspaceInfoCreatorName").innerHTML = ws.data().creatorName;
             document.getElementById("workspaceInfoDate").innerHTML = ws.data().date;
             let c = 1;
-            ws.data().team.forEach((member) => {
-                if (member != data.email) {
-                    createDynamicElement("changeWorkspaceTeamList");
-                    document.getElementById(`workspaceTeamList${c++}Input`).value = member;
-                }
+            ws.data().team.forEach(member => {
                 document.getElementById("workspaceInfoTeam").innerHTML += `
-                    <b>${member}</b>
+                    <b>${member==data.email?"You":member}</b>
                     <br>
                 `;
             })
@@ -216,6 +211,12 @@ const displaySettings = () => {
                                       </a>
                                     </div>`;
                 document.getElementById('changeWorkspaceNameInput').value = ws.data().name;
+                ws.data().team.forEach(member => {
+                    if (member != data.email) {
+                        createDynamicElement("changeWorkspaceTeamList");
+                        document.getElementById(`workspaceTeamList${c++}Input`).value = member;
+                    }
+                })
                 M.updateTextFields();
                 initMaterial();
             }
@@ -259,5 +260,20 @@ const changeSettings = () => {
         }
     } else {
         alert("Name Invalid \nlenght should be between 3 to 25 letters");
+    }
+}
+
+const deleteWorkspace = () => {
+    if (confirm("THIS WILL DELETE ALL DATA RELATED TO THE WORKSPACE AND IS IRREVERSIBLE")) {
+        showLoading("settings", "Deleting Workspace and All its Data")
+        db
+            .collection('workspace')
+            .doc(workId)
+            .delete()
+            .then(e => {
+                showLoading("settings", "Deletion Of Workspace Completed")
+                alert("Workspace Deleted");
+                loadPage('home');
+            })
     }
 }
