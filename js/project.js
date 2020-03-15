@@ -99,6 +99,11 @@ const displaySettings = () => {
         .doc(projectId)
         .get()
         .then(p => {
+            let key = page.id + data.id + data.name + page.key;
+            document.getElementById('projectInfoTitle').innerHTML = decrypt(p.data().title, key, page.level);
+            document.getElementById('projectInfoDesc').innerHTML = decrypt(p.data().description, key, page.level);
+            document.getElementById('projectInfoCreatorName').innerHTML = p.data().creatorName;
+            document.getElementById('projectInfoDate').innerHTML = p.data().date;
             if (p.data().creatorId == data.id) {
                 document
                     .getElementsByTagName("main")[0]
@@ -107,7 +112,6 @@ const displaySettings = () => {
                                         <i class="large material-icons">settings</i>
                                       </a>
                                     </div>`;
-                let key = page.id + data.id + data.name + page.key
                 mainTitle = decrypt(p.data().title, key, page.level);
                 mainDesc = decrypt(p.data().description, key, page.level)
                 document.getElementById('changeProjectTitleInput').value = mainTitle;

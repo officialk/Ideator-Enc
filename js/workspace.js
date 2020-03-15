@@ -193,6 +193,20 @@ const displaySettings = () => {
         .doc(`${workId}`)
         .get()
         .then(ws => {
+            document.getElementById("workspaceInfoName").innerHTML = ws.data().name;
+            document.getElementById("workspaceInfoCreatorName").innerHTML = ws.data().creatorName;
+            document.getElementById("workspaceInfoDate").innerHTML = ws.data().date;
+            let c = 1;
+            ws.data().team.forEach((member) => {
+                if (member != data.email) {
+                    createDynamicElement("changeWorkspaceTeamList");
+                    document.getElementById(`workspaceTeamList${c++}Input`).value = member;
+                }
+                document.getElementById("workspaceInfoTeam").innerHTML += `
+                    <b>${member}</b>
+                    <br>
+                `;
+            })
             if (ws.data().creatorId == data.id) {
                 document
                     .getElementsByTagName("main")[0]
@@ -202,13 +216,6 @@ const displaySettings = () => {
                                       </a>
                                     </div>`;
                 document.getElementById('changeWorkspaceNameInput').value = ws.data().name;
-                let c = 1;
-                ws.data().team.forEach((member) => {
-                    if (member != data.email) {
-                        createDynamicElement("changeWorkspaceTeamList");
-                        document.getElementById(`workspaceTeamList${c++}Input`).value = member;
-                    }
-                })
                 M.updateTextFields();
                 initMaterial();
             }
