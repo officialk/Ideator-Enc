@@ -1,0 +1,35 @@
+{
+    "name": "ideator",
+    "version": "1.0.0",
+    "description": "This is a simple platform where you can securely share your personal and community ideas which click suddenly in your bright minds.",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index",
+        "dev": "nodemon index"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://officialk:Offici@lk@#1998@github.com/officialk/ideator.git"
+    },
+    "keywords": [
+        "idea",
+        "sharing",
+        "firebase",
+        "encryption",
+        "encrypted",
+        "team",
+        "community",
+        "materialize"
+    ],
+    "author": "Karthik Koppaka",
+    "license": "MIT",
+    "dependencies": {
+        "express": "^4.17.1",
+        "mysql": "^2.18.1",
+        "path": "^0.12.7",
+        "randomstring": "^1.1.5"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.2"
+    }
+}

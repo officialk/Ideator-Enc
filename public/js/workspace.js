@@ -1,19 +1,14 @@
 const workId = location.href.split("?v=")[1].split("#")[0];
 
-var projects;
-
-var messages;
-
 const loginToWorkspace = () => {
     let pass = document.getElementById("workspaceLoginPassInput").value;
     let level = document.getElementById("workspaceLoginLevelInput").value;
-    db
-        .collection("workspace")
-        .doc(workId)
-        .get()
+    send('read', 'validate', {
+            id: workId
+        })
         .then(wk => {
             try {
-                let conf = decrypt(wk.data().pass, pass, level);
+                let conf = decrypt(wk.pass, pass, level);
                 if (conf == pass) {
                     page.page = "workspace";
                     page.id = workId;
@@ -23,70 +18,59 @@ const loginToWorkspace = () => {
                     updateSession();
                     loadWorkspaceData();
                 } else {
-                    throw new Error("Invalid Credentials");
+                    throw "Invalid Credentials";
                 }
             } catch (e) {
                 alert("Invalid Credentials");
             }
         })
-        .catch(e => {
-            console.log(e);
-        })
 }
 
 const loadWorkspaceData = () => {
-    projects = db.collection(`workspace/${workId}/projects`)
-    messages = db.collection(`workspace/${workId}/messages`)
-    loadMessages();
+    setInterval(loadMessages, 1000);
     loadProjects();
     initUI();
     initMaterial();
 }
 
 const loadMessages = () => {
-    messages
-        .orderBy("date", "asc")
-        .onSnapshot(messages => {
+    send('read', 'message', {
+            id: workId
+        })
+        .then(messages => {
             document.getElementById("messageDisplay").innerHTML = "";
-            //            let html = '';
-            messages.forEach(doc => {
-                let mssg = doc.data();
-                if (mssg.content != undefined) {
-                    let html = `<div class="row message">
-                            <div class="${(mssg.sender==data.name)?"col s2 m4 l4":"hide"}"></div>
-                            <div class="card col s10 m8 l8 ${(mssg.sender==data.name)?((doc.metadata.hasPendingWrites)?"blue":"green"):"grey"}" id="message${doc.id}">
+            messages.forEach(mssg => {
+                let isUser = mssg.uid == data.id;
+                let html = `<div class="row message">
+                            <div class="${isUser?"col s2 m4 l4":"hide"}"></div>
+                            <div class="card col s10 m8 l8 ${isUser?'green':'grey'}" id="message${mssg.mid}">
                                 <div class="white-text card-content">
-                                <p><b>${(mssg.sender==data.name)?"You":mssg.sender}</b>( ${mssg.date} )
+                                <p><b>${isUser?"You":mssg.sender}</b>( ${getDate(mssg.date)} )
                                 <!-- <span class="right">
                                     <a class="btn-floating btn-flat tooltipped" data-position="bottom" data-tooltip="Add as a project"><i class="material-icons">add</i></a>
                                     <a class="btn-floating btn-flat tooltipped" data-position="bottom" data-tooltip="reply"> <i class="material-icons">reply</i></a>
                                 </span>--></p>
-                                    ${decrypt(mssg.content, page.pass + workId + mssg.date,page.level)}
+                                    ${decrypt(mssg.content, page.pass + workId + mssg.uid,page.level)}
                                 </div>
                             </div>
                             <div class="col s2 m4 l4">
                             </div>
                         </div>`;
-                    document.getElementById("messageDisplay").insertAdjacentHTML("afterbegin", html);
-                }
-                //                document.getElementById("messageDisplay").innerHTML = html;
+                document.getElementById("messageDisplay").insertAdjacentHTML("afterbegin", html);
             })
         })
 }
 
 const sendMessage = () => {
     let mssg = document.getElementById("messageTextInput").value;
-    let date = getDate();
     if (mssg.length > 0) {
-        messages
-            .add({
-                sender: data.name,
-                date: date,
-                content: encrypt(mssg, page.pass + workId + date, page.level)
+        send('add', 'message', {
+                creatorId: data.id,
+                workspaceId: workId,
+                content: encrypt(mssg, page.pass + workId + data.id, page.level)
             })
             .then(e => {
-                document.getElementById(`message${e.id}`).classList.remove("blue");
-                document.getElementById(`message${e.id}`).classList.add("green");
+                loadMessages();
             })
             .catch(e => {
                 console.log(e)
@@ -96,17 +80,16 @@ const sendMessage = () => {
 }
 
 const loadProjects = () => {
-    projects
-        .get()
+    send('read', 'project', {
+            id: workId
+        })
         .then(projects => {
             document.getElementById("projectsList").innerHTML = "";
             let html = "";
-            projects.forEach(doc => {
-                let project = doc.data();
-                let key = workId + project.creatorId + project.creatorName + page.key;
-                if (project.creatorId != undefined) {
-                    html += `<div class="col s12 m6 l4">
-                                <div class="card block link hoverable rounded" onclick="loadPage('project?${doc.id}')" id='project${doc.id}'>
+            projects.forEach(project => {
+                let key = workId + project.creatorId + page.key + project.creatorName;
+                html += `<div class="col s12 m6 l4">
+                                <div class="card block link hoverable rounded" onclick="loadPage('project?${project.id}')" id='project${project.id}'>
                                     <div class="card-title truncate flow-text"><b>${decrypt(project.title,key,page.level)}</b></div>
                                     <div class="card-content">
                                         <div class="left-align wrap">
@@ -116,54 +99,45 @@ const loadProjects = () => {
                                     <div class="card-footer left-align container">
                                         Creator:${(project.creatorId==data.id)?"You":project.creatorName}
                                         <br>
-                                        Date:${project.date}
+                                        Date:${getDate(project.date)}
                                     </div>
                                 </div>
                             </div>`;
-                }
             })
             document.getElementById("projectsList").innerHTML = html;
-            document.getElementById("projectCount").innerHTML = (projects.size - 1) || 0;
+            document.getElementById("projectCount").innerHTML = projects.length;
         })
 }
 
 const addProject = () => {
     let desc = document.getElementById("projectDescription").value;
     let title = document.getElementById("projectTitle").value;
-    let date = getDate();
-    if (title.length > 5) {
-        if (desc.length > 15) {
+    if (title.length > 3) {
+        if (desc.length > 10) {
             let modal = document.getElementById('addProjectModal');
             let html = modal.innerHTML;
             showLoading('addProjectModal', 'Adding A New Project For You');
-            let key = workId + data.id + data.name + page.key;
-            projects
-                .add({
+            let key = workId + data.id + page.key + data.name;
+            send('add', 'project', {
+                    workspaceId: workId,
                     creatorId: data.id,
-                    creatorName: data.name,
-                    date: date,
                     description: encrypt(desc, key, page.level),
                     title: encrypt(title, key, page.level)
-                }).then(e => {
-                    showLoading('addProjectModal', 'Setting Up Other Stuff');
-                    db
-                        .collection(`workspace/${workId}/projects/${e.id}/ideas`)
-                        .add({})
-                        .then(e => {
-                            showLoading('addProjectModal', 'Complete');
-                            $("#addProjectModal").modal("close");
-                            modal.innerHTML = html;
-                        })
+                })
+                .then(e => {
+                    showLoading('addProjectModal', 'Complete');
+                    $("#addProjectModal").modal("close");
+                    modal.innerHTML = html;
+                    loadProjects();
                 })
                 .catch(e => {
                     console.log(e);
                 })
-            loadProjects();
         } else {
-            alert("Description Too Short!(atleast 15 chars)");
+            alert("Description Too Short!(atleast 10 chars)");
         }
     } else {
-        alert("Title Too Short!(atleast 5 chars)");
+        alert("Title Too Short!(atleast 3 chars)");
     }
 }
 
@@ -186,22 +160,23 @@ const loadData = () => {
 }
 
 const initUI = () => {
-    db
-        .collection(`workspace`)
-        .doc(`${workId}`)
-        .get()
+    send('read', 'workUI', {
+            id: workId
+        })
         .then(ws => {
-            document.getElementById("workspaceInfoName").innerHTML = ws.data().name;
-            document.getElementById("workspaceInfoCreatorName").innerHTML = ws.data().creatorName;
-            document.getElementById("workspaceInfoDate").innerHTML = ws.data().date;
+            document.getElementById("workspaceInfoName").innerHTML = ws.name;
+            document.getElementById("workspaceInfoCreatorName").innerHTML = ws.creatorName;
+            document.getElementById("workspaceInfoDate").innerHTML = getDate(ws.date);
+            document.getElementById("workspaceInfoTeam").innerHTML = ""
+            let team = ws.team.split(',');
             let c = 1;
-            ws.data().team.forEach(member => {
+            team.forEach(member => {
                 document.getElementById("workspaceInfoTeam").innerHTML += `
-                    <li>${member==data.email?"You":member}</li>
-                    <br>
-                `;
+                                <li>${member==data.email?"You":member}</li>
+                                <br>
+                            `;
             })
-            if (ws.data().creatorId == data.id) {
+            if (ws.creatorId == data.id) {
                 document
                     .getElementsByTagName("main")[0]
                     .innerHTML += `<div class="fixed-action-btn tooltop">
@@ -209,8 +184,8 @@ const initUI = () => {
                                         <i class="large material-icons">settings</i>
                                       </a>
                                     </div>`;
-                document.getElementById('changeWorkspaceNameInput').value = ws.data().name;
-                ws.data().team.forEach(member => {
+                document.getElementById('changeWorkspaceNameInput').value = ws.name;
+                team.forEach(member => {
                     createDynamicElement("changeWorkspaceTeamList");
                     if (member != data.email) {
                         document.getElementById(`workspaceTeamList${c++}Input`).value = member;
@@ -222,40 +197,26 @@ const initUI = () => {
 }
 
 const changeSettings = () => {
-    let [name, pass, level] = getValuesByIds(['changeWorkspaceNameInput', 'changeWorkspacePassInput', 'changeWorkspaceLevelInput']);
+    let [name, pass, level] = getValuesByIds(['changeWorkspaceNameInput']);
     let team = [data.email]
         .concat(getValuesByNames(["changeWorkspaceTeamListInput"])[0]
             .filter(el => {
                 return validator("email", el) && data.email != el;
             }));
     if (name.length > 3 && name.length < 25) {
-        if (level > 0 && level < 11) {
-            if (pass.length > 5) {
-                showLoading('settings', "Making Changes");
-                var main = db
-                    .collection("workspace")
-                    .doc(workId);
-                db.runTransaction(transaction => {
-                    return transaction
-                        .get(main)
-                        .then(doc => {
-                            transaction.update(main, {
-                                name: name,
-                                team: team
-                            });
-                        });
-                }).then(function () {
-                    $("#settings").modal("close");
-                    showLoading('settings', "Complete");
-                }).catch(function (error) {
-                    console.log("Transaction failed: ", error);
-                });
-            } else {
-                alert("Password too short");
-            }
-        } else {
-            alert("Encryption Level invalid");
-        }
+        let modal = document.getElementById("settings");
+        let html = modal.innerHTML;
+        showLoading('settings', "Making Changes");
+        send('update', 'workspace', {
+                name: name,
+                team: team,
+                id: workId
+            })
+            .then(e => {
+                location.reload();
+            }).catch(function (error) {
+                console.log("Transaction failed: ", error);
+            });
     } else {
         alert("Name Invalid \nlenght should be between 3 to 25 letters");
     }
@@ -264,10 +225,9 @@ const changeSettings = () => {
 const deleteWorkspace = () => {
     if (confirm("THIS WILL DELETE ALL DATA RELATED TO THE WORKSPACE AND IS IRREVERSIBLE")) {
         showLoading("settings", "Deleting Workspace and All its Data")
-        db
-            .collection('workspace')
-            .doc(workId)
-            .delete()
+        send('delete', 'workspace', {
+                id: workId
+            })
             .then(e => {
                 showLoading("settings", "Deletion Of Workspace Completed")
                 alert("Workspace Deleted");

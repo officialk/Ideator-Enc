@@ -1,7 +1,5 @@
 const data = JSON.parse(local("data")) || {};
 
-var db;
-
 var page = JSON.parse(session("page")) || {};
 
 /*MISC FUNCTIONS*/
@@ -16,20 +14,16 @@ const logout = () => {
         .then(function () {
             local("data", "{}");
             sessionStorage.clear();
-            location.href = "/";
+            location.href = "../";
         })
         .catch(function (error) {
             // An error happened.
         });
 }
 
-const getDate = () => {
-    var today = new Date();
-    var date =
-        today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
-    var time =
-        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    return date + " " + time;
+const getDate = (date) => {
+    var date = new Date(date);
+    return date.toLocaleDateString() + " " + date.toLocaleTimeString();
 };
 
 const encrypt = (data, key, level) => {
@@ -46,10 +40,6 @@ const decrypt = (data, key, level) => {
         ret = sjcl.decrypt(key, ret);
     }
     return ret;
-}
-
-const keyShift = (oldKey, newKey, text) => {
-    return sjcl.encrypt(newKey, sjcl.decrypt(oldKey, text));
 }
 
 const loadPage = (page) => {
@@ -86,7 +76,6 @@ const initMaterial = () => {
 
 const initFirebase = () => {
     firebase.initializeApp(firebaseConfig);
-    db = firebase.firestore();
 }
 
 const updateSession = () => {
@@ -94,19 +83,29 @@ const updateSession = () => {
 }
 
 const showLoading = (id, message) => {
-    document.getElementById(id).innerHTML = `
-        <div class='modal-content row container'>
-            <br>
-            <br>
-            <div class="progress col s12 m12 l12">
-                <div class="indeterminate"></div>
-            </div>
-            <br>
-            <div class="flow-text center col s12 m12 l12">
-                ${message}
-            </div>
-        </div>
-    `;
+    document.getElementById(id).innerHTML = ` <div class='modal-content row container'>
+                                                    <br>
+                                                    <br>
+                                                    <div class="progress col s12 m12 l12">
+                                                        <div class="indeterminate"></div>
+                                                    </div> <br>
+                                                    <div class="flow-text center col s12 m12 l12">${message}</div>
+                                                </div>`;
+}
+
+/*Manipulation Functions*/
+/*
+type,page,data
+*/
+const send = (type, page, data) => {
+    return fetch(`${location.protocol}//${location.host}/api/${type}/${page}`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.json())
 }
 
 $(document).ready(() => {
