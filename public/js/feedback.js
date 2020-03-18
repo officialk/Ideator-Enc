@@ -9,13 +9,10 @@ const sendFeedback = () => {
     })[0];
     if (title.length > 3) {
         if (desc.length > 5) {
-            db
-                .collection("feedback")
-                .add({
-                    date: getDate(),
+            send('add', 'feedback', {
                     name: isAnon ? "Anonymous" : data.name,
                     title: title,
-                    desc: desc,
+                    description: desc,
                     rate: rate
                 })
                 .then(e => {
