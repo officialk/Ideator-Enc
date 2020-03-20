@@ -10,23 +10,35 @@ con.primKey = () => {
 };
 
 con.insert = (table, values, fun) => {
-    let query = `insert into ${tables[table]} set ?`;
-    con.query(query, values, fun);
+    con.getConnection((e, c) => {
+        let query = `insert into ${tables[table]} set ?`;
+        c.query(query, values, fun);
+        c.release()
+    })
 }
 
 con.read = (table, columns, where, fun) => {
-    let query = `select ${columns} from ${tables[table]} where ${where}`;
-    con.query(query, fun);
+    con.getConnection((e, c) => {
+        let query = `select ${columns} from ${tables[table]} where ${where}`;
+        c.query(query, fun);
+        c.release()
+    })
 }
 
 con.update = (table, set, where, fun) => {
-    let query = `update ${tables[table]} set ? where ${where}`;
-    con.query(query, set, fun);
+    con.getConnection((e, c) => {
+        let query = `update ${tables[table]} set ? where ${where}`;
+        c.query(query, set, fun);
+        c.release()
+    })
 }
 
 con.del = (table, where, fun) => {
-    let query = `delete from ${tables[table]} where ${where}`;
-    con.query(query, fun);
+    con.getConnection((e, c) => {
+        let query = `delete from ${tables[table]} where ${where}`;
+        c.query(query, fun);
+        c.release()
+    })
 }
 
 module.exports = con;

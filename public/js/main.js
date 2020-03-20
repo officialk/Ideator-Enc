@@ -44,7 +44,7 @@ const decrypt = (data, key, level) => {
 
 const loadPage = (page) => {
     let [to, id] = page.split("?");
-    window.location.href = to + ".html?v=" + id;
+    window.location.href = to + ".html?v=" + (id || "");
 }
 /*INIT FUNCTIONS*/
 const initSw = () => {

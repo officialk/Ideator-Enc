@@ -27,7 +27,7 @@ const loginToWorkspace = () => {
 }
 
 const loadWorkspaceData = () => {
-    setInterval(loadMessages, 1000);
+    setInterval(loadMessages, 5000);
     loadProjects();
     initUI();
     initMaterial();
