@@ -17,7 +17,7 @@ const sendFeedback = () => {
                 })
                 .then(e => {
                     alert("Thank You For Your Precious Feedback");
-                    loadPage('home');
+                    loadPage('index');
                 })
         } else {
             alert("Description should be more than 5 chars");

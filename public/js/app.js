@@ -2,7 +2,7 @@ window.onload = () => {
     firebase.initializeApp(firebaseConfig);
     let data = JSON.parse(local("data")) || {};
     if (data.id != undefined) {
-        window.location.href = "app/home.html";
+        window.location.href = "app/";
     }
     M.AutoInit();
 };
@@ -30,14 +30,14 @@ const join = () => {
                     })
                     .then(e => {
                         local("data", JSON.stringify(data));
-                        window.location.href = "app/home.html";
+                        window.location.href = "app/";
                     })
                     .catch(e => {
                         console.log(e);
                     })
             } else {
                 local("data", JSON.stringify(data));
-                window.location.href = "app/home.html";
+                window.location.href = "app/";
             }
         })
         .catch(function (error) {

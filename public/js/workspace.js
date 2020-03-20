@@ -231,7 +231,7 @@ const deleteWorkspace = () => {
             .then(e => {
                 showLoading("settings", "Deletion Of Workspace Completed")
                 alert("Workspace Deleted");
-                loadPage('home');
+                loadPage('index');
             })
     }
 }
