@@ -27,14 +27,15 @@ api.post('/add/:type', (req, res) => {
                     if (++proc == team.length) {
                         return res.json({
                             msg: e ? "Invalid Request" : "Updated Successfully",
-                            rem: rem
+                            rem: rem,
+                            insertId: e ? null : body.id
                         })
                     }
                 })
             })
         })
     } else {
-        body.id = db.primKey();
+        body.id = body.id || db.primKey();
         db.insert(type, body, (e, r, f) => {
             if (e) {
                 return res.status(400).json({
@@ -42,7 +43,8 @@ api.post('/add/:type', (req, res) => {
                 });
             }
             return res.status(200).json({
-                msg: "Insertion Successful"
+                msg: "Insertion Successful",
+                insertId: body.id
             });
         })
     }

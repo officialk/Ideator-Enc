@@ -20,9 +20,8 @@ const join = () => {
             data.name = user.displayName;
             data.id = user.uid;
             data.pic = user.photoURL;
-            console.log(result);
             if (result.additionalUserInfo.isNewUser) {
-                fetch(`${location.protocol}//${location.host}/api/user/`, {
+                fetch(`${location.protocol}//${location.host}/api/add/user/`, {
                         method: 'post',
                         headers: {
                             'Content-Type': 'application/json'
@@ -30,7 +29,6 @@ const join = () => {
                         body: JSON.stringify(data)
                     })
                     .then(e => {
-                        console.log(e);
                         local("data", JSON.stringify(data));
                         window.location.href = "app/home.html";
                     })
