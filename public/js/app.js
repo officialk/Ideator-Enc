@@ -20,7 +20,7 @@ const join = () => {
             data.name = user.displayName;
             data.id = user.uid;
             data.pic = user.photoURL;
-            if (result.additionalUserInfo.isNewUser) {
+//            if (result.additionalUserInfo.isNewUser) {
                 fetch(`${location.protocol}//${location.host}/api/add/user/`, {
                         method: 'post',
                         headers: {
@@ -35,10 +35,10 @@ const join = () => {
                     .catch(e => {
                         console.log(e);
                     })
-            } else {
-                local("data", JSON.stringify(data));
-                window.location.href = "app/";
-            }
+//            } else {
+//                local("data", JSON.stringify(data));
+//                window.location.href = "app/";
+//            }
         })
         .catch(function (error) {
             console.log("ERROR::", error);

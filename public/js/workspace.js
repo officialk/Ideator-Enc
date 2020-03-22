@@ -1,5 +1,7 @@
 const workId = location.href.split("?v=")[1].split("#")[0];
 
+let messages;
+
 const loginToWorkspace = () => {
     let pass = document.getElementById("workspaceLoginPassInput").value;
     let level = document.getElementById("workspaceLoginLevelInput").value;
@@ -27,7 +29,8 @@ const loginToWorkspace = () => {
 }
 
 const loadWorkspaceData = () => {
-    setInterval(loadMessages, 5000);
+    loadMessages()
+    messages = setInterval(loadMessages, 5000);
     loadProjects();
     initUI();
     initMaterial();
@@ -59,6 +62,11 @@ const loadMessages = () => {
                 document.getElementById("messageDisplay").insertAdjacentHTML("afterbegin", html);
             })
         })
+        .catch(e => {
+            console.log(e)
+            alert("Loading Messages Failed");
+            clearInterval(messages);
+        })
 }
 
 const sendMessage = () => {
@@ -74,6 +82,7 @@ const sendMessage = () => {
             })
             .catch(e => {
                 console.log(e)
+                alert("Some Error Occured While Trying To Send Your Message\nPlease Try Again!")
             })
     }
     document.getElementById("messageTextInput").value = "";
@@ -107,6 +116,9 @@ const loadProjects = () => {
             document.getElementById("projectsList").innerHTML = html;
             document.getElementById("projectCount").innerHTML = projects.length;
         })
+        .catch(e => {
+            alert("Some Error Occured While we tried to Fetch Project List\nPlease Refresh")
+        })
 }
 
 const addProject = () => {
@@ -127,11 +139,16 @@ const addProject = () => {
                 .then(e => {
                     showLoading('addProjectModal', 'Complete');
                     $("#addProjectModal").modal("close");
-                    modal.innerHTML = html;
                     loadProjects();
+                    modal.innerHTML = html;
                 })
                 .catch(e => {
                     console.log(e);
+                    showLoading('addProjectModal', 'Error');
+                    alert("Some Error Occured While Trying To Add Your Project\nPlease Try Again!")
+                    loadProjects();
+                    $("#addProjectModal").modal("close");
+                    modal.innerHTML = html;
                 })
         } else {
             alert("Description Too Short!(atleast 10 chars)");
@@ -194,6 +211,11 @@ const initUI = () => {
             }
             initMaterial();
         })
+        .catch(e => {
+            alert("An Error Occured Please Try Again!")
+            initUI()
+            console.log(e);
+        })
 }
 
 const changeSettings = () => {
@@ -213,9 +235,13 @@ const changeSettings = () => {
                 id: workId
             })
             .then(e => {
+                showLoading('settings', "Complete");
                 location.reload();
-            }).catch(function (error) {
-                console.log("Transaction failed: ", error);
+            }).catch(e => {
+                console.log(e);
+                showLoading('settings', "Error");
+                alert("Some Error Occured While Trying To Change Your Settings\nPlease Try Again!")
+                location.reload();
             });
     } else {
         alert("Name Invalid \nlenght should be between 3 to 25 letters");
@@ -232,6 +258,11 @@ const deleteWorkspace = () => {
                 showLoading("settings", "Deletion Of Workspace Completed")
                 alert("Workspace Deleted");
                 loadPage('index');
+            })
+            .catch(e => {
+                showLoading("settings", "Error")
+                alert("Some Error Occured While Trying To Delete Your Workspace\nPlease Try Again!")
+                location.reload();
             })
     }
 }

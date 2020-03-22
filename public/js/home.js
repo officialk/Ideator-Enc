@@ -22,15 +22,16 @@ const addWorkspace = () => {
                     send('add', 'workspace', wdata)
                         .then(e => {
                             showLoading('addWorkspaceModal', 'Workspace Added');
-                            if (e.rem.length != 0) {
-                                alert(`Users with email/s ${e.rem} are not a part of our family yet`)
-                            }
                             $('#addWorkspaceModal').modal('close');
-                            modal.innerHTML = html;
                             loadData();
+                            modal.innerHTML = html;
                         })
                         .catch(e => {
                             console.log(e);
+                            showLoading('addWorkspaceModal', 'ERROR');
+                            alert("Some Error Occured While Trying To Add Your Workspace\nPlease Try Again!")
+                            $('#addWorkspaceModal').modal('close');
+                            modal.innerHTML = html;
                         });
                 } else {
                     alert("Passwords dont match");
@@ -48,7 +49,9 @@ const addWorkspace = () => {
 
 const loadData = () => {
     sessionStorage.clear();
-    createDynamicElement('addWorkspaceTeamList');
+    try {
+        createDynamicElement('addWorkspaceTeamList');
+    } catch (e) {}
     send('read', 'workspace', {
             id: data.id
         })

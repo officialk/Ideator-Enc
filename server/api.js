@@ -1,6 +1,7 @@
 const express = require("express");
 const api = express.Router();
 const db = require('./db');
+//const mailer = require('./mailer');
 //CREATE
 api.post('/add/:type', (req, res) => {
     let type = req.params.type;
@@ -8,31 +9,41 @@ api.post('/add/:type', (req, res) => {
     if (type == 'workspace') {
         body.id = db.primKey();
         let team = body.team;
-        let rem = [];
-        let proc = 0;
         delete body.team;
         db.insert('workspace', body, (e, r) => {
-            team.forEach(email => {
-                db.read("user", 'id', `email='${email}'`, (e, r, f) => {
-                    if (r.length == 0) {
-                        /*SEND MAIL TO THE NEW USER*/
-                        rem.push(email);
-                    } else {
-                        let ins = {
-                            workspaceId: body.id,
-                            userId: r[0].id
-                        }
-                        db.insert("team", ins)
-                    }
-                    if (++proc == team.length) {
-                        return res.json({
-                            msg: e ? "Invalid Request" : "Updated Successfully",
-                            rem: rem,
-                            insertId: e ? null : body.id
-                        })
-                    }
+            addTeam(res, body.id, team, rem => {
+                res.json({
+                    msg: e ? "Invalid Request" : "Added Successfully",
+                    insertId: e ? undefined : body.id,
+                    rem: rem
                 })
             })
+        })
+    } else if (type == 'user') {
+        db.update('user', body, `email='${body.email}'`, (e, r, f) => {
+            if (r.affectedRows == 0) {
+                db.insert('user', body, (e, r, f) => {
+                    if (e) {
+                        return res.status(400).json({
+                            msg: "Invalid Request"
+                        });
+                    }
+                    return res.status(200).json({
+                        msg: "Insertion Successful",
+                        insertId: body.id
+                    });
+                })
+            } else {
+                if (e) {
+                    return res.status(400).json({
+                        msg: "Invalid Request"
+                    });
+                }
+                return res.status(200).json({
+                    msg: "Insertion Successful",
+                    insertId: body.id
+                });
+            }
         })
     } else {
         body.id = body.id || db.primKey();
@@ -104,30 +115,14 @@ api.post('/update/:type', (req, res) => {
     if (type == 'workspace') {
         let team = body.team;
         let id = body.id;
-        let rem = [];
-        let proc = 0;
         delete body.team;
         delete body.id;
         db.update(type, body, `id='${id}'`, (e, r, f) => {
             db.del('team', `workspaceId='${id}'`, (e, r, f) => {
-                team.forEach(email => {
-                    db.read("user", 'id', `email='${email}'`, (e, r, f) => {
-                        if (r.length == 0) {
-                            /*SEND MAIL TO THE NEW USER*/
-                            rem.push(email);
-                        } else {
-                            let ins = {
-                                workspaceId: id,
-                                userId: r[0].id
-                            }
-                            db.insert("team", ins)
-                        }
-                        if (++proc == team.length) {
-                            return res.json({
-                                msg: e ? "Invalid Request" : "Updated Successfully",
-                                rem: rem
-                            })
-                        }
+                addTeam(res, id, team, rem => {
+                    res.json({
+                        msg: e ? "Invalid Request" : "Updated Successfully",
+                        rem: rem
                     })
                 })
             })
@@ -157,5 +152,39 @@ api.post('/delete/:type', (req, res) => {
         })
     })
 })
+
+const addTeam = (res, id, team, func) => {
+    let rem = []
+    let proc = 0
+    team.forEach(email => {
+        return db.read("user", 'id', `email='${email}'`, (e, r, f) => {
+            if (r.length == 0) {
+                rem.push(email)
+                let ins = {
+                    workspaceId: id,
+                    userId: db.primKey()
+                }
+                let user = {
+                    id: ins.userId,
+                    name: email.split('@')[0],
+                    email: email,
+                    pic: ''
+                }
+                db.insert('user', user, (e, r, f) => {
+                    //                        mailer.mail(email)
+                    db.insert("team", ins)
+                })
+            } else {
+                db.insert("team", {
+                    workspaceId: id,
+                    userId: r[0].id
+                })
+            }
+            if (++proc == team.length) {
+                func(rem)
+            }
+        })
+    })
+}
 
 module.exports = api;

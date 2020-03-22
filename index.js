@@ -10,6 +10,7 @@ const port = process.env.PORT || 8282;
 
 app.listen(port, () => {
     console.log("Runnin On :: " + port);
+    console.clear()
 });
 
 

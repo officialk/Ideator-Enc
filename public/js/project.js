@@ -46,6 +46,11 @@ const loadIdeas = () => {
             document.getElementById("IdeasList").innerHTML = html;
             document.getElementById("ideaCount").innerHTML = ideas.length;
         })
+        .catch(e => {
+            console.log(e)
+            alert("Some Error Occured While Trying To Load Your Ideas\nPlease Try Again!")
+            location.reload()
+        })
 }
 
 const addIdea = () => {
@@ -71,6 +76,10 @@ const addIdea = () => {
                 })
                 .catch(e => {
                     console.log(e);
+                    showLoading('addIdeaModal', 'Error')
+                    alert("Some Error Occured While Trying To Add Your Idea\nPlease Try Again!")
+                    $("#addIdeaModal").modal("close");
+                    modal.innerHTML = html;
                 })
         } else {
             alert("Description too short");
@@ -116,6 +125,10 @@ const initUI = () => {
                 M.updateTextFields();
             }
         })
+        .catch(e => {
+            console.log(e)
+            alert("Some Error Occured While Trying To Load Your Settings\nPlease Try Again!")
+        })
 }
 
 const changeSettings = () => {
@@ -129,9 +142,13 @@ const changeSettings = () => {
                 title: encrypt(title, key, page.level),
                 description: encrypt(desc, key, page.level)
             }).then(function () {
+                showLoading('settings', "Complete");
                 location.reload()
-            }).catch(function (error) {
-                console.log("Transaction failed: ", error);
+            }).catch(e => {
+                console.log(e);
+                showLoading('settings', "Error");
+                alert("Some Error Occured While Trying To Change Your Settings\nPlease Try Again!")
+                location.reload();
             });
         } else {
             alert("Description Too Short!(atleast 15 chars)");
@@ -151,6 +168,11 @@ const deleteProject = () => {
                 showLoading("settings", "Deletion Of Project Completed")
                 alert("Project Deleted");
                 back()
+            })
+            .catch(e => {
+                showLoading("settings", "Error")
+                alert("Some Error Occured While Trying To Delete Your Project\nPlease Try Again!")
+                location.reload();
             })
     }
 }

@@ -1,24 +1,21 @@
 const loadData = () => {
 
 }
+
 const sendFeedback = () => {
     let [title, desc] = getValuesByIds(['feedbackComment', 'feedbackDesc']);
-    let isAnon = document.getElementById('feedbackAnonymousInput').checked;
     let rate = getValuesByNames(['rating'])[0].filter(e => {
         return e;
     })[0];
     if (title.length > 3) {
         if (desc.length > 5) {
-            send('add', 'feedback', {
-                    name: isAnon ? "Anonymous" : data.name,
-                    title: title,
-                    description: desc,
-                    rate: rate
-                })
-                .then(e => {
-                    alert("Thank You For Your Precious Feedback");
-                    loadPage('index');
-                })
+            let name = data.name;
+            let subject = 'Feedback From ' + data.name;
+            let body = `Title :: ${title}\nRating :: ${rate}\n\n${desc}
+            `;
+            let href = `mailto:ideator@officialk.codes?subject=${encodeURI(subject)}&body=${encodeURI(body)}`
+            let win = window.open(href, 'parent')
+            location.href = '../'
         } else {
             alert("Description should be more than 5 chars");
         }
