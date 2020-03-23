@@ -1,7 +1,13 @@
+/*
+    PSUEDO FUNCTION
+*/
 const loadData = () => {
 
 }
-
+/*
+    sends the feedback to the ideator@officiak.codes
+    Params:NaN
+*/
 const sendFeedback = () => {
     let [title, desc] = getValuesByIds(['feedbackComment', 'feedbackDesc']);
     let rate = getValuesByNames(['rating'])[0].filter(e => {

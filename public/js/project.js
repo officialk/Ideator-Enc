@@ -1,21 +1,15 @@
 const projectId = location.href.split("?v=")[1].split("#")[0];;
-
-var mainTitle, mainDesc;
-
-const isLoggedIn = () => {
-    if (page.page == "workspace" && page.level != undefined && page.pass != undefined && projectId != "") {
-        loadProjectData();
-    } else {
-        loadPage("home");
-    }
-}
-
+/*
+    loads the Project data
+*/
 const loadProjectData = () => {
     loadIdeas();
     initUI();
     initMaterial();
 }
-
+/*
+    loads the Ideas List of the Project
+*/
 const loadIdeas = () => {
     send('read', 'idea', {
             id: projectId
@@ -52,7 +46,9 @@ const loadIdeas = () => {
             location.reload()
         })
 }
-
+/*
+    adds an Ideas to the Project
+*/
 const addIdea = () => {
     let title = document.getElementById("ideaTitle").value;
     let desc = document.getElementById("ideaDescription").value;
@@ -88,15 +84,29 @@ const addIdea = () => {
         alert("Title Should be between 5-30 chars");
     }
 }
-
+/*
+ goes back to the workspace page
+ */
 const back = () => {
     loadPage("workspace?" + page.id + "#projects");
 }
-
+/*
+    checks for users login
+    if user.loginValid
+        then loadProjectData
+    else
+        back to workspace page
+*/
 const loadData = () => {
-    isLoggedIn();
+    if (page.page == "workspace" && page.level != undefined && page.pass != undefined && projectId != "") {
+        loadProjectData();
+    } else {
+        loadPage("home");
+    }
 }
-
+/*
+    loads the Projects data and show extra options if you are the creator of the Project
+*/
 const initUI = () => {
     send('read', 'projectUI', {
             id: projectId
@@ -117,8 +127,6 @@ const initUI = () => {
                                         <i class="large material-icons">settings</i>
                                       </a>
                                     </div>`;
-                mainTitle = decrypt(p.title, key, page.level);
-                mainDesc = decrypt(p.description, key, page.level)
                 document.getElementById('changeProjectTitleInput').value = title;
                 document.getElementById('changeProjectDescInput').value = description;
                 initMaterial();
@@ -130,7 +138,9 @@ const initUI = () => {
             alert("Some Error Occured While Trying To Load Your Settings\nPlease Try Again!")
         })
 }
-
+/*
+    changes the projects name and description as per data gathered from the UI
+*/
 const changeSettings = () => {
     let [title, desc] = getValuesByIds(['changeProjectTitleInput', 'changeProjectDescInput']);
     if (title.length > 3) {
@@ -157,7 +167,9 @@ const changeSettings = () => {
         alert("Title Too Short!(atleast 3 chars)");
     }
 }
-
+/*
+    DELETES THE CURRENT WORKSPACES
+*/
 const deleteProject = () => {
     if (confirm("THIS WILL DELETE ALL DATA RELATED TO THE PROJECT AND IS IRREVERSIBLE")) {
         showLoading("settings", "Deleting Project and All its Data")

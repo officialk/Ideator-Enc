@@ -1,4 +1,14 @@
-/*WORKSPACE FUNCTIONS*/
+/*
+adds a workspace to the database
+Data is gathered from the UI adn send it to the server
+Params:NaN
+Data = workspace{
+    name,
+    password,
+    encryption level,
+    team
+}
+*/
 const addWorkspace = () => {
     let [name, level, pass, passconf] = getValuesByIds(["addWorkspaceNameInput", "addWorkspaceLevelInput", "addWorkspacePassInput", "addWorkspacePassConfInput"]);
     let team = [data.email]
@@ -46,7 +56,10 @@ const addWorkspace = () => {
         alert("Name Invalid \nlenght should be between 3 to 25 letters");
     }
 }
-
+/*
+Requests the server for workspace list whose teams the user is
+and displays it
+*/
 const loadData = () => {
     sessionStorage.clear();
     try {

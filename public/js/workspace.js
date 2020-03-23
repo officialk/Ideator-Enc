@@ -1,7 +1,11 @@
+//the current workspaces' id
+//retrieved from the url
 const workId = location.href.split("?v=")[1].split("#")[0];
-
+//stores messages
 let messages;
-
+/*
+    Logs the user in to the workspace IF the password AND encryption level is valid
+*/
 const loginToWorkspace = () => {
     let pass = document.getElementById("workspaceLoginPassInput").value;
     let level = document.getElementById("workspaceLoginLevelInput").value;
@@ -27,7 +31,9 @@ const loginToWorkspace = () => {
             }
         })
 }
-
+/*
+    loads the workspace data
+*/
 const loadWorkspaceData = () => {
     loadMessages()
     messages = setInterval(loadMessages, 5000);
@@ -35,7 +41,9 @@ const loadWorkspaceData = () => {
     initUI();
     initMaterial();
 }
-
+/*
+    loads the messages of the workspace
+*/
 const loadMessages = () => {
     send('read', 'message', {
             id: workId
@@ -68,7 +76,9 @@ const loadMessages = () => {
             clearInterval(messages);
         })
 }
-
+/*
+    sends a new messages into the workspace
+*/
 const sendMessage = () => {
     let mssg = document.getElementById("messageTextInput").value;
     if (mssg.length > 0) {
@@ -87,7 +97,9 @@ const sendMessage = () => {
     }
     document.getElementById("messageTextInput").value = "";
 }
-
+/*
+    loads the projects List of the workspace
+*/
 const loadProjects = () => {
     send('read', 'project', {
             id: workId
@@ -120,7 +132,9 @@ const loadProjects = () => {
             alert("Some Error Occured While we tried to Fetch Project List\nPlease Refresh")
         })
 }
-
+/*
+    sends a new messages into the workspace
+*/
 const addProject = () => {
     let desc = document.getElementById("projectDescription").value;
     let title = document.getElementById("projectTitle").value;
@@ -157,8 +171,14 @@ const addProject = () => {
         alert("Title Too Short!(atleast 3 chars)");
     }
 }
-
-const isLoggedIn = () => {
+/*
+    checks if the user is logged in
+    if Yes
+        then loadWorkspaceData
+    else
+        loginToWorkspace
+*/
+const loadData = () => {
     if (workId != "" && page.page == "workspace" && page.id == workId && page.pass != undefined && page.level != undefined) {
         loadWorkspaceData();
     } else {
@@ -171,11 +191,9 @@ const isLoggedIn = () => {
         $("#workspaceLoginModal").modal("open");
     }
 }
-
-const loadData = () => {
-    isLoggedIn();
-}
-
+/*
+    loads the workspaces' data and show extra options if you are the creator of the workspace
+*/
 const initUI = () => {
     send('read', 'workUI', {
             id: workId
@@ -217,7 +235,9 @@ const initUI = () => {
             console.log(e);
         })
 }
-
+/*
+    changes the workspace name and team as per data gathered from the UI
+*/
 const changeSettings = () => {
     let [name, pass, level] = getValuesByIds(['changeWorkspaceNameInput']);
     let team = [data.email]
@@ -247,7 +267,9 @@ const changeSettings = () => {
         alert("Name Invalid \nlenght should be between 3 to 25 letters");
     }
 }
-
+/*
+    DELETES THE CURRENT WORKSPACES
+*/
 const deleteWorkspace = () => {
     if (confirm("THIS WILL DELETE ALL DATA RELATED TO THE WORKSPACE AND IS IRREVERSIBLE")) {
         showLoading("settings", "Deleting Workspace and All its Data")
