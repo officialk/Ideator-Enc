@@ -7,7 +7,11 @@ window.onload = () => {
     if (data.id != undefined) {
         window.location.href = "app/";
     }
-    M.AutoInit();
+    $('.carousel.carousel-slider').carousel({
+        fullWidth: true,
+        indicators: true
+    });
+    $('.collapsible').collapsible();
 };
 
 /*
