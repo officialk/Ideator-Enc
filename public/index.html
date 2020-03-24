@@ -22,6 +22,12 @@
             padding-left: 0px;
         }
 
+        .card-panel {
+            height: 350px;
+            max-height: 350px;
+            cursor: pointer
+        }
+
     </style>
 
     <!--FIREBASE JS-->
@@ -35,26 +41,192 @@
 </head>
 
 <body>
-    <header id="appNavbar">
-        <nav class="navbar-fixed theme">
-            <a href="#" class="brand-logo center">Ideator</a>
-        </nav>
-    </header>
-    <main class="container">
+    <main>
         <div class="center">
-            <br>
-            <br>
-            <br>
-            <br>
-            <div class="btn btn-primary" onclick="join()">JOIN USING GOOGLE</div>
+            <div class="carousel carousel-slider center">
+                <div class="carousel-fixed-item center">
+                    <div class="btn btn-large white black-text" onclick="join()">JOIN</div>
+                </div>
+                <div class="carousel-item theme" href="#one!">
+                    <h1>Ideator-Enc</h1>
+                    <p class="flow-text">The Comfortable Platform For Sharing Ideas</p>
+                </div>
+                <div class="carousel-item theme" href="#two!">
+                    <h1>Ideator-Enc</h1>
+                    <p class="flow-text">A Way To Encrypt Ideas and Messages From Everyone Except Your Team</p>
+                </div>
+                <div class="carousel-item theme" href="#three!">
+                    <h1>Ideator-Enc</h1>
+                    <p class="flow-text">An Open Source Project Open to Everyone</p>
+                </div>
+            </div>
         </div>
-
+        <br>
+        <div class="row container">
+            <div class="flow-text center col s12 m12 l12">
+                Features
+            </div>
+            <div class="col s12 m4 l4">
+                <div class="card-panel center-align hoverable">
+                    <br>
+                    <br>
+                    <div class="card-image">
+                        <div class="btn-floating btn-large theme">
+                            <i class="material-icons large">
+                                lock
+                            </i>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card-title flow-text">
+                        Encrypted
+                    </div>
+                    <br>
+                    <div class="card-content">
+                        Ideator-Enc uses the <a href="https://github.com/bitwiseshiftleft/sjcl/">SJCL Library</a>
+                        to Encrypt everything on the Client side and Then Send it to the Backend To be Stored.
+                        So not even We can See it without Your Credentials
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m4 l4">
+                <div class="card-panel center-align hoverable">
+                    <br>
+                    <br>
+                    <div class="card-image">
+                        <div class="btn-floating btn-large theme">
+                            <i class="material-icons large">
+                                group_add
+                            </i>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card-title flow-text">
+                        Shareable
+                    </div>
+                    <br>
+                    <div class="card-content">
+                        Ideator-Enc workspaces can be shared with your awesome team so you can discuss your projects and ideas without the fear or snooping eyes or ears
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m4 l4">
+                <div class="card-panel center-align hoverable">
+                    <br>
+                    <br>
+                    <div class="card-image">
+                        <div class="btn-floating btn-large theme">
+                            <i class="material-icons large">
+                                public
+                            </i>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card-title flow-text">
+                        Open-Source
+                    </div>
+                    <br>
+                    <div class="card-content">
+                        Ideator-Enc Is an Open Source Project on
+                        <a href="https://github.com/officialk/Ideator-Enc">GitHub</a>
+                        where We always welcome awesome people like you to contribute in any way you can.
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row container">
+            <div class="flow-text center col s12 m12 l12">
+                FAQ
+            </div>
+            <ul class="collapsible popout col s12 m12 l12">
+                <li class="active">
+                    <div class="collapsible-header"><i class="material-icons">question_answer</i>How do I use this app?</div>
+                    <div class="collapsible-body">
+                        <span>
+                            <ol class="browser-default">
+                                <li>Click The Join Button</li>
+                                <li>install this app when prompted for ease of use(Optional)</li>
+                                <li>Add a Workspace with a Name,Encryption Level,Password and a Team(Optional)</li>
+                                <li>You can send and recieve Messages to your team and add Projects to this Workspace after entering it</li>
+                                <li>You can also add your Ideas to the Projects</li>
+                            </ol>
+                        </span>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">question_answer</i>What does it cost?</div>
+                    <div class="collapsible-body">
+                        <span>
+                            Ideator-Enc is a fully Free to use Application.
+                        </span>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">question_answer</i>If the Application is Free to use then how do you keep it all going?</div>
+                    <div class="collapsible-body">
+                        <span>
+                            We keep the application going with your support through donations and/or by showing ads that you allow us to show by disabling your adblocker if you use any
+                        </span>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">question_answer</i>How can I help Ideator-Enc?</div>
+                    <div class="collapsible-body">
+                        <span>
+                            You can Spread or name by sharing the app/link with your Friends and Family
+                            <br>
+                            OR
+                            <br>
+                            You can also Contibute to us in the Following ways on <a href="https://github.com/officialk/Ideator-Enc">GitHub</a>
+                            <ul class="browser-default">
+                                <li>feature suggestion</li>
+                                <li>code improvement</li>
+                                <li>code addition</li>
+                                <li>bug fixes</li>
+                                <li>bug reports</li>
+                            </ul>
+                        </span>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">question_answer</i>Isn't my Password still stored for you to see?</div>
+                    <div class="collapsible-body">
+                        <span>
+                            Yes and also No,Yes your password is stored in our Database but NO we cant view it as it is also encrypted on your side before it is sent to us.
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </main>
-    <footer>
+    <footer class="page-footer center theme">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m12 l12 flow-text white-text">
+                    Support
+                </div>
+                <div class="col s4 m4 l4">
+                    <a class="btn-large white black-text" href="https://github.com/officialk/Ideator-Enc" target="_blank">GitHub</a>
+                </div>
+                <div class="col s4 m4 l4">
+                </div>
+                <div class="col s4 m4 l4">
+                    <a class="btn-large white black-text" href="https://donorbox.org/ideator-enc">Donate</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2020 Copyright
+            </div>
+        </div>
     </footer>
-    <extras>
-    </extras>
 </body>
 
 </html>
-
